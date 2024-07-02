@@ -1,66 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MyCorte
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![MyCorte Logo](link_da_sua_logo_aqui)
 
-## About Laravel
+## Descrição do Projeto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+MyCorte é um sistema de agendamento de horários com funcionalidades de marketing para impulsionar vendas e aumentar a base de clientes, tornando-os clientes fiéis. Nosso objetivo é ajudar barbearias e salões de beleza a organizar melhor seus horários, reduzir cancelamentos e aumentar os lucros, proporcionando uma experiência agradável tanto para os clientes quanto para os profissionais.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🎯 Objetivo do Projeto
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Aumentar a base de clientes fiéis.
+- Diminuir o número de agendamentos desmarcados.
+- Aumentar os lucros.
+- Reduzir o tempo de espera dos clientes.
+- Permitir que os barbeiros e cabeleireiros tenham uma rotina de trabalho menos exaustiva.
 
-## Learning Laravel
+## 🛠 Problemas Resolvidos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Cancelamentos de última hora.
+- Rotinas de trabalho cansativas.
+- Perda de clientes.
+- Horários vazios durante a semana.
+- Falta de uma agenda organizada.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## ✨ Funcionalidades Principais
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Agendamentos de horários.
+- Sistemas de reagendamentos para diminuir cancelamentos.
+- Criação de promoções e incentivos para atrair clientes.
+- Análise de desempenho e lucros dos colaboradores.
+- Dashboards personalizáveis.
+- Sistema que permite aos clientes alterar imagens e cores de acordo com suas preferências.
 
-## Laravel Sponsors
+## 🚀 Instalação
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Requisitos
 
-### Premium Partners
+- Um dispositivo com acesso à internet.
+- Navegador web atualizado.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Passo a Passo
 
-## Contributing
+1. Acesse o site do MyCorte.
+2. Crie uma conta ou faça login se já tiver uma.
+3. Configure seu perfil e comece a utilizar o sistema.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 📚 Uso
 
-## Code of Conduct
+### Exemplos de Uso
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Exemplo 1:** Você precisa agendar um corte de cabelo para um casamento e não quer correr o risco de encontrar a barbearia lotada. Acesse o sistema, faça a reserva e espere. Quando a data do agendamento estiver próxima, enviaremos um lembrete para você.
+- **Exemplo 2:** Um cliente quer aproveitar uma promoção especial que você criou. Ele pode acessar o sistema, visualizar as promoções disponíveis e agendar um horário diretamente.
 
-## Security Vulnerabilities
+## 🤝 Contribuição
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Como Contribuir
 
-## License
+- Sugerindo melhorias de desempenho.
+- Enviando dicas e sugestões de novas funcionalidades.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Diretrizes
+
+- Seguir os padrões de código e boas práticas recomendadas.
+
+## 📄 Licença
+
+Este projeto está licenciado sob a licença [Nome da Licença]. Veja o arquivo LICENSE para mais detalhes.
+
+## 👥 Autores
+
+- **Gabriel Alves Pereira**
+- **João Caetano Lima Remonato**
+
+## 🙏 Agradecimentos
+
+Agradecimentos especiais à Somos Devs Corp pelo apoio e suporte.
+
+## 🌐 Recursos Adicionais
+
+- (Aqui você pode adicionar links para a documentação, páginas web ou outros recursos relacionados ao projeto)
+
+## 📞 Contatos
+
+Para dúvidas ou suporte, entre em contato conosco pelo email: [Seu Email]
+
+## 🚧 Estado do Projeto
+
+Atualmente, o projeto está em desenvolvimento.
+
+## 🛠 Tecnologias Usadas
+
+- ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+- ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+- ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+- ![SpringBoot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+- ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+
+## 🗺️ Roadmap
+
+- (Aqui você pode listar planos futuros ou funcionalidades que pretende adicionar)
+
+## ❓ FAQ
+
+- **Pergunta 1:** (Aqui você pode adicionar perguntas frequentes e suas respostas)
+- **Pergunta 2:** 
