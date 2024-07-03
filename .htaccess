@@ -1,0 +1,25 @@
+# To prevent access to .env and other files
+<Files .*>
+# Apache 2.2
+<IfModule !mod_authz_core.c>
+Order deny,allow
+Deny from all
+</IfModule>
+# Apache 2.4
+<IfModule mod_authz_core.c>
+Require all denied
+</IfModule>
+</Files>
+
+<IfModule mod_alias.c>
+</IfModule>
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^mycorte.somosdevteam.com$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^www.somosdevteam.com$
+RewriteCond %{REQUEST_URI} !public/
+RewriteRule (.*) /public/$1 [L]
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Este domínio herda o pacote “PHP”.
+# php -- END cPanel-generated handler, do not edit
