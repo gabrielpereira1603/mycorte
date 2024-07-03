@@ -36,9 +36,17 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'client' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'client',
+        ],
+        'collaborator' => [
+            'driver' => 'session',
+            'provider' => 'collaborator',
+        ],
+        'dba' => [
+            'driver' => 'session',
+            'provider' => 'dba',
         ],
     ],
 
@@ -60,15 +68,18 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'client' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => env('AUTH_MODEL', \App\Models\Client::class),
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+//        'collaborators' => [
+//            'driver' => 'eloquent',
+//            'model' => App\Models\Collaborator::class,
+//        ],
+//        'dbas' => [
+//            'driver' => 'eloquent',
+//            'model' => App\Models\Dba::class,
+//        ],
     ],
 
     /*
