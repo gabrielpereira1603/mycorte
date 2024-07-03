@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AvailabilityCollaborator;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StyleSeeder::class);
         $this->call(CollaboratorSeeder::class);
         $this->call(ServiceSeeder::class);
+        $this->call(AvailabilityCollaboratorSeeder::class);
     }
 }
