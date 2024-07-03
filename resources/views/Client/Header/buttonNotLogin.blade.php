@@ -261,7 +261,7 @@
         border-radius: 0;
         width: 100%;
     }
-    
+
     .forgot-pass-fau a {
         text-decoration: none !important;
         font-size: 14px;
