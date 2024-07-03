@@ -13,7 +13,7 @@ class LoginClientController extends Controller
 {
     public function index($tokenCompany)
     {
-        return view('client.login', ['tokenCompany' => $tokenCompany]);
+        return view('Client.loginClient', ['tokenCompany' => $tokenCompany]);
     }
 
     public function login(Request $request): RedirectResponse
