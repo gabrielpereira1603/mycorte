@@ -25,7 +25,7 @@ class CollaboratorSeeder extends Seeder
             ],
             [
                 'email' => 'joao@gmail.com',
-                'enabled' => true,
+                'enabled' => false,
                 'image' => null,
                 'name' => 'Jhon Whick',
                 'password' => bcrypt('joao'),

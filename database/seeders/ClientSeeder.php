@@ -20,6 +20,15 @@ class ClientSeeder extends Seeder
                 'image' => 'teste',
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'name' => 'João Caetano',
+                'email' => 'joaocaetanodev@gmail.com',
+                'password' => bcrypt('caetano'),
+                'telephone' => '67981203040',
+                'image' => 'teste',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }
