@@ -65,7 +65,7 @@
         <div class="modal-content" style="max-width: 450px !important;">
             <div class="modal-body seminor-login-modal-body">
                 <h5 class="modal-title text-center">Entrar</h5>
-                <form class="seminor-login-form" method="post" action="{{ route('loginclient.post', ['tokenCompany' => $tokenCompany]) }}">
+                <form id="loginForm" class="seminor-login-form" method="post" action="{{ route('loginclient.post', ['tokenCompany' => $tokenCompany]) }}">
                     @csrf
                     <div class="form-group">
                         <input type="email" class="form-control" required name="email">
@@ -77,9 +77,22 @@
                     </div>
 
                     <div class="btn-check-log">
-                        <button type="submit" class="btn-check-login">Entrar</button>
+                        <button id="loginButton" type="submit" class="btn-check-login">
+                            <span id="loginButtonContent">Entrar</span>
+                            <span id="loginLoader" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" style="color: white"></span>
+                            <span id="loginLoadingText" class="ml-2 d-none">Carregando...</span>
+                        </button>
                     </div>
-
+                    <script>
+                        $(document).ready(function() {
+                            $('#loginForm').on('submit', function(event) {
+                                // Mostra o texto "Carregando..." e o spinner de carregamento
+                                $('#loginButtonContent').addClass('d-none');
+                                $('#loginLoader').removeClass('d-none');
+                                $('#loginLoadingText').removeClass('d-none');
+                            });
+                        });
+                    </script>
                     <div class="forgot-pass-fau text-center pt-3">
                         <a href="#" class="text-secondary">Esqueceu a Senha?</a>
                     </div>
@@ -90,12 +103,15 @@
 </div>
 
 
+
+
 <style>
     .seminor-login-modal-body .close{
         position: relative;
         top: -45px;
         left: 10px;
         color: #1cd8ad;
+
     }
     .seminor-login-modal-body .close{
         opacity:0.75;
@@ -245,6 +261,7 @@
         border-radius: 0;
         width: 100%;
     }
+    
     .forgot-pass-fau a {
         text-decoration: none !important;
         font-size: 14px;

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->string('image', '120')->nullable();
             $table->string('name', '100');
             $table->string('password');
-            $table->enum('role', ['SYS', 'ADMIN', 'COLLABORATOR', 'CLIENT']);
+            $table->enum('role', ['ADMIN', 'COLLABORATOR']);
             $table->string('telephone', '60');
-            $table->bigInteger('companyfk')->unsigned();
+            $table->unsignedBigInteger('companyfk');
             $table->foreign('companyfk')->references('id')->on('company')->onDelete('cascade');
             $table->timestamps();
 

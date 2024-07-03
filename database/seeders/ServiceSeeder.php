@@ -30,6 +30,22 @@ class ServiceSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => 'Corte de Cabelo Masculino',
+                'time' => '00:30:00',
+                'value' => 35.00,
+                'collaboratorfk' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Coloração de Cabelo',
+                'time' => '01:00:00',
+                'value' => 120.00,
+                'collaboratorfk' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
