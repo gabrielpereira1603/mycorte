@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class LoginClientController extends Controller
 {
-
     public function index($tokenCompany)
     {
         return view('client.loginClient', ['tokenCompany' => $tokenCompany]);
@@ -19,21 +18,29 @@ class LoginClientController extends Controller
 
     public function login(Request $request): RedirectResponse
     {
-        // Validação dos dados
+        // Validação dos dados com mensagens personalizadas
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6',
+        ], [
+            'email.required' => 'O campo de email é obrigatório.',
+            'email.email' => 'Por favor, insira um email válido.',
+            'password.required' => 'O campo de senha é obrigatório.',
+            'password.min' => 'A senha deve ter pelo menos :min caracteres.',
         ]);
 
-        // Tentar autenticar como Client
+        // Tentar autenticar como Cliente
         $client = Client::where('email', $request->email)->first();
 
         if ($client && password_verify($request->password, $client->password)) {
             Auth::guard('client')->login($client);
+            Session::put('user', $client); // Armazenar dados do usuário na sessão se necessário
 
+            // Redirecionar para a rota de homeclient com o tokenCompany
+            Session::forget('loading'); // Limpar a variável de sessão de carregamento
+            return redirect()->route('homeclient', ['tokenCompany' => $request->tokenCompany])->with('success', 'Login realizado com sucesso!');
         }
 
-        // Autenticação falhou
         return back()->withErrors([
             'email' => 'As credenciais fornecidas estão incorretas.',
         ])->onlyInput('email');
