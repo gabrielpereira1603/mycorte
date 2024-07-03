@@ -21,7 +21,7 @@ class CompanySeeder extends Seeder
                 'number' => '1005',
                 'state' => 'São Paulo',
                 'zipCode' => '15775000',
-                'token' => 'fee0bdf87366430b6302536ca9f84772305b5cef15859ac9e5...',
+                'token' => 'fee0bdf87366430b6302536ca9f84772305b5cef15859ac9e531328f2deeb390',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

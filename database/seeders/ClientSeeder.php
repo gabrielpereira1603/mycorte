@@ -15,7 +15,7 @@ class ClientSeeder extends Seeder
             [
                 'name' => 'Gabriel Pereira',
                 'email' => 'pereiragabrieldev@gmail.com',
-                'password' => password_hash('123', PASSWORD_DEFAULT),
+                'password' => bcrypt('gabriel'),
                 'telephone' => '67981957833',
                 'image' => 'teste',
                 'created_at' => now(),
