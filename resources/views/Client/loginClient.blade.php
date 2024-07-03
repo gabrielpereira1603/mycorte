@@ -15,9 +15,6 @@
     <section class="form-section">
         <img src="{{ asset('images/logoLetraAzul.png') }}" alt="Logo">
         <h2>Acesse sua conta</h2>
-        <form method="post" action="{{ route('loginclient.post', ['tokenCompany' => $tokenCompany]) }}">
-            @csrf
-            <div class="input-wrapper">
 
                 @if(session('success'))
                     <div class="alert alert-success">

@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class LoginClientController extends Controller
 {
-    public function index($tokenCompany)
-    {
-        return view('client.loginClient', ['tokenCompany' => $tokenCompany]);
     }
 
     public function login(Request $request): RedirectResponse
@@ -29,10 +26,7 @@ class LoginClientController extends Controller
 
         if ($client && password_verify($request->password, $client->password)) {
             Auth::guard('client')->login($client);
-            Session::put('user', $client); // Armazenar dados do usuário na sessão se necessário
 
-            // Redirecionar para a rota de homeclient com o tokenCompany
-            return redirect()->route('homeclient', ['tokenCompany' => $request->tokenCompany])->with('success', 'Login realizado com sucesso!');
         }
 
         // Autenticação falhou
