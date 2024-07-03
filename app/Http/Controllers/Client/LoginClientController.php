@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Session;
 
 class LoginClientController extends Controller
 {
+
+    public function index($tokenCompany)
+    {
+        return view('client.loginClient', ['tokenCompany' => $tokenCompany]);
     }
 
     public function login(Request $request): RedirectResponse
