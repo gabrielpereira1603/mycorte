@@ -79,7 +79,7 @@
                     <div class="btn-check-log">
                         <button id="loginButton" type="submit" class="btn-check-login">
                             <span id="loginButtonContent">Entrar</span>
-                            <span id="loginLoader" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" style="color: white"></span>
+                            <span id="loginLoader" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" style="color: inherit"></span>
                             <span id="loginLoadingText" class="ml-2 d-none">Carregando...</span>
                         </button>
                     </div>
