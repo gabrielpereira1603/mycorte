@@ -22,20 +22,27 @@ view()->composer('components.layoutClient', function ($view) {
     $view->with('style', $style);
 });
 
+// Agrupamento de rotas para o cliente com prefixo e middleware comuns
+Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
+
+    // Rota de login do cliente
+    Route::get('/login/{tokenCompany}', [LoginClientController::class, 'index'])
+        ->name('loginclient');
+
+    Route::post('/login/{tokenCompany}', [LoginClientController::class, 'login'])
+        ->name('loginclient.post')
+        ->middleware(RedirectIfAuthenticatedClient::class);
+
+    // Rota de logout do cliente
+    Route::post('/logout/{tokenCompany}', [LogoutClientController::class, 'logout'])
+        ->name('logoutclient');
+
+    // Rota da página inicial do cliente
+    Route::get('/home/{tokenCompany}', [HomeClientController::class, 'index'])
+        ->name('homeclient');
+});
+
+// Rota padrão para página inicial de todas as empresas
 Route::get('/', function () {
     return view('allcompany');
 });
-
-Route::get('/loginclient/{tokenCompany}', [
-    LoginClientController::class, 'index'])
-    ->name('loginclient')
-    ->middleware(CheckCompany::class)
-    ->middleware(RedirectIfAuthenticatedClient::class);
-
-Route::post('/loginclient/{tokenCompany}', [LoginClientController::class, 'login'])->name('loginclient.post');
-Route::post('/logoutclient/{tokenCompany}', [LogoutClientController::class, 'logout'])->name('logoutclient');
-
-Route::get('/homeclient/{tokenCompany}', [
-    HomeClientController::class, 'index'])
-    ->name('homeclient')
-    ->middleware(CheckCompany::class);
