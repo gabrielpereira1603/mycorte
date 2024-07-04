@@ -17,12 +17,15 @@ class UploadPhotoClientController extends Controller
         // Armazena a foto e obtém o caminho
         $path = $request->file('photo')->store('profile_photos', 'public');
 
+        // Obtém a URL completa da foto armazenada
+        $fullPath = asset('storage/app/public/' . $path);
+
         // Obtém o cliente autenticado
         $client = Auth::guard('client')->user();
 
         if ($client) {
-            // Salva o caminho da foto no banco de dados
-            $client->image = $path;
+            // Salva o caminho completo da foto no banco de dados
+            $client->image = $fullPath;
             $client->save();
 
             // Define a mensagem de sucesso na sessão
