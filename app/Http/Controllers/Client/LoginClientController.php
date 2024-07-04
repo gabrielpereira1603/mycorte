@@ -37,7 +37,6 @@ class LoginClientController extends Controller
             Session::put('client', $client); // Armazenar dados do usuário na sessão se necessário
 
             // Redirecionar para a rota de homeclient com o tokenCompany
-            Session::forget('loading'); // Limpar a variável de sessão de carregamento
             return redirect()->route('homeclient', ['tokenCompany' => $request->tokenCompany])->with('success', 'Login realizado com sucesso!');
         }
 

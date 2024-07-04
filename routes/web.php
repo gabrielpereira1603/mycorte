@@ -7,6 +7,7 @@ use App\Http\Controllers\Client\MyAccountClientController;
 use App\Http\Controllers\Client\UploadPhotoClientController;
 use App\Http\Middleware\CheckCompany;
 use App\Http\Middleware\Client\RedirectIfAuthenticatedClient;
+use App\Http\Middleware\Client\RedirectIfNotAuthenticatedClient;
 use App\Models\Style;
 use Illuminate\Support\Facades\Route;
 
@@ -45,9 +46,12 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
 
     // Rota da myaccount do cliente
     Route::get('/myaccount/{tokenCompany}', [MyAccountClientController::class, 'index'])
-        ->name('myaccountclient');
+        ->name('myaccountclient')
+        ->middleware(RedirectIfNotAuthenticatedClient::class);
 
-    Route::post('/uploadPhotoClient/{tokenCompany}', [UploadPhotoClientController::class, 'uploadPhoto'])->name('uploadPhotoClient');
+    Route::post('/uploadPhotoClient/{tokenCompany}', [UploadPhotoClientController::class, 'uploadPhoto'])
+        ->name('uploadPhotoClient')
+        ->middleware(RedirectIfNotAuthenticatedClient::class);
 });
 
 // Rota padrão para página inicial de todas as empresas

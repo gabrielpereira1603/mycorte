@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('email', '100');
             $table->string('password', '255');
             $table->string('telephone', '30');
-            $table->string('image', '100')->nullable();
+            $table->string('image', '255')->nullable();
             $table->enum('role', ['CLIENT'])->default('CLIENT')->nullable();
             $table->timestamps();
         });
