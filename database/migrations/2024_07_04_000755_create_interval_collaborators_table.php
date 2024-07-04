@@ -6,24 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('availability_collaborator', function (Blueprint $table) {
+        Schema::create('interval_collaborator', function (Blueprint $table) {
             $table->id();
+            $table->string('reason', '50');
             $table->time('hourStart', '0');
             $table->time('hourFinal', '0');
-            $table->time('hourServiceInterval', '0');
-            $table->time('hourInterval', '0');
-            $table->enum('workDays', ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo']);
             $table->unsignedBigInteger('collaboratorfk');
             $table->foreign('collaboratorfk')->references('id')->on('collaborator')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('availability_collaborator');
+        Schema::dropIfExists('interval_collaborator');
     }
 };
