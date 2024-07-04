@@ -1,14 +1,15 @@
 <x-layoutClient title="Minha Conta" :tokenCompany="$tokenCompany">
 
     <div class="profile-name" style="background-color: #3a497684;">
-        <h3 style="color: white;">Perfil de Gabriel Alves Pereira</h3>
+        <h3 style="color: white;">Perfil de {{ $client->name }}</h3>
     </div>
 
     <section class="section-myAccount">
         <div class="main-myAccount">
             <div class="card-profile">
                 <div class="image-profile">
-                    <img src="https://somosdevteam.com/mycorte/images/Client/Profile/homer" alt="Perfil" width="100px" id="profileImage">
+                    <img src="{{ asset('storage/app/public/' . $client->image) }}" alt="Perfil" width="100px" id="profileImage">
+                    <p>{{ asset('storage/app/public/' . Auth::guard('client')->user()->image) }}</p>
                     <span class="icon-image-profile">
                         <i class="fa-solid fa-gear" style="color: white;"></i>
                     </span>
@@ -25,14 +26,15 @@
                             <div class="body-editImageModal">
                                 <img src="" alt="Perfil" id="modalImage" width="150px" height="150px">
                                 <span class="iconMyCorte-editImagelModal">
-                                    <img src="/app/Presentation/Assets/Images/SVG/apenasLogo.svg" alt="Icon MYCORTE" width="30px" height="30px">
+                                    <img src="{{ asset('images/apenasLogo.svg') }}" alt="Icon MYCORTE" width="30px" height="30px">
                                 </span>
                             </div>
 
                             <p style="font-style: italic; font-size: 12px; color: gray; margin: 2px 2px;">Caso nenhuma foto seja selecionada, escolheremos um dos nossos icons que combina mais com voçê para substituir</p>
 
                             <div class="editImageModal-options">
-                                <form id="uploadForm" enctype="multipart/form-data" action="/uploadPhotoProfileClient/" method="POST">
+                                <form id="uploadForm" enctype="multipart/form-data" action="{{ route('uploadPhotoClient', ['tokenCompany' => $tokenCompany]) }}" method="POST">
+                                    @csrf
                                     <input type="file" id="uploadPhoto" name="photo" style="display: none;">
                                     <div class="editImageModal-optionsUpload">
                                         <button type="button" id="cancelUpload" class="btn btn-danger" style="display: none;">Cancelar Foto</button>
@@ -51,12 +53,12 @@
                     <ul class="info-profile-list">
                         <li>
                             <div class="image-container">
-                                <img src="/app/Presentation/Assets/Images/Icons/Icongmail.png" alt="Icon Gmail">
+                                <img src="{{ asset('images/icons/Icongmail.png') }}" alt="Icon Gmail">
                             </div>
                         </li>
                         <li>
                             <div class="image-container">
-                                <img src="/app/Presentation/Assets/Images/Icons/whatsappIcon.png" alt="Whatsapp Icon">
+                                <img src="{{ asset('images/icons/whatsappIcon.png') }}" alt="Whatsapp Icon">
                             </div>
                         </li>
                     </ul>
@@ -73,13 +75,13 @@
                         </p>
                     </li>
                     <li>
-                        <p id="bioNome"><strong>Nome:</strong> </p>
+                        <p id="bioNome"><strong>Nome:</strong> {{ $client->name }}</p>
                     </li>
                     <li>
-                        <p id="bioTelefone"><strong>Telefone:</strong> </p>
+                        <p id="bioTelefone"><strong>Telefone:</strong> {{ $client->telephone }}</p>
                     </li>
                     <li>
-                        <p id="bioEmail"><strong>Email:</strong></p>
+                        <p id="bioEmail"><strong>Email:</strong> {{ $client->email }}</p>
                     </li>
                 </ul>
 
@@ -112,25 +114,25 @@
     <section class="conquistas" style="background-color: #6d82c4;">
         <ul class="list-conquistas">
             <li>
-                <img src="/app/Presentation/Assets/Images/Icons/conquistasIcon.png" alt="">
+                <img src="{{ asset('images/icons/conquistasIcon.png') }}" alt="">
                 <h4>+2000</h4>
                 <p>Cortes no ultimo mês</p>
             </li>
 
             <li>
-                <img src="/app/Presentation/Assets/Images/Icons/conquistasIcon.png" alt="">
+                <img src="{{ asset('images/icons/conquistasIcon.png') }}" alt="">
                 <h4>5000</h4>
                 <p>Cortes ao total, UAU!!!</p>
             </li>
 
             <li>
-                <img src="/app/Presentation/Assets/Images/Icons/conquistasIcon.png" alt="">
+                <img src="{{ asset('images/icons/conquistasIcon.png') }}" alt="">
                 <h4>+100</h4>
                 <p>Barbas feitas em dois meses</p>
             </li>
 
             <li>
-                <img src="/app/Presentation/Assets/Images/Icons/conquistasIcon.png" alt="">
+                <img src="{{ asset('images/icons/conquistasIcon.png') }}" alt="">
                 <h4>30/4</h4>
                 <p>Cliente semanal, Sempre alinhado!</p>
             </li>

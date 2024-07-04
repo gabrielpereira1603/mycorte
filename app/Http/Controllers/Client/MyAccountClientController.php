@@ -8,8 +8,12 @@ use Illuminate\Http\Request;
 class MyAccountClientController extends Controller
 {
     public function index($tokenCompany){
+        $client = session('client'); // Recuperar dados do cliente da sessão
+
         return view('Client.myaccountClient',[
-        'tokenCompany' => $tokenCompany
-        ]);
+        'tokenCompany' => $tokenCompany],
+        compact('client'));
     }
+
+
 }

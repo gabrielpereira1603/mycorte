@@ -34,7 +34,7 @@ class LoginClientController extends Controller
 
         if ($client && password_verify($request->password, $client->password)) {
             Auth::guard('client')->login($client);
-            Session::put('user', $client); // Armazenar dados do usuário na sessão se necessário
+            Session::put('client', $client); // Armazenar dados do usuário na sessão se necessário
 
             // Redirecionar para a rota de homeclient com o tokenCompany
             Session::forget('loading'); // Limpar a variável de sessão de carregamento

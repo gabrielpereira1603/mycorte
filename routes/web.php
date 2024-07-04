@@ -4,6 +4,7 @@ use App\Http\Controllers\Client\HomeClientController;
 use App\Http\Controllers\Client\LoginClientController;
 use App\Http\Controllers\Client\LogoutClientController;
 use App\Http\Controllers\Client\MyAccountClientController;
+use App\Http\Controllers\Client\UploadPhotoClientController;
 use App\Http\Middleware\CheckCompany;
 use App\Http\Middleware\Client\RedirectIfAuthenticatedClient;
 use App\Models\Style;
@@ -45,6 +46,8 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
     // Rota da myaccount do cliente
     Route::get('/myaccount/{tokenCompany}', [MyAccountClientController::class, 'index'])
         ->name('myaccountclient');
+
+    Route::post('/uploadPhotoClient/{tokenCompany}', [UploadPhotoClientController::class, 'uploadPhoto'])->name('uploadPhotoClient');
 });
 
 // Rota padrão para página inicial de todas as empresas
