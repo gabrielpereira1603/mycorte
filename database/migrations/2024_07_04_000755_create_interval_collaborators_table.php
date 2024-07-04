@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('interval_collaborator', function (Blueprint $table) {
             $table->id();
             $table->string('reason', '50');
-            $table->time('hourStart', '0');
-            $table->time('hourFinal', '0');
+            $table->time('hourStart');
+            $table->time('hourFinal');
             $table->date('date',);
             $table->unsignedBigInteger('collaboratorfk');
             $table->foreign('collaboratorfk')->references('id')->on('collaborator')->onDelete('cascade');

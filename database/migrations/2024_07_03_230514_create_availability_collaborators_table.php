@@ -11,10 +11,10 @@ return new class extends Migration
     {
         Schema::create('availability_collaborator', function (Blueprint $table) {
             $table->id();
-            $table->time('hourStart', '0');
-            $table->time('hourFinal', '0');
-            $table->time('hourServiceInterval', '0');
-            $table->time('hourInterval', '0');
+            $table->time('hourStart');
+            $table->time('hourFinal');
+            $table->time('hourServiceInterval');
+            $table->time('hourInterval');
             $table->enum('workDays', ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo']);
             $table->unsignedBigInteger('collaboratorfk');
             $table->foreign('collaboratorfk')->references('id')->on('collaborator')->onDelete('cascade');
