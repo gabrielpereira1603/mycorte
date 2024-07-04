@@ -32,9 +32,6 @@ class HomeClientController extends Controller
             $collaborator->formatted_services = $services;
         }
 
-        // Debug para verificar os colaboradores e serviços
-        // var_dump($collaborators);
-
         return view('Client.homeClient', [
             'tokenCompany' => $tokenCompany,
             'collaborators' => $collaborators,

@@ -11,6 +11,17 @@ class Schedule extends Model
 
     protected $table = 'schedule';
 
+    protected $fillable = [
+        'date',
+        'hourStart',
+        'hourFinal',
+        'reminderEmailSent',
+        'clientfk',
+        'collaboratorfk',
+        'statusSchedulefk',
+        'companyfk',
+    ];
+
     public function services()
     {
         return $this->belongsToMany(Service::class);
