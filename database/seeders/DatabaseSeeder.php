@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ServiceSeeder::class);
         $this->call(AvailabilityCollaboratorSeeder::class);
         $this->call(IntervalCollaboratorSeeder::class);
+        $this->call(StatusScheduleSeeder::class);
     }
 }
