@@ -17,7 +17,7 @@ class ClientSeeder extends Seeder
                 'email' => 'pereiragabrieldev@gmail.com',
                 'password' => bcrypt('gabriel'),
                 'telephone' => '67981957833',
-                'image' => 'teste',
+                'image' => 'https://mycorte.somosdevteam.com/storage/app/public/profile_photos/yRZLPTBDW3llPcyyb055kZ0h2vy0u2WcnKvxAnGR.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -26,7 +26,7 @@ class ClientSeeder extends Seeder
                 'email' => 'joaocaetanodev@gmail.com',
                 'password' => bcrypt('caetano'),
                 'telephone' => '67981203040',
-                'image' => 'teste',
+                'image' => 'https://mycorte.somosdevteam.com/storage/app/public/profile_photos/l1vZwZ0L3J2mNvy6clwoFNRCXflWoGyzndJc1vzh.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
