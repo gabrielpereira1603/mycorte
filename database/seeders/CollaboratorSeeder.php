@@ -14,7 +14,7 @@ class CollaboratorSeeder extends Seeder
             [
                 'email' => 'gabriel@gmail.com',
                 'enabled' => true,
-                'image' => null,
+                'image' => 'https://mycorte.somosdevteam.com/storage/app/public/profile_photos/collaborator/jason.png',
                 'name' => 'Jason Statham',
                 'password' => bcrypt('gabriel'),
                 'role' => 'COLLABORATOR',
@@ -26,7 +26,7 @@ class CollaboratorSeeder extends Seeder
             [
                 'email' => 'joao@gmail.com',
                 'enabled' => false,
-                'image' => null,
+                'image' => 'https://mycorte.somosdevteam.com/storage/app/public/profile_photos/collaborator/jhon.png',
                 'name' => 'Jhon Whick',
                 'password' => bcrypt('joao'),
                 'role' => 'COLLABORATOR',

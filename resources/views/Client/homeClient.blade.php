@@ -10,7 +10,7 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="card card-custom" style="border: solid black 1px;">
                         <div class="profile-collaborator">
-                            <img src="/app/Presentation/Assets/Images/perfil.jpeg" alt="Profile Picture">
+                            <img src="{{ $collaborator->image }}" alt="Profile Picture">
                             <h3 class="mt-2">{{ $collaborator->name }}</h3>
                             <p><strong>Serviços:</strong> <span class="services-tooltip" data-tooltip="{{ $collaborator->formatted_services }}">{{ $collaborator->formatted_services }}</span></p>
                         </div>
@@ -28,7 +28,7 @@
                         </div>
                         <div class="buttons-home">
                             <a class="btn btn-dark" href="{{--{{ route('services', ['collaboratorId' => $collaborator->id]) }}--}}">Serviços</a>
-                            <a class="btn btn-dark" href="{{--{{ route('schedules', ['collaboratorId' => $collaborator->id]) }}--}}">Horários</a>
+                            <a class="btn btn-dark" href="{{ route('scheduleclient', ['tokenCompany' => $tokenCompany, 'collaboratorId' => $collaborator->id]) }}">Horários</a>
                         </div>
                     </div>
                 </div>

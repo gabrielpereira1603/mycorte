@@ -11,4 +11,13 @@ class Client extends Authenticatable
     use HasFactory;
 
     protected $table = 'client';
+
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'telephone',
+        'image',
+        'role'
+    ];
 }

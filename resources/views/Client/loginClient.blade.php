@@ -26,7 +26,7 @@
 
                 @if(session('success'))
                     <div class="alert alert-success">
-                        {{ session('success') }}
+                        <i class="fa-regular fa-circle-check"></i> {{ session('success') }}
                     </div>
                 @endif
 
@@ -65,7 +65,7 @@
                     <span class="divider-text">OU</span>
                     <div></div>
                 </div>
-                <a class="button btn-secondary" href="">Cadastre-se Agora</a>
+                <a class="button btn-secondary" href="{{ route('singupclient', ['tokenCompany' => $tokenCompany]) }}" id="singupBtn" onclick="handleLink('singupBtn')">Cadastre-se Agora</a>
             </div>
         </form>
     </section>
@@ -100,6 +100,10 @@
     function handleLogin() {
         document.getElementById('submitBtn').innerHTML = '<span class="spinner-border spinner-border-sm" style="color: white !important;" role="status" aria-hidden="true"></span> Carregando...';
         document.getElementById('loginForm').submit();
+    }
+
+    function handleLink(buttonId) {
+        document.getElementById(buttonId).innerHTML = '<span class="spinner-border spinner-border-sm" style="color: inherit !important;" role="status" aria-hidden="true"></span> Carregando...';
     }
 </script>
 </body>

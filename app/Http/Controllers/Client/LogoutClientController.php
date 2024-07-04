@@ -11,13 +11,18 @@ class LogoutClientController extends Controller
 {
     public function logout(Request $request): RedirectResponse
     {
-        Auth::guard('client')->logout();
+        try {
+            Auth::guard('client')->logout();
 
-        // Invalidate the session and regenerate the CSRF token
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+            // Invalidate the session and regenerate the CSRF token
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-        // Redirecionar para a página inicial ou página de login
-        return redirect()->route('loginclient', ['tokenCompany' => $request->tokenCompany])->with('success', 'Logout realizado com sucesso!');
+            // Redirecionar para a URL de origem ou para a rota de login
+            $redirectTo = $request->headers->get('referer') ?: route('loginclient', ['tokenCompany' => $request->tokenCompany]);
+            return redirect()->to($redirectTo)->with('success', 'Logout realizado com sucesso!');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Erro ao fazer logout. Por favor, tente novamente.']);
+        }
     }
 }

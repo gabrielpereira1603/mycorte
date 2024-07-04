@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
@@ -36,8 +35,9 @@ class LoginClientController extends Controller
             Auth::guard('client')->login($client);
             Session::put('client', $client); // Armazenar dados do usuário na sessão se necessário
 
-            // Redirecionar para a rota de homeclient com o tokenCompany
-            return redirect()->route('homeclient', ['tokenCompany' => $request->tokenCompany])->with('success', 'Login realizado com sucesso!');
+            // Redirecionar para a URL de origem ou para a rota de homeclient se não houver URL de origem
+            $redirectTo = $request->input('redirect_to', route('homeclient', ['tokenCompany' => $request->tokenCompany]));
+            return redirect()->intended($redirectTo)->with('success', 'Login realizado com sucesso!');
         }
 
         return back()->withErrors([

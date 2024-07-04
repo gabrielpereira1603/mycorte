@@ -4,6 +4,8 @@ use App\Http\Controllers\Client\HomeClientController;
 use App\Http\Controllers\Client\LoginClientController;
 use App\Http\Controllers\Client\LogoutClientController;
 use App\Http\Controllers\Client\MyAccountClientController;
+use App\Http\Controllers\Client\ScheduleClientController;
+use App\Http\Controllers\Client\SingupClientController;
 use App\Http\Controllers\Client\UploadPhotoClientController;
 use App\Http\Middleware\CheckCompany;
 use App\Http\Middleware\Client\RedirectIfAuthenticatedClient;
@@ -30,11 +32,22 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
 
     // Rota de login do cliente
     Route::get('/login/{tokenCompany}', [LoginClientController::class, 'index'])
-        ->name('loginclient');
+        ->name('loginclient')
+        ->middleware(RedirectIfAuthenticatedClient::class);
 
+    // Rota POST de login do cliente
     Route::post('/login/{tokenCompany}', [LoginClientController::class, 'login'])
         ->name('loginclient.post')
         ->middleware(RedirectIfAuthenticatedClient::class);
+
+    // Rota de singup do cliente
+    Route::get('/singup/{tokenCompany}', [SingupClientController::class, 'index'])
+        ->name('singupclient')
+        ->middleware(RedirectIfAuthenticatedClient::class);
+
+    // Rota de singup POST do client
+    Route::post('/singup/{tokenCompany}', [SingupClientController::class, 'register'])
+        ->name('singupclient.post');
 
     // Rota de logout do cliente
     Route::post('/logout/{tokenCompany}', [LogoutClientController::class, 'logout'])
@@ -53,9 +66,12 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
         ->name('uploadPhotoClient')
         ->middleware(RedirectIfNotAuthenticatedClient::class);
 
-    Route::post('/mycutsclient/{tokenCompany}', [])
+    Route::get('/mycuts/{tokenCompany}', [])
         ->name('mycutsclient')
         ->middleware(RedirectIfNotAuthenticatedClient::class);
+
+    Route::get('/schedule/{tokenCompany}/{collaboratorId}', [ScheduleClientController::class, 'index'])
+        ->name('scheduleclient');
 });
 
 // Rota padrão para página inicial de todas as empresas

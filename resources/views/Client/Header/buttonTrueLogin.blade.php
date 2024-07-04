@@ -1,5 +1,6 @@
 <form id="logout-form" action="{{ route('logoutclient', ['tokenCompany' => $tokenCompany]) }}" method="POST" style="display: none;">
     @csrf
+    <input type="hidden" name="redirect_to" value="{{ request()->fullUrl() }}">
 </form>
 
 <form class="d-flex form-header">

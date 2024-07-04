@@ -22,8 +22,9 @@
         <div class="modal-content" style="max-width: 450px !important;">
             <div class="modal-body seminor-login-modal-body">
                 <h5 class="modal-title text-center">Crie sua conta agora</h5>
-                <form class="seminor-login-form" method="post" action="#">
-
+                <form class="seminor-login-form" id="singupForm" method="post" action="{{ route('singupclient.post', ['tokenCompany' => $tokenCompany]) }}">
+                    @csrf
+                    <input type="hidden" name="redirect_to" value="{{ request()->fullUrl() }}">
                     <div class="form-group">
                         <input type="text" class="form-control" name="name" required>
                         <label class="form-control-placeholder" >Nome</label>
@@ -52,8 +53,24 @@
                     </div>
 
                     <div class="btn-check-log">
-                        <button type="submit" class="btn-check-login">Registre-se</button>
+                        <button type="submit" class="btn-check-login">
+                            <span id="singupButtonContent">Registre-se</span>
+                            <span id="singupLoader" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" style="color: inherit"></span>
+                            <span id="singupLoadingText" class="ml-2 d-none">Carregando...</span>
+                        </button>
+
                     </div>
+
+                    <script>
+                        $(document).ready(function() {
+                            $('#singupForm').on('submit', function(event) {
+                                // Mostra o texto "Carregando..." e o spinner de carregamento
+                                $('#singupButtonContent').addClass('d-none');
+                                $('#singupLoader').removeClass('d-none');
+                                $('#singupLoadingText').removeClass('d-none');
+                            });
+                        });
+                    </script>
                 </form>
             </div>
         </div>
@@ -67,6 +84,7 @@
                 <h5 class="modal-title text-center">Entrar</h5>
                 <form id="loginForm" class="seminor-login-form" method="post" action="{{ route('loginclient.post', ['tokenCompany' => $tokenCompany]) }}">
                     @csrf
+                    <input type="hidden" name="redirect_to" value="{{ request()->fullUrl() }}">
                     <div class="form-group">
                         <input type="email" class="form-control" required name="email">
                         <label class="form-control-placeholder">Email</label>

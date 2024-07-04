@@ -27,7 +27,7 @@ class UploadPhotoClientController extends Controller
             }
 
             // Armazena a nova foto e obtém o caminho
-            $path = $request->file('photo')->store('profile_photos', 'public');
+            $path = $request->file('photo')->store('profile_photos/client', 'public');
 
             // Obtém a URL completa da nova foto armazenada
             $fullPath = asset('storage/app/public/' . $path);

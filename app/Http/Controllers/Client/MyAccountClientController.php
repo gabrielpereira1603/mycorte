@@ -14,7 +14,7 @@ class MyAccountClientController extends Controller
 
         return view('Client.myaccountClient', [
             'tokenCompany' => $tokenCompany,
-            'client' => $client, // Passar o cliente para a view
+            'client' => $client,
         ]);
     }
 
