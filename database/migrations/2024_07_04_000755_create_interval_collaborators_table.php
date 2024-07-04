@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('reason', '50');
             $table->time('hourStart', '0');
             $table->time('hourFinal', '0');
+            $table->date('date',);
             $table->unsignedBigInteger('collaboratorfk');
             $table->foreign('collaboratorfk')->references('id')->on('collaborator')->onDelete('cascade');
             $table->timestamps();
