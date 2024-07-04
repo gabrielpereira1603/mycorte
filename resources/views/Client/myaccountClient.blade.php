@@ -8,7 +8,7 @@
         <div class="main-myAccount">
             <div class="card-profile">
                 <div class="image-profile">
-                    <img src="{{ asset('storage/app/public/' . $client->image) }}" alt="Perfil" width="100px" id="profileImage">
+                    <img src="{{ asset('storage/app/public/' . Auth::guard('client')->user()->image) }}" alt="Perfil" width="100px" id="profileImage">
                     <p>{{ asset('storage/app/public/' . Auth::guard('client')->user()->image) }}</p>
                     <span class="icon-image-profile">
                         <i class="fa-solid fa-gear" style="color: white;"></i>
