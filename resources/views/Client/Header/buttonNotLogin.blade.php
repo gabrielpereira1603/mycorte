@@ -64,7 +64,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="max-width: 450px !important;">
             <div class="modal-body seminor-login-modal-body">
-                <h5 class="modal-title text-center">Entrar</h5>
+                <h5 class="modal-title text-center">Entrar</h5>{{  }}
                 <form id="loginForm" class="seminor-login-form" method="post" action="{{ route('loginclient.post', ['tokenCompany' => $tokenCompany]) }}">
                     @csrf
                     <div class="form-group">
