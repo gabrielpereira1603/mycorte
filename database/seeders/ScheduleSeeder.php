@@ -32,6 +32,17 @@ class ScheduleSeeder extends Seeder
                 'companyfk' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'date' => now(),
+                'hourStart' => '11:00:00',
+                'hourFinal' => '12:00:00',
+                'clientfk' => 2,
+                'collaboratorfk' => 1,
+                'statusSchedulefk' => 1,
+                'companyfk' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }

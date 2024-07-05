@@ -11,13 +11,22 @@ class ScheduleServiceSeeder extends Seeder
 {
     public function run(): void
     {
-        // Get the schedule and services
-        $schedule = Schedule::first();
+        // Recupero os Services
         $service1 = Service::where('id', 1)->first();
         $service2 = Service::where('id', 2)->first();
 
-        // Attach services to schedule
+        //Recupero as Schedules
+        $schedule = Schedule::first();
+        $schedule2 = Schedule::where('id', 2)->first();
+        $schedule3 = Schedule::where('id', 3)->first();
+
+        // Attach Services em Schedule
         $schedule->services()->attach($service1->id);
         $schedule->services()->attach($service2->id);
+        $schedule2->services()->attach($service1->id);
+        $schedule2->services()->attach($service2->id);
+        $schedule3->services()->attach($service2->id);
+        $schedule3->services()->attach($service2->id);
+
     }
 }

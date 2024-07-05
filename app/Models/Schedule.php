@@ -26,4 +26,15 @@ class Schedule extends Model
     {
         return $this->belongsToMany(Service::class);
     }
+
+    public function collaborator()
+    {
+        return $this->belongsTo(Collaborator::class, 'collaboratorfk');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'companyfk');
+    }
+
 }
