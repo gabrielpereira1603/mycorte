@@ -18,7 +18,7 @@
 
 /* Container principal dos agendamentos */
 .main-myCuts {
-    width: 80%;
+    width: 100%;
     max-width: 1200px;
 }
 
@@ -36,6 +36,7 @@
 /* Container de cada agendamento */
 .card-schedule {
     display: flex;
+    width: 100%;
     flex-direction: column;
     background-color: #fff;
     border-radius: 10px;
@@ -56,8 +57,19 @@
     margin-bottom: 20px;
 }
 
+.title-card-myCuts{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.icon-infoChedule-mycuts{
+    margin-bottom: 2px;
+}
+
 .info-schedule h4 {
-    margin: 0 0 10px 0;
+    gap: 10px;
+    margin: 0px;
     font-size: 1.5em;
     color: #333;
 }
@@ -102,14 +114,10 @@
 
 /* Container do mapa */
 .map-container {
-    flex: 1;
-    min-width: 300px;
+    width: 100%;
+    min-width: 400px;
     margin-top: 20px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    background-color: #fff;
+
 }
 
 .map-title {
@@ -122,10 +130,25 @@
 .map-container iframe {
     width: 100%;
     height: 300px;
-    border: none;
     border-radius: 10px;
+    border: solid 5px #3A4976;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    animation: borderFlash 2s linear infinite;
 }
+
+@keyframes borderFlash {
+    0% {
+        box-shadow: 0 0 5px white, 0 0 5px white, 0 0 10px white;
+    }
+    50% {
+        box-shadow: 0 0 3px rgba(58, 73, 118, 0.76), 0 0 3px rgba(58, 73, 118, 0.76), 0 0 3px rgba(58, 73, 118, 0.76);
+    }
+    100% {
+        box-shadow: 0 0 5px white, 0 0 5px white, 0 0 10px white;
+    }
+}
+
 
 /* Botões de ação */
 .action-buttons {

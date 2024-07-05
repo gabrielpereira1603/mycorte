@@ -24,6 +24,6 @@ class CheckCompany
             return redirect()->route('allcompany');
         }
 
-        return $next($request);
+        return $next($request, ['company' => $company]);
     }
 }

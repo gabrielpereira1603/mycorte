@@ -1,4 +1,3 @@
-<!-- resources/views/Client/mycutsClient.blade.php -->
 <x-layoutClient title="Meus Cortes" :tokenCompany="$tokenCompany">
     <div class="profile-name">
         <h3>Meus Agendamentos</h3>
@@ -12,7 +11,12 @@
                 @foreach($schedules as $schedule)
                     <div class="card-schedule">
                         <div class="info-schedule">
-                            <h4>Agendamento em {{ \Carbon\Carbon::parse($schedule->date)->format('d-m-Y') }} às {{ $schedule->hourStart }}</h4>
+                            <div class="title-card-myCuts">
+                                <span class="icon-infoChedule-mycuts">
+                                    <img src="{{ asset('images/icons/calendarioIcon.png') }}" alt="Icone de Calendario" width="20px">
+                                </span>
+                                <h4>Agendamento em {{ \Carbon\Carbon::parse($schedule->date)->format('d-m-Y') }} às {{ $schedule->hourStart }}</h4>
+                            </div>
                             <p><strong>Hora de Término:</strong> {{ $schedule->hourFinal }}</p>
                             <p><strong>Status:</strong> Agendado</p>
                             <p><strong>Colaborador:</strong> {{ $schedule->collaborator->name }}</p>
@@ -30,10 +34,7 @@
                             <p class="map-title">Como Chegar:</p>
                             {!! $company->localization !!}
                         </div>
-                        <div class="action-buttons">
-                            <button type="button" class="btn btn-danger" onclick="cancelAppointment({{ $schedule->id }})">Cancelar</button>
-                            <button type="button" class="btn btn-warning" onclick="rescheduleAppointment({{ $schedule->id }})">Reagendar</button>
-                        </div>
+
                     </div>
                 @endforeach
             @endif
@@ -48,3 +49,7 @@
         }
     </script>
 </x-layoutClient>
+<div class="action-buttons">
+    <button type="button" class="btn btn-danger" onclick="cancelAppointment({{ $schedule->id }})">Cancelar</button>
+    <button type="button" class="btn btn-warning" onclick="rescheduleAppointment({{ $schedule->id }})">Reagendar</button>
+</div>

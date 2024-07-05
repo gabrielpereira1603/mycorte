@@ -12,6 +12,10 @@
     color: #3A4976 !important;
 }
 
+#logoHeader{
+    margin-left: 100px;
+}
+
 @media (max-width: 575.98px) {
     .form-header.d-flex {
         flex-direction: column;
@@ -19,6 +23,10 @@
 
     .form-header .divider {
         text-align: center;
+    }
+
+    #logoHeader{
+        margin-left: 40px;
     }
 
     .divider {

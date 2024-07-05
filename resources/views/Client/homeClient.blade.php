@@ -3,7 +3,6 @@
         <h3 style="color: white;">Seja Bem Vindo</h3>
         <p style="color: white;">Escolha o profissional para lhe atender:</p>
     </div>
-
     <section class="container">
         <div class="row">
             @foreach ($collaborators as $collaborator)

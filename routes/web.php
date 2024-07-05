@@ -24,15 +24,8 @@ view()->composer('components.layoutClient', function ($view) {
         $query->where('token', $tokenCompany);
     })->first();
 
-    // Se encontrou o estilo, buscar a company associada a ele
-    $company = null;
-    if ($style) {
-        $company = $style->company()->first();
-    }
-
-    // Passar o estilo e a empresa para a view
+    // Passar o estilo para a view
     $view->with('style', $style);
-    $view->with('company', $company);
 });
 
 // Agrupamento de rotas para o cliente com prefixo e middleware comuns

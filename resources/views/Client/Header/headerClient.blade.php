@@ -1,8 +1,10 @@
 <nav class="navbar navbar-expand-lg" style="background-color: {{ $style->primaryColor ?? 'white' }};">
     <div class="container-fluid">
-        <a class="navbar-brand ms-5" href="{{ route('homeclient', ['tokenCompany' => $tokenCompany]) }}">
-            <img src="{{ asset('images/logoLetraAzul.png') }}" alt="Logo" width="60" class="d-inline-block align-text-top">
+        <a class="navbar-brand ms-lg-5 ms-md-3 ms-sm-1" href="{{ route('homeclient', ['tokenCompany' => $tokenCompany]) }}">
+            <img src="{{ asset('images/logoLetraAzul.png') }}" id="logoHeader" alt="Logo" width="60" class="d-inline-block align-text-top" style="">
         </a>
+
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

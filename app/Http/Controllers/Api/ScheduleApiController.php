@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Schedule;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ScheduleApiController extends Controller
 {
-    public function getScheduleData($date, $companyId, $collaboratorId)
+    public function getScheduleData($date, $companyId, $collaboratorId): JsonResponse
     {
         try {
             $schedules = Schedule::where('date', $date)
@@ -24,17 +25,8 @@ class ScheduleApiController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Erro ao buscar os dados de agendamento.'
-            ], 500);
+            ], 100);
         }
     }
 
-    public function getAvailabilityCollaborator($collaboratorId)
-    {
-        // Lógica para buscar a disponibilidade do colaborador
-    }
-
-    public function getIntervalCollaborator($collaboratorId)
-    {
-        // Lógica para buscar os intervalos do colaborador
-    }
 }
