@@ -4,6 +4,7 @@ use App\Http\Controllers\Client\HomeClientController;
 use App\Http\Controllers\Client\LoginClientController;
 use App\Http\Controllers\Client\LogoutClientController;
 use App\Http\Controllers\Client\MyAccountClientController;
+use App\Http\Controllers\Client\MyCutsClientController;
 use App\Http\Controllers\Client\ScheduleClientController;
 use App\Http\Controllers\Client\SingupClientController;
 use App\Http\Controllers\Client\UploadPhotoClientController;
@@ -66,7 +67,7 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
         ->name('uploadPhotoClient')
         ->middleware(RedirectIfNotAuthenticatedClient::class);
 
-    Route::get('/mycuts/{tokenCompany}', [])
+    Route::get('/mycuts/{tokenCompany}', [MyCutsClientController::class, 'index'])
         ->name('mycutsclient')
         ->middleware(RedirectIfNotAuthenticatedClient::class);
 
