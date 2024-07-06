@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\CancelScheduleController;
 use App\Http\Controllers\Client\HomeClientController;
 use App\Http\Controllers\Client\LoginClientController;
 use App\Http\Controllers\Client\LogoutClientController;
@@ -49,6 +50,10 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
     // Rota de singup POST do client
     Route::post('/singup/{tokenCompany}', [SingupClientController::class, 'register'])
         ->name('singupclient.post');
+
+    // Rota cancel schedule
+    Route::post('/cancel-schedule/{tokenCompany}/{scheduleId}', [CancelScheduleController::class, 'cancel'])
+        ->name('cancel.schedule');
 
     // Rota de logout do cliente
     Route::post('/logout/{tokenCompany}', [LogoutClientController::class, 'logout'])

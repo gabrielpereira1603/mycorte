@@ -35,9 +35,10 @@
 
 /* Container de cada agendamento */
 .card-schedule {
+    position: relative;
     display: flex;
-    width: 100%;
     flex-direction: column;
+    width: 100%;
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
@@ -50,26 +51,40 @@
     transform: translateY(-5px);
 }
 
+/* Banner de status */
+.status-banner {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 0.9em;
+    font-weight: bold;
+    z-index: 1;
+}
+
 /* Informações do agendamento */
 .info-schedule {
     flex: 1;
-    min-width: 300px;
     margin-bottom: 20px;
 }
 
-.title-card-myCuts{
+.title-card-myCuts {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.icon-infoChedule-mycuts{
-    margin-bottom: 2px;
+.icon-infoChedule-mycuts {
+    margin-right: 10px;
 }
 
 .info-schedule h4 {
-    gap: 10px;
-    margin: 0px;
+    margin: 0;
     font-size: 1.5em;
     color: #333;
 }
@@ -83,7 +98,6 @@
 /* Serviços do agendamento */
 .services-schedule {
     flex: 1;
-    min-width: 300px;
     margin-bottom: 20px;
 }
 
@@ -106,6 +120,7 @@
     font-size: 1em;
     color: #333;
     transition: background-color 0.3s ease;
+    word-wrap: break-word; /* Adiciona a quebra de palavra */
 }
 
 .services-schedule ul li:hover {
@@ -115,9 +130,7 @@
 /* Container do mapa */
 .map-container {
     width: 100%;
-    min-width: 400px;
     margin-top: 20px;
-
 }
 
 .map-title {
@@ -133,7 +146,6 @@
     border-radius: 10px;
     border: solid 5px #3A4976;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
     animation: borderFlash 2s linear infinite;
 }
 
@@ -148,7 +160,6 @@
         box-shadow: 0 0 5px white, 0 0 5px white, 0 0 10px white;
     }
 }
-
 
 /* Botões de ação */
 .action-buttons {
@@ -183,9 +194,45 @@
     border-color: #d39e00;
 }
 
-/* Responsividade para os botões */
+/* Responsividade */
 @media (max-width: 768px) {
+    .profile-name h3 {
+        font-size: 1.5em;
+    }
+
+    .info-schedule h4 {
+        font-size: 1.2em;
+    }
+
+    .info-schedule p {
+        font-size: 0.9em;
+    }
+
+    .services-schedule h5 {
+        font-size: 1.1em;
+    }
+
+    .services-schedule ul li {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .map-container iframe {
+        height: 200px;
+    }
+
     .action-buttons {
         justify-content: center;
+    }
+
+    .status-banner {
+        position: relative; /* Voltando ao fluxo normal */
+        width: auto;
+        max-width: 100%;
+        margin-top: -20px; /* Ajuste de margem para posicionamento */
+        top: unset;
+        right: unset;
+        font-size: 0.8em;
+        padding: 3px 7px;
     }
 }
