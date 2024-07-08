@@ -8,7 +8,6 @@ use App\Models\Company;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
-use Illuminate\Http\Request;
 
 class HomeClientController extends Controller
 {

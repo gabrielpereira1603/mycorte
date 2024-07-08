@@ -208,6 +208,10 @@
         font-size: 0.9em;
     }
 
+    .services-schedule{
+        margin-bottom: 0px;
+    }
+
     .services-schedule h5 {
         font-size: 1.1em;
     }
@@ -222,15 +226,20 @@
     }
 
     .action-buttons {
+        display: flex;
         justify-content: center;
+        flex-direction: row;
+    }
+
+    .action-buttons button{
+        width: 46%;
     }
 
     .status-banner {
         position: relative; /* Voltando ao fluxo normal */
         width: auto;
         max-width: 100%;
-        margin-top: -20px; /* Ajuste de margem para posicionamento */
-        top: unset;
+        top: -10px;
         right: unset;
         font-size: 0.8em;
         padding: 3px 7px;

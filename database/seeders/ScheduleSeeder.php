@@ -35,8 +35,8 @@ class ScheduleSeeder extends Seeder
             ],
             [
                 'date' => now(),
-                'hourStart' => '00:00:00',
-                'hourFinal' => '01:00:00',
+                'hourStart' => '14:00:00',
+                'hourFinal' => '15:00:00',
                 'clientfk' => 2,
                 'collaboratorfk' => 1,
                 'statusSchedulefk' => 1,

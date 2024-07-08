@@ -14,7 +14,7 @@ class AvailabilityCollaboratorSeeder extends Seeder
             [
                 'hourStart' => '08:00:00',
                 'hourFinal' => '17:00:00',
-                'hourServiceInterval' => '12:00:00',
+                'hourServiceInterval' => '01:00:00',
                 'hourInterval' => '15:00:00',
                 'workDays' => 'Segunda',
                 'collaboratorfk' => 1,
@@ -24,9 +24,9 @@ class AvailabilityCollaboratorSeeder extends Seeder
             [
                 'hourStart' => '08:00:00',
                 'hourFinal' => '17:00:00',
-                'hourServiceInterval' => '12:00:00',
+                'hourServiceInterval' => '01:00:00',
                 'hourInterval' => '15:00:00',
-                'workDays' => 'Terça',
+                'workDays' => 'Terca',
                 'collaboratorfk' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),

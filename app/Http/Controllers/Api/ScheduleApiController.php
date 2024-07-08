@@ -5,14 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Schedule;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ScheduleApiController extends Controller
 {
     public function getScheduleData($date, $companyId, $collaboratorId): JsonResponse
     {
         try {
-            $schedules = Schedule::where('date', $date)
+            $schedules = Schedule::with('statusSchedule')
+                ->where('date', $date)
                 ->where('companyfk', $companyId)
                 ->where('collaboratorfk', $collaboratorId)
                 ->get();
@@ -22,11 +23,13 @@ class ScheduleApiController extends Controller
                 'data' => $schedules
             ]);
         } catch (\Exception $e) {
+            // Log do erro para análise posterior
+            Log::error('Erro ao buscar os dados de agendamento: ' . $e->getMessage());
+
             return response()->json([
                 'success' => false,
                 'message' => 'Erro ao buscar os dados de agendamento.'
-            ], 100);
+            ], 500);
         }
     }
-
 }

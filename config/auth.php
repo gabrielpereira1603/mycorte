@@ -74,7 +74,7 @@ return [
         ],
        'collaborators' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Collaborator::class,
+            'model' => \App\Models\Collaborator::class,
         ],
 //        'dbas' => [
 //            'driver' => 'eloquent',

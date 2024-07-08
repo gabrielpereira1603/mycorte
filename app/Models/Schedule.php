@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,4 +36,8 @@ class Schedule extends Model
         return $this->belongsTo(Company::class, 'companyfk');
     }
 
+    public function statusSchedule()
+    {
+        return $this->belongsTo(StatusSchedule::class, 'statusSchedulefk');
+    }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->time('hourFinal');
             $table->time('hourServiceInterval');
             $table->time('hourInterval');
-            $table->enum('workDays', ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo']);
+            $table->enum('workDays', ['Segunda', 'Terca', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo']);
             $table->unsignedBigInteger('collaboratorfk');
             $table->foreign('collaboratorfk')->references('id')->on('collaborator')->onDelete('cascade');
             $table->timestamps();
