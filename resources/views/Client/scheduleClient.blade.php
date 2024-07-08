@@ -22,6 +22,7 @@
             function adjustCalendar(availabilities) {
                 var validDays = {};
                 var slotDurations = {};
+                var hiddenDays = [0, 1, 2, 3, 4, 5, 6]; // Todos os dias da semana, 0 é domingo, 6 é sábado
 
                 // Acessa diretamente o array de disponibilidades
                 availabilities.data.forEach(function(availability) {
@@ -31,6 +32,13 @@
                         end: availability.hourFinal.substr(0, 5)    // Formato HH:MM
                     };
                     slotDurations[day] = availability.hourServiceInterval; // Intervalo de serviço para cada dia
+
+                    // Remove o dia da semana da lista de dias ocultos
+                    var dayIndex = getDayIndex(day);
+                    var hiddenDayIndex = hiddenDays.indexOf(dayIndex);
+                    if (hiddenDayIndex > -1) {
+                        hiddenDays.splice(hiddenDayIndex, 1);
+                    }
                 });
 
                 var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -43,6 +51,7 @@
                         center: 'title',
                         right: 'timeGridDay'
                     },
+                    hiddenDays: hiddenDays, // Oculta os dias da semana sem disponibilidade
                     validRange: function(nowDate) {
                         let endDate = new Date(nowDate);
                         endDate.setDate(endDate.getDate() + 6);
@@ -249,6 +258,20 @@
 
                 var formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
                 return formattedDateTime;
+            }
+
+            // Função para obter o índice do dia da semana a partir do nome do dia
+            function getDayIndex(dayName) {
+                var days = {
+                    'Domingo': 0,
+                    'Segunda': 1,
+                    'Terca': 2,
+                    'Quarta': 3,
+                    'Quinta': 4,
+                    'Sexta': 5,
+                    'Sabado': 6
+                };
+                return days[dayName];
             }
 
             // Função para buscar a disponibilidade do colaborador da API
