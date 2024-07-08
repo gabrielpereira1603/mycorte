@@ -31,6 +31,47 @@ class AvailabilityCollaboratorSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'hourStart' => '08:00:00',
+                'hourFinal' => '17:00:00',
+                'hourServiceInterval' => '01:00:00',
+                'hourInterval' => '15:00:00',
+                'workDays' => 'Quarta',
+                'collaboratorfk' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'hourStart' => '08:00:00',
+                'hourFinal' => '17:00:00',
+                'hourServiceInterval' => '01:00:00',
+                'hourInterval' => '15:00:00',
+                'workDays' => 'Quinta',
+                'collaboratorfk' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'hourStart' => '08:00:00',
+                'hourFinal' => '17:00:00',
+                'hourServiceInterval' => '01:00:00',
+                'hourInterval' => '15:00:00',
+                'workDays' => 'Sexta',
+                'collaboratorfk' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'hourStart' => '08:00:00',
+                'hourFinal' => '17:00:00',
+                'hourServiceInterval' => '01:00:00',
+                'hourInterval' => '15:00:00',
+                'workDays' => 'Sabado',
+                'collaboratorfk' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
         ]);
     }
 }

@@ -1,0 +1,94 @@
+.container-calendar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+#calendar{
+    width: 80%;
+    border-top: 10px solid #3A4976;
+}
+
+.fc-scrollgrid-sync-inner a {
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+
+.fc-toolbar {
+    background-color: #f8f9fa;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.fc-button {
+    background-color: #6c757d;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    margin: 0 2px;
+    border-radius: 4px;
+}
+
+.fc-button:hover {
+    background-color: #5a6268;
+}
+
+.fc-button:disabled {
+    background-color: #c6c8ca;
+}
+
+.fc-button-primary {
+    background-color: #007bff;
+}
+
+.fc-button-primary:hover {
+    background-color: #0056b3;
+}
+
+.fc .fc-toolbar-title {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.fc-event, .fc-event-dot {
+    background-color: #007bff;
+    border: 1px solid #0056b3;
+    color: #fff;
+}
+
+.fc-daygrid-day-number {
+    font-size: 1em;
+    color: #333;
+}
+
+.fc-day-today {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.fc-scrollgrid {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.fc-available-event {
+    font-size: 12px;
+    color: #ffffff;
+    background-color: #4CAF50;
+    padding: 2px 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.fc-direction-ltr {
+    margin-left: .75em;
+    margin-top: 10px;
+}
+
+.fc-direction-ltr .fc-toolbar .fc-custom-button {
+    margin-top: 120px; /* Ajuste o valor de acordo com sua necessidade */
+}
