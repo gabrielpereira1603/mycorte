@@ -9,6 +9,7 @@ use App\Http\Controllers\Client\MyCutsClientController;
 use App\Http\Controllers\Client\ScheduleClientController;
 use App\Http\Controllers\Client\SingupClientController;
 use App\Http\Controllers\Client\UploadPhotoClientController;
+use App\Http\Controllers\Mails\CancelScheduleMailController;
 use App\Http\Middleware\CheckCompany;
 use App\Http\Middleware\Client\RedirectIfAuthenticatedClient;
 use App\Http\Middleware\Client\RedirectIfNotAuthenticatedClient;
@@ -78,6 +79,7 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
 
     Route::get('/schedule/{tokenCompany}/{collaboratorId}', [ScheduleClientController::class, 'index'])
         ->name('scheduleclient');
+
 });
 
 // Rota padrão para página inicial de todas as empresas

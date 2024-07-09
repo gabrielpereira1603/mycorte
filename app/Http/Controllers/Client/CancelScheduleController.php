@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Mails\CancelScheduleMailController;
+use App\Mail\CancellationMail;
 use App\Models\Company;
 use App\Models\Schedule;
 use App\Models\StatusSchedule;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class CancelScheduleController extends Controller
@@ -30,7 +33,9 @@ class CancelScheduleController extends Controller
         $schedule->statusSchedulefk = $statusSchedule->id;
         $schedule->save();
 
+        Mail::to($client->email)->send(new CancellationMail($client->name, $company->name));
+
         return Redirect::route('mycutsclient', ['tokenCompany' => $tokenCompany])
-            ->with('success', 'Agendamento cancelado com sucesso.');
+            ->with('success', 'Agendamento cancelado com sucesso!');
     }
 }

@@ -2,9 +2,11 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeMail;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class SingupClientController extends Controller
 {
@@ -41,6 +43,8 @@ class SingupClientController extends Controller
 
             // Autentica o cliente recém-criado
             Auth::guard('client')->login($client);
+
+            Mail::to($client->email)->send(new WelcomeMail($client->name));
 
             // Redireciona para a URL de origem ou para a rota de homeclient se não houver URL de origem
             $redirectTo = $request->input('redirect_to', route('homeclient', ['tokenCompany' => $tokenCompany]));
