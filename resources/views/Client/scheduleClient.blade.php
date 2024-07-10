@@ -229,13 +229,63 @@
                             var end = clickedEvent.endStr.slice(11, 16); // Extrai apenas a hora de fim (HH:MM)
                             var date = clickedEvent.start.toISOString().slice(0, 10); // Apenas a data no formato YYYY-MM-DD
 
-                            // Redireciona o usuário para a URL construída
-                            window.location.href = `${URL}/serviceclient/${companyToken}/${collaboratorId}/${start}/${end}/${date}`;
+                            redirectToServiceClient(start,end,date,collaboratorId,companyToken, 'serviceBySchedule');
                         }
                     }
                 });
 
                 calendar.render();
+            }
+
+            function redirectToServiceClient(start, end, date, collaboratorId, companyToken, redirectRoute) {
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action = "{{ route('dataTransporter') }}"; // Nome da rota que irá armazenar os dados na sessão e redirecionar
+
+                var csrfToken = document.createElement('input');
+                csrfToken.type = 'hidden';
+                csrfToken.name = '_token';
+                csrfToken.value = '{{ csrf_token() }}';
+                form.appendChild(csrfToken);
+
+                var redirectRouteInput = document.createElement('input');
+                redirectRouteInput.type = 'hidden';
+                redirectRouteInput.name = 'redirectRoute';
+                redirectRouteInput.value = redirectRoute;
+                form.appendChild(redirectRouteInput);
+
+                var tokenCompanyInput = document.createElement('input');
+                tokenCompanyInput.type = 'hidden';
+                tokenCompanyInput.name = 'tokenCompany';
+                tokenCompanyInput.value = companyToken;
+                form.appendChild(tokenCompanyInput);
+
+                var startInput = document.createElement('input');
+                startInput.type = 'hidden';
+                startInput.name = 'start';
+                startInput.value = start;
+                form.appendChild(startInput);
+
+                var endInput = document.createElement('input');
+                endInput.type = 'hidden';
+                endInput.name = 'end';
+                endInput.value = end;
+                form.appendChild(endInput);
+
+                var dateInput = document.createElement('input');
+                dateInput.type = 'hidden';
+                dateInput.name = 'date';
+                dateInput.value = date;
+                form.appendChild(dateInput);
+
+                var collaboratorIdInput = document.createElement('input');
+                collaboratorIdInput.type = 'hidden';
+                collaboratorIdInput.name = 'collaboratorId';
+                collaboratorIdInput.value = collaboratorId;
+                form.appendChild(collaboratorIdInput);
+
+                document.body.appendChild(form);
+                form.submit();
             }
 
             // Função para converter a duração do intervalo de serviço em milissegundos
@@ -305,5 +355,12 @@
     <div class="container-calendar">
         <div id="calendar"></div>
     </div>
+
+    <form action="" method="post">
+        <input type="hidden" name="date">
+        <input type="hidden" name="start">
+        <input type="hidden" name="end">
+        <input type="hidden" name="collaboradorId">
+    </form>
 
 </x-layoutClient>

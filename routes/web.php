@@ -7,9 +7,11 @@ use App\Http\Controllers\Client\LogoutClientController;
 use App\Http\Controllers\Client\MyAccountClientController;
 use App\Http\Controllers\Client\MyCutsClientController;
 use App\Http\Controllers\Client\ScheduleClientController;
+use App\Http\Controllers\Client\ServiceBySchedule\InsertServiceByScheduleController;
+use App\Http\Controllers\Client\ServiceBySchedule\ServiceByScheduleController;
 use App\Http\Controllers\Client\SingupClientController;
 use App\Http\Controllers\Client\UploadPhotoClientController;
-use App\Http\Controllers\Mails\CancelScheduleMailController;
+use App\Http\Controllers\Session\SessionStoreController;
 use App\Http\Middleware\CheckCompany;
 use App\Http\Middleware\Client\RedirectIfAuthenticatedClient;
 use App\Http\Middleware\Client\RedirectIfNotAuthenticatedClient;
@@ -69,18 +71,31 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
         ->name('myaccountclient')
         ->middleware(RedirectIfNotAuthenticatedClient::class);
 
+    // Rota da upload de foto do cliente
     Route::post('/uploadPhotoClient/{tokenCompany}', [UploadPhotoClientController::class, 'uploadPhoto'])
         ->name('uploadPhotoClient')
         ->middleware(RedirectIfNotAuthenticatedClient::class);
 
+    // Rota da mycuts do cliente
     Route::get('/mycuts/{tokenCompany}', [MyCutsClientController::class, 'index'])
         ->name('mycutsclient')
         ->middleware(RedirectIfNotAuthenticatedClient::class);
 
+    // Rota de horarios de agendamento do client
     Route::get('/schedule/{tokenCompany}/{collaboratorId}', [ScheduleClientController::class, 'index'])
         ->name('scheduleclient');
 
+    // Rota de servicos do agendamento do client
+    Route::get('/service/{tokenCompany}/{collaboratorId}', [ServiceByScheduleController::class, 'index'])
+        ->name('serviceBySchedule');
+
+    // Rota de cadastro de agendamento do client
+    Route::post('/service/{tokenCompany}', [InsertServiceByScheduleController::class, 'createSchedule'])
+        ->name('insertServiceBySchedule');
+
 });
+
+Route::post('/store-session-data', [SessionStoreController::class, 'store'])->name('dataTransporter');
 
 // Rota padrão para página inicial de todas as empresas
 Route::get('/', function () {

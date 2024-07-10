@@ -14,7 +14,7 @@ class IntervalCollaboratorSeeder extends Seeder
             [
                 'reason' => 'Almoço',
                 'hourStart' => '12:00:00',
-                'hourFinal' => '13:30:00',
+                'hourFinal' => '13:00:00',
                 'date' => '2024-07-04',
                 'collaboratorfk' => 1,
                 'created_at' => now(),
