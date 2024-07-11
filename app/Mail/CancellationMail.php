@@ -23,7 +23,7 @@ class CancellationMail extends Mailable
 
     public function build()
     {
-        return $this->view('emails.cancellation')
+        return $this->view('Emails.cancellation')
             ->with([
                 'clientName' => $this->clientName,
                 'companyName' => $this->companyName,

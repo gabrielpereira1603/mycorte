@@ -22,7 +22,7 @@ class WelcomeMail extends Mailable
 
     public function build()
     {
-        return $this->view('emails.welcome')
+        return $this->view('Emails.welcome')
             ->with([
                 'clientName' => $this->clientName,
             ])
