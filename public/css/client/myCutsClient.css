@@ -194,6 +194,36 @@
     border-color: #d39e00;
 }
 
+.modal-header{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.modal-header button{
+    position: absolute;
+    right: 15px;
+    bottom: 20px;
+    border: transparent;
+    background: transparent;
+    font-size: 20px;
+}
+
+.modal-lg {
+    max-width: 90%; /* Ajusta a largura máxima do modal */
+}
+
+#calendar {
+    width: 100%; /* Garante que o calendário ocupe toda a largura disponível */
+    max-width: 1000px; /* Ajuste o tamanho máximo do calendário conforme necessário */
+    margin: 0 auto; /* Centraliza horizontalmente */
+}
+
+.fc-event-title, .fc-event-time{
+    margin: 6px;
+    color: black;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .profile-name h3 {
@@ -243,5 +273,9 @@
         right: unset;
         font-size: 0.8em;
         padding: 3px 7px;
+    }
+
+    .modal-lg {
+        max-width: 100%; /* Ajusta a largura máxima do modal */
     }
 }

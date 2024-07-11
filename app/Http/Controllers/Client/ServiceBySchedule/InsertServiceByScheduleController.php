@@ -26,6 +26,24 @@ class InsertServiceByScheduleController extends Controller
         // Convertendo a string de IDs em um array
         $selectedServices = explode(',', $request->input('selectedServicesModal'));
 
+        // Verificação de conflitos de agendamento
+        $conflictingSchedules = Schedule::where('date', $request->input('date'))
+            ->where('statusSchedulefk', 1) // Verificando apenas agendamentos com status "Agendado"
+            ->where(function($query) use ($request) {
+                $query->where(function($query) use ($request) {
+                    $query->where('hourStart', '<', $request->input('end'))
+                        ->where('hourFinal', '>', $request->input('start'));
+                });
+            })
+            ->exists();
+
+        if ($conflictingSchedules) {
+            return redirect()->route('scheduleclient', [
+                'tokenCompany' => $tokenCompany,
+                'collaboratorId' => $request->input('idCollaborator')
+            ])->with('error', 'Já existe um agendamento para a data e horário selecionados. Por favor, escolha outro horário.');
+        }
+
         try {
             // Criação do agendamento
             $schedule = new Schedule();
@@ -54,6 +72,7 @@ class InsertServiceByScheduleController extends Controller
             return redirect()->back()->with('error', 'Ocorreu um erro ao criar o agendamento. Por favor, tente novamente mais tarde.');
         }
     }
+
 
     private function validateScheduleData(Request $request)
     {

@@ -23,7 +23,7 @@
             </div>
 
             <div class="service-buttons">
-                <a class="btn btn-danger" href="/schedulesclient/"><i class="fa-solid fa-triangle-exclamation"></i> Voltar aos Horários</a>
+                <a class="btn btn-danger" href="{{ $redirectButton }}"><i class="fa-solid fa-triangle-exclamation"></i> {{ $redirectMessage }}</a>
             </div>
         </div>
     </section>
@@ -173,7 +173,7 @@
             <div class="modal-content" style="max-width: 450px !important;">
                 <div class="modal-body">
                     <h5 class="modal-title text-center mb-2">Confirme o agendamento</h5>
-                    <form id="modalForm-serviceFromSchedule" method="post" action="{{ route('insertServiceBySchedule', ['tokenCompany' => $tokenCompany]) }}" style="padding-top: 10px">
+                    <form id="modalForm-serviceFromSchedule" method="post" action="{{ $data['redirectController'] }}" style="padding-top: 10px">
                         @csrf
                         <input type="hidden" name="start" value="{{ $data['start'] }}">
                         <input type="hidden" name="end" value="{{ $data['end'] }}">

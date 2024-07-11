@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Client\MyCuts;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Schedule;
 use App\Models\StatusSchedule;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MyCutsClientController extends Controller

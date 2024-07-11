@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Client\CancelScheduleController;
 use App\Http\Controllers\Client\HomeClientController;
 use App\Http\Controllers\Client\LoginClientController;
 use App\Http\Controllers\Client\LogoutClientController;
 use App\Http\Controllers\Client\MyAccountClientController;
-use App\Http\Controllers\Client\MyCutsClientController;
+use App\Http\Controllers\Client\MyCuts\CancelScheduleController;
+use App\Http\Controllers\Client\MyCuts\MyCutsClientController;
+use App\Http\Controllers\Client\MyCuts\RescheduleClientController;
 use App\Http\Controllers\Client\ScheduleClientController;
 use App\Http\Controllers\Client\ServiceBySchedule\InsertServiceByScheduleController;
 use App\Http\Controllers\Client\ServiceBySchedule\ServiceByScheduleController;
@@ -81,6 +82,10 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
         ->name('mycutsclient')
         ->middleware(RedirectIfNotAuthenticatedClient::class);
 
+    // Rota de reagendamento do client
+    Route::post('/reschedule/{tokenCompany}', [RescheduleClientController::class, 'reschedule'])
+        ->name('rescheduleclient');
+
     // Rota de horarios de agendamento do client
     Route::get('/schedule/{tokenCompany}/{collaboratorId}', [ScheduleClientController::class, 'index'])
         ->name('scheduleclient');
@@ -92,7 +97,6 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
     // Rota de cadastro de agendamento do client
     Route::post('/service/{tokenCompany}', [InsertServiceByScheduleController::class, 'createSchedule'])
         ->name('insertServiceBySchedule');
-
 });
 
 Route::post('/store-session-data', [SessionStoreController::class, 'store'])->name('dataTransporter');
