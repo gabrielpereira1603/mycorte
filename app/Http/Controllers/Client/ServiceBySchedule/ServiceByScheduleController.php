@@ -10,7 +10,6 @@ class ServiceByScheduleController extends Controller
     public function index($tokenCompany, $collaboratorId)
     {
         $data = session('dynamicData');
-
         if (empty($data)) {
             return redirect()->route('scheduleclient', [
                 'tokenCompany' => $tokenCompany,
