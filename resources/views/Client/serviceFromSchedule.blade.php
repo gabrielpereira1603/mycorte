@@ -175,6 +175,7 @@
                     <h5 class="modal-title text-center mb-2">Confirme o agendamento</h5>
                     <form id="modalForm-serviceFromSchedule" method="post" action="{{ $data['redirectController'] }}" style="padding-top: 10px">
                         @csrf
+                        <input type="hidden" name="scheduleId" value="{{ $data['scheduleId'] }}">
                         <input type="hidden" name="start" value="{{ $data['start'] }}">
                         <input type="hidden" name="end" value="{{ $data['end'] }}">
                         <input type="hidden" name="date" value="{{ $data['date'] }}">
