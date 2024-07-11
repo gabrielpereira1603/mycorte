@@ -500,3 +500,14 @@
     border-radius: 2px;
 }
 
+.btn-save-enabled {
+    background-color: #28a745;
+    cursor: pointer;
+}
+
+.btn-save-disabled {
+    background-color: #98fb98;
+    cursor: not-allowed;
+}
+
+

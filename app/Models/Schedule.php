@@ -21,6 +21,11 @@ class Schedule extends Model
         'companyfk',
     ];
 
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'clientfk');
+    }
+
     public function services()
     {
         return $this->belongsToMany(Service::class);

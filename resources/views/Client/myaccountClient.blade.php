@@ -202,6 +202,7 @@
             const editTelefone = document.getElementById('editTelefone');
             const editEmail = document.getElementById('editEmail');
 
+            const saveEditBioBtn = document.getElementById('saveEditBio');
             let originalPhotoSrc = profileImg.src;
 
             // Função para gerar cor aleatória em formato hexadecimal
@@ -323,6 +324,10 @@
                 editNome.value = currentNome;
                 editTelefone.value = currentTelefone;
                 editEmail.value = currentEmail;
+
+                saveEditBioBtn.classList.add('btn-save-disabled');
+                saveEditBioBtn.classList.remove('btn-save-enabled');
+                saveEditBioBtn.disabled = true;
             });
 
             closeBiografiaBtn.addEventListener('click', function() {
@@ -337,9 +342,9 @@
 
             document.getElementById('editBiografiaForm').addEventListener('submit', function(event) {
                 event.preventDefault();
-                const nome = document.getElementById('editNome').value;
-                const telefone = document.getElementById('editTelefone').value;
-                const email = document.getElementById('editEmail').value;
+                const nome = editNome.value;
+                const telefone = editTelefone.value;
+                const email = editEmail.value;
 
                 // Atualize a biografia com os novos valores
                 bioNome.innerHTML = `<strong>Nome:</strong> ${nome}`;
@@ -348,6 +353,30 @@
 
                 biografiaModal.style.display = 'none';
             });
+
+            // Função para verificar mudanças
+            function checkForChanges() {
+                const currentNome = bioNome.textContent.split(': ')[1];
+                const currentTelefone = bioTelefone.textContent.split(': ')[1];
+                const currentEmail = bioEmail.textContent.split(': ')[1];
+
+                const isChanged = currentNome !== editNome.value || currentTelefone !== editTelefone.value || currentEmail !== editEmail.value;
+
+                if (isChanged) {
+                    saveEditBioBtn.classList.add('btn-save-enabled');
+                    saveEditBioBtn.classList.remove('btn-save-disabled');
+                    saveEditBioBtn.disabled = false;
+                } else {
+                    saveEditBioBtn.classList.add('btn-save-disabled');
+                    saveEditBioBtn.classList.remove('btn-save-enabled');
+                    saveEditBioBtn.disabled = true;
+                }
+            }
+
+            editNome.addEventListener('input', checkForChanges);
+            editTelefone.addEventListener('input', checkForChanges);
+            editEmail.addEventListener('input', checkForChanges);
         });
     </script>
+
 </x-layoutClient>
