@@ -243,7 +243,6 @@
                 modal.style.display = 'none';
             });
 
-
             editBioIcon.addEventListener('click', function() {
                 biografiaModal.style.display = 'block';
             });

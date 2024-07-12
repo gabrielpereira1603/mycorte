@@ -23,6 +23,31 @@
             <p style="color: white;">Essas são as empresas parceiras</p>
         </div>
 
+        <div class="alert-container">
+            @if(Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fa-solid fa-triangle-exclamation"></i> {{ Session::get('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fa-regular fa-circle-check"></i> {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <p style="margin-bottom: 5px;"><i class="fa-solid fa-triangle-exclamation"></i> {{ $error }}</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+
         <div class="container mt-4">
             <div class="input-group">
         <span class="input-group-text">
@@ -51,7 +76,7 @@
                                 </ul>
                             </div>
                             <div class="buttons-home">
-                                <a class="btn btn-dark" href="">Endereço</a>
+                                <button class="btn btn-dark btn-map" data-bs-toggle="modal" data-bs-target="#localizationModal" data-localization="{{ $company->localization }}">Localização</button>
                                 <a class="btn btn-dark" href="{{ route('homeclient', ['tokenCompany' => $company->token]) }}">Agendar</a>
                             </div>
                         </div>
@@ -60,30 +85,61 @@
             </div>
         </section>
 
-        <div class="alert-container">
-            @if(Session::has('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="fa-solid fa-triangle-exclamation"></i> {{ Session::get('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
 
-            @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <i class="fa-regular fa-circle-check"></i> {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
-            @if($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <p style="margin-bottom: 5px;"><i class="fa-solid fa-triangle-exclamation"></i> {{ $error }}</p>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div id="localizationModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content modal-myaccount-localization" style="max-width: 450px !important;">
+                    <div class="header-modal-localization" style="background-color: #3a4976;">
+                        <p class="title-localization" style="color: white;">LOCALIZAÇÃO DA EMPRESA</p>
                     </div>
-                @endforeach
-            @endif
+                    <div class="body-localizacao">
+                        <div id="map-container" style="height: 400px;"></div>
+                        <div class="buttons-modalLocalization">
+                            <button type="button" class="btn btn-primary" id="exitModalLocalization">Fechar</button>
+                            <button type="submit" class="btn btn-primary" id="goMaps">Ir Para o Maps</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+        <script>
+            $(document).ready(function() {
+                // Inicializa o modal do Bootstrap
+                const modalElement = document.getElementById('localizationModal');
+                const modal = new bootstrap.Modal(modalElement, {
+                    keyboard: false
+                });
+
+                // Abre o modal e define o conteúdo do mapa
+                $('.btn-map').click(function() {
+                    var localization = $(this).data('localization');
+                    $('#map-container').html(localization);
+                    modal.show();
+                });
+
+                // Fecha o modal ao clicar no botão "Fechar"
+                $('#exitModalLocalization').click(function() {
+                    modal.hide();
+                });
+
+                // Abre o Google Maps em uma nova aba ao clicar no botão "Ir Para o Maps"
+                $('#goMaps').click(function() {
+                    var mapUrl = $('#map-container').find('iframe').attr('src');
+                    if (mapUrl) {
+                        window.open(mapUrl, '_blank');
+                    }
+                });
+
+                // Fecha o modal ao clicar fora do conteúdo do modal
+                $(window).click(function(event) {
+                    if ($(event.target).is(modalElement)) {
+                        modal.hide();
+                    }
+                });
+            });
+        </script>
 
         @include('Client.Footer.footerClient')
 

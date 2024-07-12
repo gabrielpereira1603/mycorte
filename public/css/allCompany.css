@@ -84,12 +84,162 @@ header{
 }
 
 .buttons-home {
+    width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 6px;
 }
 
-.buttons-home a {
-    width: 45%;
+.buttons-home button{
+    width: 50%;
     background-color: #3A4976;
-    border: #424242 solid 1px;
+    border: #3A4976 solid 1px;
+}
+
+.buttons-home a{
+    width: 50%;
+    background-color: #3A4976;
+    border: #3A4976 solid 1px;
+}
+
+.buttons-home button:hover{
+    width: 50%;
+    background-color: #5a6793;
+    border: #5a6793 solid 1px;
+}
+
+.buttons-home a:hover{
+    width: 50%;
+    background-color: #5a6793;
+    border: #5a6793 solid 1px;
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1050; /* Higher than default Bootstrap z-index */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Adicionando um estilo para a camada de fundo para garantir que seja ocultada */
+.modal-backdrop {
+    display: none !important; /* Certifique-se de que o backdrop seja removido */
+}
+
+.modal-dialog {
+    margin: auto;
+}
+
+.modal-myaccount-localization {
+    padding: 25px 20px;
+}
+
+.header-modal-localization {
+    padding: 15px 10px;
+    background-color: #3a4976;
+}
+
+.title-localization {
+    margin-bottom: 0px;
+    position: relative;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 6px;
+}
+
+.close-localization {
+    position: absolute;
+    top: -4px;
+    right: -2px;
+    background-color: transparent;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    /* Remove any default padding */
+}
+
+.title-localization::after {
+    content: '';
+    position: absolute;
+    bottom: -47px;
+    /* Adjust this value to move the arrow up/down */
+    left: 6%;
+    transform: translateX(-50%);
+    border-width: 16px;
+    /* Size of the arrow */
+    border-style: solid;
+    border-color: #3a4976 transparent transparent transparent;
+}
+
+.body-localization {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#map-container {
+    height: 350px !important;
+}
+
+.body-localizacao iframe {
+    width: 100%;
+    border: solid 5px #3A4976;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
+
+
+.buttons-modalLocalization{
+    background-color: #edf3f6;
+    gap: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#exitModalLocalization{
+    margin-right: 20px;
+    color: red;
+    font-weight: 300;
+    width: 50%;
+    background-color: transparent;
+    border: none;
+}
+
+#exitModalLocalization:hover {
+    background-color: red;
+    color: white;
+    border-radius: 2px;
+}
+
+#goMaps{
+    margin-right: 10px;
+    color: #edf3f6;
+    font-weight: 300;
+    width: 50%;
+    padding: 12px;
+    background-color: #5ad678;
+    border-radius: 2px;
+    border: none;
 }
