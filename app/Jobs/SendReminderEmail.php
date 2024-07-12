@@ -10,30 +10,29 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class SendReminderEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $schedule;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct($schedule)
+    public function __construct(Schedule $schedule)
     {
         $this->schedule = $schedule;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
-        Mail::to($this->schedule->client->email)->send(new ReminderEmail($this->schedule));
-    }
+        $schedule = Schedule::with('client')->find($this->schedule->id);
+        Log::info($schedule->client->email);
 
+        if ($schedule && $schedule->client) {
+            Mail::to($schedule->client->email)->send(new ReminderEmail($schedule));
+        } else {
+            Log::error("Client not found for schedule ID: {$this->schedule->id}");
+        }
+        $this->schedule->reminderEmailSent = true;
+        $this->schedule->save();
+    }
 }
