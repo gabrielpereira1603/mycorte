@@ -29,7 +29,7 @@
                                 </span>
                             </div>
 
-                            <p style="font-style: italic; font-size: 12px; color: gray; margin: 2px 2px;">Caso nenhuma foto seja selecionada, escolheremos um dos nossos icons que combina mais com voçê para substituir</p>
+                            <p style="font-style: italic; font-size: 12px; color: gray; margin: 2px 2px;">Caso nenhuma foto seja selecionada, escolheremos um dos nossos icons que combina mais com você para substituir</p>
 
                             <div class="editImageModal-options">
                                 <form id="uploadForm" enctype="multipart/form-data" action="{{ route('uploadPhotoClient', ['tokenCompany' => $tokenCompany]) }}" method="POST">
@@ -84,59 +84,59 @@
                     </li>
                 </ul>
 
-                <h5>Serviços Favoritos</h5>
+                {{--                <h5>Serviços Favoritos</h5>--}}
 
-                <ul class="biografia-serices-favorite">
-                    <li>
-                        <p id="service-favorite">Corte de Cabelo</p>
-                    </li>
-                    <li>
-                        <p id="service-favorite">Barba</p>
-                    </li>
-                    <li>
-                        <p id="service-favorite">Alisamento</p>
-                    </li>
-                    <li>
-                        <p id="service-favorite">Luzes</p>
-                    </li>
-                    <li>
-                        <p id="service-favorite">Sombrancelha</p>
-                    </li>
-                    <li>
-                        <p id="service-favorite">Mid Fade</p>
-                    </li>
-                </ul>
+                {{--                <ul class="biografia-serices-favorite">--}}
+                {{--                    <li>--}}
+                {{--                        <p id="service-favorite">Corte de Cabelo</p>--}}
+                {{--                    </li>--}}
+                {{--                    <li>--}}
+                {{--                        <p id="service-favorite">Barba</p>--}}
+                {{--                    </li>--}}
+                {{--                    <li>--}}
+                {{--                        <p id="service-favorite">Alisamento</p>--}}
+                {{--                    </li>--}}
+                {{--                    <li>--}}
+                {{--                        <p id="service-favorite">Luzes</p>--}}
+                {{--                    </li>--}}
+                {{--                    <li>--}}
+                {{--                        <p id="service-favorite">Sobrancelha</p>--}}
+                {{--                    </li>--}}
+                {{--                    <li>--}}
+                {{--                        <p id="service-favorite">Mid Fade</p>--}}
+                {{--                    </li>--}}
+                {{--                </ul>--}}
             </div>
         </div>
     </section>
 
-    <section class="conquistas" style="background-color: #6d82c4;">
-        <ul class="list-conquistas">
-            <li>
-                <img src="{{ asset('images/icons/conquistasIcon.png') }}" alt="">
-                <h4>+2000</h4>
-                <p>Cortes no ultimo mês</p>
-            </li>
+    {{--    <section class="conquistas" style="background-color: #6d82c4;">--}}
+    {{--        <ul class="list-conquistas">--}}
+    {{--            <li>--}}
+    {{--                <img src="{{ asset('images/icons/conquistasIcon.png') }}" alt="">--}}
+    {{--                <h4>+2000</h4>--}}
+    {{--                <p>Cortes no último mês</p>--}}
+    {{--            </li>--}}
 
-            <li>
-                <img src="{{ asset('images/icons/conquistasIcon.png') }}" alt="">
-                <h4>5000</h4>
-                <p>Cortes ao total, UAU!!!</p>
-            </li>
+    {{--            <li>--}}
+    {{--                <img src="{{ asset('images/icons/conquistasIcon.png') }}" alt="">--}}
+    {{--                <h4>5000</h4>--}}
+    {{--                <p>Cortes ao total, UAU!!!</p>--}}
+    {{--            </li>--}}
 
-            <li>
-                <img src="{{ asset('images/icons/conquistasIcon.png') }}" alt="">
-                <h4>+100</h4>
-                <p>Barbas feitas em dois meses</p>
-            </li>
+    {{--            <li>--}}
+    {{--                <img src="{{ asset('images/icons/conquistasIcon.png') }}" alt="">--}}
+    {{--                <h4>+100</h4>--}}
+    {{--                <p>Barbas feitas em dois meses</p>--}}
+    {{--            </li>--}}
 
-            <li>
-                <img src="{{ asset('images/icons/conquistasIcon.png') }}" alt="">
-                <h4>30/4</h4>
-                <p>Cliente semanal, Sempre alinhado!</p>
-            </li>
-        </ul>
-    </section>
+    {{--            <li>--}}
+    {{--                <img src="{{ asset('images/icons/conquistasIcon.png') }}" alt="">--}}
+    {{--                <h4>30/4</h4>--}}
+    {{--                <p>Cliente semanal, Sempre alinhado!</p>--}}
+    {{--            </li>--}}
+    {{--        </ul>--}}
+    {{--    </section>--}}
 
     <!-- Modal de Edição de Biografia -->
     <div id="biografiaModal" class="modal">
@@ -147,26 +147,28 @@
                     <p class="title-editBiografiaModal" style="color: white;">EDITAR SUAS INFORMAÇÕES</p>
                 </div>
                 <div class="body-editBiografiaModal">
-                    <form id="editBiografiaForm">
+                    <form id="editBiografiaForm" action="{{ route('client.myaccount.update', ['tokenCompany' => $tokenCompany]) }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="tokenCompany" value="{{ $tokenCompany }}">
                         <div class="form-group">
                             <label for="editNome">Nome:</label>
-                            <input type="text" id="editNome" class="form-control" value="" autocomplete="new-password">
+                            <input type="text" id="editNome" class="form-control" name="name" value="{{ $client->name }}" autocomplete="new-password">
                         </div>
 
                         <div class="form-group">
                             <label for="editTelefone">Telefone:</label>
-                            <input type="text" id="editTelefone" class="form-control" value="" autocomplete="new-password">
+                            <input type="text" id="editTelefone" class="form-control" name="telephone" value="{{ $client->telephone }}" autocomplete="new-password">
                         </div>
 
                         <div class="form-group">
                             <label for="editEmail">Email:</label>
-                            <input type="email" id="editEmail" class="form-control" value="" disabled autocomplete="new-password">
+                            <input type="email" id="editEmail" class="form-control" name="email" value="{{ $client->email }}" disabled autocomplete="new-password">
                         </div>
                         <p style="margin-bottom: 0px; font-style: italic; font-size: 11px; color: gray;">
-                            <strong>OBS:</strong> após alterar os dados para confirmar alterar será necessario que confirme seu login por segurança.
+                            <strong>OBS:</strong> após alterar os dados para confirmar alterar será necessário que confirme seu login por segurança.
                         </p>
                         <div class="buttons-modalBiografia">
-                            <button class="btn btn-primary" id="cancelEditBio">Cancelar Edição</button>
+                            <button type="button" class="btn btn-primary" id="cancelEditBio">Cancelar Edição</button>
                             <button type="submit" class="btn btn-primary" id="saveEditBio">Salvar Edição</button>
                         </div>
                     </form>
@@ -187,50 +189,22 @@
             const deletePhotoBtn = document.getElementById('deletePhoto');
             const uploadPhotoInput = document.getElementById('uploadPhoto');
             const selectPhotoBtn = document.getElementById('selectPhoto');
-            const services = document.querySelectorAll('.biografia-serices-favorite p');
-            const FormUpload = document.getElementById('uploadForm');
-
-            const biografiaModal = document.getElementById('biografiaModal');
-            const editIcon = document.getElementById('icon-Edit-biogragia');
-            const closeBiografiaBtn = document.querySelector('.close-editBiografia');
-
+            const services = document.querySelectorAll('.biografia-serices-favorite li p');
+            const editBioIcon = document.querySelector('.edit-icon');
             const bioNome = document.getElementById('bioNome');
             const bioTelefone = document.getElementById('bioTelefone');
             const bioEmail = document.getElementById('bioEmail');
-
+            const biografiaModal = document.getElementById('biografiaModal');
+            const closeEditBioBtn = document.querySelector('.close-editBiografia');
+            const saveEditBioBtn = document.getElementById('saveEditBio');
+            const cancelEditBioBtn = document.getElementById('cancelEditBio');
             const editNome = document.getElementById('editNome');
             const editTelefone = document.getElementById('editTelefone');
             const editEmail = document.getElementById('editEmail');
 
-            const saveEditBioBtn = document.getElementById('saveEditBio');
-            let originalPhotoSrc = profileImg.src;
-
-            // Função para gerar cor aleatória em formato hexadecimal
-            function getRandomColor() {
-                return '#' + Math.floor(Math.random() * 16777215).toString(16);
-            }
-
-            // Função para verificar se a cor é escura
-            function isDarkColor(color) {
-                const hexToRgb = (hex) => {
-                    const bigint = parseInt(hex.substring(1), 16);
-                    const r = (bigint >> 16) & 255;
-                    const g = (bigint >> 8) & 255;
-                    const b = bigint & 255;
-                    return [r, g, b];
-                };
-
-                const [r, g, b] = hexToRgb(color);
-                const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-                return brightness < 128;
-            }
-
-            services.forEach(function(service) {
-                const randomColor = getRandomColor();
-                service.style.backgroundColor = randomColor;
-                if (isDarkColor(randomColor)) {
-                    service.style.color = 'white';
-                }
+            profileImg.addEventListener('click', function() {
+                modal.style.display = 'block';
+                modalImg.src = this.src;
             });
 
             icon.addEventListener('click', function() {
@@ -242,119 +216,49 @@
                 modal.style.display = 'none';
             });
 
-            window.addEventListener('click', function(event) {
-                if (event.target == modal) {
-                    modal.style.display = 'none';
-                }
+            editBioIcon.addEventListener('click', function() {
+                biografiaModal.style.display = 'block';
             });
 
-            uploadPhotoInput.addEventListener('change', function(event) {
-                const file = event.target.files[0];
-                if (file) {
+            closeEditBioBtn.addEventListener('click', function() {
+                biografiaModal.style.display = 'none';
+            });
+
+            cancelEditBioBtn.addEventListener('click', function() {
+                biografiaModal.style.display = 'none';
+            });
+
+            uploadPhotoInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         modalImg.src = e.target.result;
-                        profileImg.src = e.target.result;
-                        selectPhotoBtn.style.display = 'none';
-                        updatePhotoBtn.style.display = 'inline-block';
-                        cancelUploadBtn.style.display = 'inline-block';
-                        deletePhotoBtn.style.display = 'none';
-                        FormUpload.style.width = '100%';
                     };
-                    reader.readAsDataURL(file);
+                    reader.readAsDataURL(this.files[0]);
+                    updatePhotoBtn.style.display = 'inline-block';
+                    cancelUploadBtn.style.display = 'inline-block';
                 }
             });
 
-            updatePhotoBtn.addEventListener('click', function() {
-                const file = uploadPhotoInput.files[0];
-                if (file) {
-                    saveImage(file);
-                }
+            selectPhotoBtn.addEventListener('click', function() {
+                uploadPhotoInput.click();
             });
 
             cancelUploadBtn.addEventListener('click', function() {
-                modalImg.src = originalPhotoSrc;
-                profileImg.src = originalPhotoSrc;
-                selectPhotoBtn.style.display = 'inline-block';
+                uploadPhotoInput.value = '';
+                modalImg.src = profileImg.src;
                 updatePhotoBtn.style.display = 'none';
                 cancelUploadBtn.style.display = 'none';
-                deletePhotoBtn.style.display = 'inline-block';
-                FormUpload.style.width = '0px';
             });
 
             deletePhotoBtn.addEventListener('click', function() {
-                profileImg.src = '/app/Presentation/Assets/Images/default-profile.png';
-            });
-
-            function saveImage(file) {
-                const formData = new FormData();
-                formData.append('photo', file);
-
-                fetch('upload.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            originalPhotoSrc = modalImg.src;
-                            modal.style.display = 'none';
-                            selectPhotoBtn.style.display = 'inline-block';
-                            updatePhotoBtn.style.display = 'none';
-                            cancelUploadBtn.style.display = 'none';
-                            deletePhotoBtn.style.display = 'inline-block';
-                        } else {
-                            alert('Erro ao atualizar a foto. Por favor, tente novamente.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro:', error);
-                    });
-            }
-
-            // Modal de Edição de Biografia
-            editIcon.addEventListener('click', function() {
-                biografiaModal.style.display = 'block';
-
-                // Preencher o modal com os valores atuais
-                const currentNome = bioNome.textContent.split(': ')[1];
-                const currentTelefone = bioTelefone.textContent.split(': ')[1];
-                const currentEmail = bioEmail.textContent.split(': ')[1];
-
-                editNome.value = currentNome;
-                editTelefone.value = currentTelefone;
-                editEmail.value = currentEmail;
-
-                saveEditBioBtn.classList.add('btn-save-disabled');
-                saveEditBioBtn.classList.remove('btn-save-enabled');
-                saveEditBioBtn.disabled = true;
-            });
-
-            closeBiografiaBtn.addEventListener('click', function() {
-                biografiaModal.style.display = 'none';
-            });
-
-            window.addEventListener('click', function(event) {
-                if (event.target == biografiaModal) {
-                    biografiaModal.style.display = 'none';
-                }
+                // Lógica para remover a foto do perfil
             });
 
             document.getElementById('editBiografiaForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-                const nome = editNome.value;
-                const telefone = editTelefone.value;
-                const email = editEmail.value;
-
-                // Atualize a biografia com os novos valores
-                bioNome.innerHTML = `<strong>Nome:</strong> ${nome}`;
-                bioTelefone.innerHTML = `<strong>Telefone:</strong> ${telefone}`;
-                bioEmail.innerHTML = `<strong>Email:</strong> ${email}`;
-
-                biografiaModal.style.display = 'none';
+                // Remova a prevenção do evento, para permitir o envio do formulário
             });
 
-            // Função para verificar mudanças
             function checkForChanges() {
                 const currentNome = bioNome.textContent.split(': ')[1];
                 const currentTelefone = bioTelefone.textContent.split(': ')[1];

@@ -25,7 +25,8 @@
     background-color: white;
     border: solid 1px gray;
     box-sizing: border-box;
-    margin-right: 20px; /* Espaçamento entre o card e a biografia */
+    margin-right: 20px;
+    /* Espaçamento entre o card e a biografia */
 }
 
 .card-profile .image-profile {
@@ -53,9 +54,12 @@
 
 .icon-image-profile {
     position: absolute;
-    top: calc(100% - -30px); /* Ajusta a posição relativa ao final da imagem */
-    left: 50%; /* Centraliza horizontalmente */
-    transform: translateX(-50%); /* Ajusta para centralização exata */
+    top: calc(100% - -30px);
+    /* Ajusta a posição relativa ao final da imagem */
+    left: 50%;
+    /* Centraliza horizontalmente */
+    transform: translateX(-50%);
+    /* Ajusta para centralização exata */
     border-radius: 50%;
     width: 36px;
     height: 36px;
@@ -108,13 +112,15 @@
     display: flex;
     flex-direction: column;
     color: black;
-    width: 58%; /* Faz a biografia ocupar o restante do espaço */
+    width: 58%;
+    /* Faz a biografia ocupar o restante do espaço */
 }
 
 .list-biografia {
     padding: 0;
     display: flex;
-    flex-wrap: wrap; /* Permite que os itens quebrem para a linha abaixo quando não há mais espaço */
+    flex-wrap: wrap;
+    /* Permite que os itens quebrem para a linha abaixo quando não há mais espaço */
     gap: 12px;
     list-style: none;
 }
@@ -123,21 +129,23 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 0px; /* Espaçamento entre os itens */
+    margin-bottom: 0px;
+    /* Espaçamento entre os itens */
 }
 
 .list-biografia li p {
     background-color: #bababa;
     padding: 4px;
     border-radius: 6px;
-    margin-bottom: 0; /* Removido para evitar duplicação do espaçamento */
+    margin-bottom: 0;
+    /* Removido para evitar duplicação do espaçamento */
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 200px;
 }
 
-.icon-Edit-biogragia{
+.icon-Edit-biogragia {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -148,7 +156,7 @@
     cursor: pointer;
 }
 
-.biografia-serices-favorite{
+.biografia-serices-favorite {
     padding: 0px;
     display: flex;
     flex-wrap: wrap;
@@ -156,7 +164,7 @@
     list-style: none;
 }
 
-.biografia-serices-favorite p{
+.biografia-serices-favorite p {
     margin-bottom: 0px;
     padding: 8px;
     background-color: #909dc4;
@@ -171,7 +179,8 @@
     margin: 30px 0px;
     width: 100%;
     max-height: 500px;
-    overflow: auto; /* Add overflow:auto to allow scrolling if content exceeds max-height */
+    overflow: auto;
+    /* Add overflow:auto to allow scrolling if content exceeds max-height */
     background-color: #6d82c4;
 }
 
@@ -179,13 +188,17 @@
     margin-bottom: 0;
     padding: 0;
     display: flex;
-    flex-wrap: wrap; /* Permitir que os itens quebrem para a linha seguinte se necessário */
-    gap: 52px; /* Espaçamento entre os itens */
-    justify-content: space-between; /* Alinhar os itens horizontalmente */
+    flex-wrap: wrap;
+    /* Permitir que os itens quebrem para a linha seguinte se necessário */
+    gap: 52px;
+    /* Espaçamento entre os itens */
+    justify-content: space-between;
+    /* Alinhar os itens horizontalmente */
 }
 
 .list-conquistas li {
-    flex: 1; /* Fazer com que os itens ocupem o espaço disponível igualmente */
+    flex: 1;
+    /* Fazer com que os itens ocupem o espaço disponível igualmente */
     max-width: 150px;
     text-align: center;
     display: flex;
@@ -198,7 +211,8 @@
 
 .list-conquistas img {
     width: 30px;
-    margin-bottom: 0px; /* Adicionar um espaçamento inferior para separar a imagem do texto */
+    margin-bottom: 0px;
+    /* Adicionar um espaçamento inferior para separar a imagem do texto */
 }
 
 .list-conquistas li p {
@@ -207,7 +221,8 @@
 }
 
 .list-conquistas li h4 {
-    margin: 0px 0 0; /* Ajustar a margem para separar verticalmente os elementos */
+    margin: 0px 0 0;
+    /* Ajustar a margem para separar verticalmente os elementos */
 }
 
 
@@ -283,7 +298,7 @@
         cursor: pointer;
     }
 
-    .info-card-profile{
+    .info-card-profile {
         margin-top: 50px;
     }
 
@@ -307,22 +322,26 @@
         display: flex;
         align-items: center;
         gap: 8px;
-        margin-bottom: 0px; /* Espaçamento entre os itens */
+        margin-bottom: 0px;
+        /* Espaçamento entre os itens */
     }
 
     .list-biografia li p {
         background-color: #bababa;
         padding: 4px;
         border-radius: 6px;
-        margin-bottom: 0; /* Removido para evitar duplicação do espaçamento */
+        margin-bottom: 0;
+        /* Removido para evitar duplicação do espaçamento */
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        min-width: 50px; /* Mínimo que o elemento pode encolher */
-        max-width: 150px; /* Máximo que o elemento pode expandir */
+        min-width: 50px;
+        /* Mínimo que o elemento pode encolher */
+        max-width: 150px;
+        /* Máximo que o elemento pode expandir */
     }
 
-    .biografia-serices-favorite{
+    .biografia-serices-favorite {
         padding: 0px;
         display: flex;
         flex-wrap: wrap;
@@ -333,15 +352,22 @@
 }
 
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black with opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black with opacity */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -351,11 +377,11 @@
     margin: auto;
 }
 
-.modal-myaccount-editPhoto{
+.modal-myaccount-editPhoto {
     padding: 25px 20px;
 }
 
-.header-modal-EditImage{
+.header-modal-EditImage {
     padding: 15px 10px;
     background-color: #3a4976;
 }
@@ -384,21 +410,24 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    padding: 0; /* Remove any default padding */
+    padding: 0;
+    /* Remove any default padding */
 }
 
 .title-editImageModal::after {
     content: '';
     position: absolute;
-    bottom: -47px; /* Adjust this value to move the arrow up/down */
+    bottom: -47px;
+    /* Adjust this value to move the arrow up/down */
     left: 6%;
     transform: translateX(-50%);
-    border-width: 16px; /* Size of the arrow */
+    border-width: 16px;
+    /* Size of the arrow */
     border-style: solid;
     border-color: #3a4976 transparent transparent transparent;
 }
 
-.body-editImageModal{
+.body-editImageModal {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -409,11 +438,12 @@
     display: block;
     margin: 20px auto;
     border-radius: 50%;
-    object-fit: cover; /* Garante que a imagem cubra todo o espaço do contêiner sem distorção */
+    object-fit: cover;
+    /* Garante que a imagem cubra todo o espaço do contêiner sem distorção */
 }
 
 
-.iconMyCorte-editImagelModal{
+.iconMyCorte-editImagelModal {
     position: relative;
     background-color: white;
     border: solid gray 1px;
@@ -421,11 +451,11 @@
     top: -30px;
 }
 
-.iconMyCorte-editImagelModal img{
+.iconMyCorte-editImagelModal img {
     border-radius: 50%;
 }
 
-.editImageModal-options{
+.editImageModal-options {
     display: flex;
     flex-direction: row;
     background-color: #edf3f6;
@@ -434,7 +464,7 @@
     padding: 12px;
 }
 
-#deletePhoto{
+#deletePhoto {
     margin-right: 20px;
     color: red;
     font-weight: 300;
@@ -443,13 +473,13 @@
     border: none;
 }
 
-#deletePhoto:hover{
+#deletePhoto:hover {
     background-color: red;
     color: white;
     border-radius: 2px;
 }
 
-#selectPhoto{
+#selectPhoto {
     margin-right: 10px;
     color: #edf3f6;
     font-weight: 300;
@@ -460,21 +490,21 @@
     border: none;
 }
 
-#uploadPhoto{
+#uploadPhoto {
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 100%;
 }
 
-.editImageModal-optionsUpload{
+.editImageModal-optionsUpload {
     display: flex;
     width: 100%;
     gap: 12px;
     justify-content: center;
 }
 
-#updatePhoto{
+#updatePhoto {
     margin-right: 10px;
     color: #edf3f6;
     font-weight: 300;
@@ -485,7 +515,7 @@
     border: none;
 }
 
-#cancelUpload{
+#cancelUpload {
     margin-right: 20px;
     color: red;
     font-weight: 300;
@@ -494,7 +524,7 @@
     border: none;
 }
 
-#cancelUpload:hover{
+#cancelUpload:hover {
     background-color: red;
     color: white;
     border-radius: 2px;
@@ -509,5 +539,3 @@
     background-color: #98fb98;
     cursor: not-allowed;
 }
-
-

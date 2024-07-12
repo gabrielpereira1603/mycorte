@@ -72,6 +72,10 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
         ->name('myaccountclient')
         ->middleware(RedirectIfNotAuthenticatedClient::class);
 
+    //Rota de alteração de dados do Cliente
+    Route::post('myaccount/{tokenCompany}/update', [MyAccountClientController::class, 'update'])
+        ->name('client.myaccount.update');
+
     // Rota da upload de foto do cliente
     Route::post('/uploadPhotoClient/{tokenCompany}', [UploadPhotoClientController::class, 'uploadPhoto'])
         ->name('uploadPhotoClient')

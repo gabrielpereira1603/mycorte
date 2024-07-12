@@ -19,9 +19,9 @@
                 <li class="nav-item ms-lg-3">
                     <a class="nav-link" aria-current="page" href="#" style="color: {{ $style->colorText }}">Históricos</a>
                 </li>
-                <li class="nav-item ms-lg-3">
-                    <a class="nav-link" aria-current="page" href="#" style="color: {{ $style->colorText }}">Como Chegar?</a>
-                </li>
+{{--                <li class="nav-item ms-lg-3">--}}
+{{--                    <a class="nav-link" aria-current="page" href="#" style="color: {{ $style->colorText }}">Como Chegar?</a>--}}
+{{--                </li>--}}
 
             </ul>
 
