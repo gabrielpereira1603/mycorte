@@ -3,11 +3,18 @@
 namespace App\Http\Controllers\Client\ServiceBySchedule;
 
 use App\Http\Controllers\Controller;
+use App\Mail\CreatedScheduleMail;
+use App\Mail\WelcomeMail;
+use App\Models\Client;
+use App\Models\Collaborator;
 use App\Models\Company;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
 use App\Models\Service;
 use App\Models\ScheduleService;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class InsertServiceByScheduleController extends Controller
@@ -56,6 +63,9 @@ class InsertServiceByScheduleController extends Controller
             $schedule->companyfk = $company->id; // Token da empresa
             $schedule->save();
 
+            $formattedDate = Carbon::createFromFormat('Y-m-d', $schedule->date)->format('d-m-Y');
+
+
             // Adiciona os serviços relacionados ao agendamento
             foreach ($selectedServices as $serviceId) {
                 $service = Service::find($serviceId);
@@ -66,6 +76,11 @@ class InsertServiceByScheduleController extends Controller
                     $scheduleService->save();
                 }
             }
+
+            $client = Client::where('id', $schedule->clientfk)->first();
+            $collaborator = Collaborator::where('id', $schedule->collaboratorfk)->first();
+            Mail::to($client->email)->send(new CreatedScheduleMail($client, $schedule, $collaborator, $company, $formattedDate));
+
 
             return redirect()->route('mycutsclient', ['tokenCompany' => $tokenCompany])->with('success', 'Agendamento criado com sucesso!');
         } catch (\Exception $e) {

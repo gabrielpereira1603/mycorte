@@ -13,33 +13,32 @@ class CreatedScheduleMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $clientName;
-    public $scheduleDate;
-    public $scheduleStartTime;
-    public $scheduleEndTime;
-    public $collaboratorName;
-    public $companyName;
+    public $client;
+    public $schedule;
+    public $collaborator;
 
-    public function __construct($clientName, $scheduleDate, $scheduleStartTime, $scheduleEndTime, $collaboratorName, $companyName)
+    public $company;
+    public $formatedData;
+
+    public function __construct($client, $schedule, $collaborator, $company, $formatedData)
     {
-        $this->clientName = $clientName;
-        $this->scheduleDate = $scheduleDate;
-        $this->scheduleStartTime = $scheduleStartTime;
-        $this->scheduleEndTime = $scheduleEndTime;
-        $this->collaboratorName = $collaboratorName;
-        $this->companyName = $companyName;
+        $this->client = $client;
+        $this->schedule = $schedule;
+        $this->collaborator = $collaborator;
+        $this->company = $company;
+        $this->formatedData = $formatedData;
     }
 
     public function build()
     {
-        return $this->view('emails.createdSchedule')
+        return $this->view('Emails.createdSchedule')
             ->with([
-                'clientName' => $this->clientName,
-                'scheduleDate' => $this->scheduleDate,
-                'scheduleStartTime' => $this->scheduleStartTime,
-                'scheduleEndTime' => $this->scheduleEndTime,
-                'collaboratorName' => $this->collaboratorName,
-                'companyName' => $this->companyName,
+                'clientName' => $this->client->name,
+                'scheduleDate' => $this->formatedData,
+                'scheduleStartTime' => $this->schedule->hourStart,
+                'scheduleEndTime' => $this->schedule->hourFinal,
+                'collaboratorName' => $this->collaborator->name,
+                'companyName' => $this->company->name,
             ])
             ->subject('Agendamento Confirmado!');
     }
