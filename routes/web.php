@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AllCompanyController;
 use App\Http\Controllers\Client\HomeClientController;
 use App\Http\Controllers\Client\LoginClientController;
 use App\Http\Controllers\Client\LogoutClientController;
@@ -106,6 +107,6 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
 Route::post('/store-session-data', [SessionStoreController::class, 'store'])->name('dataTransporter');
 
 // Rota padrão para página inicial de todas as empresas
-Route::get('/', function () {
-    return view('allcompany');
-});
+Route::get('/', [AllCompanyController::class, 'index'])->name('allCompany');
+
+Route::get('/search-companies', [AllCompanyController::class, 'search'])->name('search.companies');

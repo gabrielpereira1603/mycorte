@@ -10,4 +10,9 @@ class Company extends Model
     use HasFactory;
 
     protected $table = 'company';
+
+    public function style()
+    {
+        return $this->hasOne(Style::class, 'companyfk');
+    }
 }

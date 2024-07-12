@@ -1,0 +1,95 @@
+header{
+    width: 100%;
+    background-color: #3A4976;
+}
+
+.nav-allcompany{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-allcompany img{
+    width: 150px;
+}
+
+.title-home{
+    padding: 20px;
+    text-align: center;
+}
+
+.title-home h3{
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.input-group .input-group-text {
+    background-color: #3A4976;
+    border: none;
+}
+
+.input-group-text i{
+    color: white;
+}
+
+.input-group .form-control {
+    border-left: none;
+}
+
+.search-info {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.card-custom {
+    background-color: #3A4976;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 300px;
+    margin: 20px auto;
+}
+
+.profile-collaborator img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background-color: #000;
+}
+
+.profile-collaborator h3, .profile-collaborator p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.status {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.status .list-address{
+    padding: 0px;
+    gap: 10px;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.buttons-home {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons-home a {
+    width: 45%;
+    background-color: #3A4976;
+    border: #424242 solid 1px;
+}

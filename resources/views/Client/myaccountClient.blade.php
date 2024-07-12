@@ -189,8 +189,10 @@
             const deletePhotoBtn = document.getElementById('deletePhoto');
             const uploadPhotoInput = document.getElementById('uploadPhoto');
             const selectPhotoBtn = document.getElementById('selectPhoto');
-            const services = document.querySelectorAll('.biografia-serices-favorite li p');
-            const editBioIcon = document.querySelector('.edit-icon');
+            const FormUpload = document.getElementById('uploadForm');
+            let originalPhotoSrc = profileImg.src;
+
+            const editBioIcon = document.querySelector('.icon-Edit-biogragia');
             const bioNome = document.getElementById('bioNome');
             const bioTelefone = document.getElementById('bioTelefone');
             const bioEmail = document.getElementById('bioEmail');
@@ -201,10 +203,35 @@
             const editNome = document.getElementById('editNome');
             const editTelefone = document.getElementById('editTelefone');
             const editEmail = document.getElementById('editEmail');
+            const services = document.querySelectorAll('.biografia-serices-favorite p');
 
-            profileImg.addEventListener('click', function() {
-                modal.style.display = 'block';
-                modalImg.src = this.src;
+
+            // Função para gerar cor aleatória em formato hexadecimal
+            function getRandomColor() {
+                return '#' + Math.floor(Math.random() * 16777215).toString(16);
+            }
+
+            // Função para verificar se a cor é escura
+            function isDarkColor(color) {
+                const hexToRgb = (hex) => {
+                    const bigint = parseInt(hex.substring(1), 16);
+                    const r = (bigint >> 16) & 255;
+                    const g = (bigint >> 8) & 255;
+                    const b = bigint & 255;
+                    return [r, g, b];
+                };
+
+                const [r, g, b] = hexToRgb(color);
+                const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                return brightness < 128;
+            }
+
+            services.forEach(function(service) {
+                const randomColor = getRandomColor();
+                service.style.backgroundColor = randomColor;
+                if (isDarkColor(randomColor)) {
+                    service.style.color = 'white';
+                }
             });
 
             icon.addEventListener('click', function() {
@@ -215,6 +242,7 @@
             closeBtn.addEventListener('click', function() {
                 modal.style.display = 'none';
             });
+
 
             editBioIcon.addEventListener('click', function() {
                 biografiaModal.style.display = 'block';
@@ -228,37 +256,46 @@
                 biografiaModal.style.display = 'none';
             });
 
-            uploadPhotoInput.addEventListener('change', function() {
-                if (this.files && this.files[0]) {
+            uploadPhotoInput.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         modalImg.src = e.target.result;
+                        profileImg.src = e.target.result;
+                        selectPhotoBtn.style.display = 'none';
+                        updatePhotoBtn.style.display = 'inline-block';
+                        cancelUploadBtn.style.display = 'inline-block';
+                        deletePhotoBtn.style.display = 'none';
+                        FormUpload.style.width = '100%';
                     };
-                    reader.readAsDataURL(this.files[0]);
-                    updatePhotoBtn.style.display = 'inline-block';
-                    cancelUploadBtn.style.display = 'inline-block';
+                    reader.readAsDataURL(file);
                 }
             });
 
-            selectPhotoBtn.addEventListener('click', function() {
-                uploadPhotoInput.click();
+            updatePhotoBtn.addEventListener('click', function() {
+                const file = uploadPhotoInput.files[0];
+                if (file) {
+                    saveImage(file);
+                }
             });
 
             cancelUploadBtn.addEventListener('click', function() {
-                uploadPhotoInput.value = '';
-                modalImg.src = profileImg.src;
+                modalImg.src = originalPhotoSrc;
+                profileImg.src = originalPhotoSrc;
+                selectPhotoBtn.style.display = 'inline-block';
                 updatePhotoBtn.style.display = 'none';
                 cancelUploadBtn.style.display = 'none';
+                deletePhotoBtn.style.display = 'inline-block';
+                FormUpload.style.width = '0px';
             });
 
             deletePhotoBtn.addEventListener('click', function() {
-                // Lógica para remover a foto do perfil
+                profileImg.src = '/app/Presentation/Assets/Images/default-profile.png';
             });
 
-            document.getElementById('editBiografiaForm').addEventListener('submit', function(event) {
-                // Remova a prevenção do evento, para permitir o envio do formulário
-            });
 
+            // Função para verificar mudanças
             function checkForChanges() {
                 const currentNome = bioNome.textContent.split(': ')[1];
                 const currentTelefone = bioTelefone.textContent.split(': ')[1];
@@ -282,5 +319,4 @@
             editEmail.addEventListener('input', checkForChanges);
         });
     </script>
-
 </x-layoutClient>
