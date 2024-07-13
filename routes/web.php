@@ -95,7 +95,8 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
 
     //Rota de Histórico de Agendamentos
     Route::get('/historico-agendamentos/{tokenCompany}', [MyHistoricCutsClientController::class, 'index'])
-        ->name('myhistoriccuts');
+        ->name('myhistoriccuts')
+        ->middleware(RedirectIfNotAuthenticatedClient::class);
 
     // Rota de reagendamento do client
     Route::post('/reschedule/{tokenCompany}', [RescheduleClientController::class, 'reschedule'])
