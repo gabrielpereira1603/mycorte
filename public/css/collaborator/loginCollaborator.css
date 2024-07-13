@@ -1,0 +1,76 @@
+main {
+    height: 100vh;
+    background: linear-gradient(to bottom, #3A4976 40%, white 40%);
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+.main-login {
+    text-align: center;
+    width: 40%;
+    padding: 20px;
+}
+
+.main-form {
+    width: 80%;
+    margin: 20px auto 0; /* Centraliza horizontalmente */
+    background-color: white;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-form label {
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.main-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.main-form button {
+    background-color: #3A4976;
+    border: transparent;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.main-form button:hover {
+    background-color: #586dac;
+    border: transparent;
+    width: 100%;
+}
+
+.resetPassword {
+    text-decoration: none;
+    color: gray;
+    margin: 10px;
+}
+
+.swal2-container {
+    z-index: 9999; /* Garantir que o modal apareça sobre outros elementos */
+}
+
+
+@media (max-width: 768px) {
+    .main-login {
+        text-align: center;
+        width: 100%;
+        padding: 20px;
+    }
+    .main-form {
+        width: 100%;
+        margin: 20px auto 0; /* Centraliza horizontalmente */
+        background-color: white;
+        padding: 20px;
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+}

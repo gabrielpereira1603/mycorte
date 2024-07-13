@@ -14,6 +14,7 @@ use App\Http\Controllers\Client\ServiceBySchedule\InsertServiceByScheduleControl
 use App\Http\Controllers\Client\ServiceBySchedule\ServiceByScheduleController;
 use App\Http\Controllers\Client\SingupClientController;
 use App\Http\Controllers\Client\UploadPhotoClientController;
+use App\Http\Controllers\Collaborator\LoginCollaboratorController;
 use App\Http\Controllers\Session\SessionStoreController;
 use App\Http\Middleware\CheckCompany;
 use App\Http\Middleware\Client\RedirectIfAuthenticatedClient;
@@ -114,3 +115,12 @@ Route::post('/store-session-data', [SessionStoreController::class, 'store'])->na
 Route::get('/', [AllCompanyController::class, 'index'])->name('allCompany');
 
 Route::get('/search-companies', [AllCompanyController::class, 'search'])->name('search.companies');
+
+Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(function () {
+    // Rota de login do collaborator
+    Route::get('/login/{tokenCompany}', [LoginCollaboratorController::class, 'index'])
+        ->name('logincollaborator');
+
+    Route::post('/login/{tokenCompany}', [LoginCollaboratorController::class, 'login'])
+        ->name('logincollaborator.post');
+});

@@ -24,6 +24,7 @@ class AllCompanyController extends Controller
             ->orWhere('city', 'LIKE', "%{$query}%")
             ->orWhere('neighborhood', 'LIKE', "%{$query}%")
             ->orWhere('state', 'LIKE', "%{$query}%")
+            ->orWhere('number', 'LIKE', "%{$query}%")
             ->get();
 
         return response()->json($companies);
