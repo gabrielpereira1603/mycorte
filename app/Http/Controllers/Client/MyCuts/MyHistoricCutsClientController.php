@@ -57,4 +57,20 @@ class MyHistoricCutsClientController extends Controller
         return response()->json($schedules);
     }
 
+    public function getAllSchedules($tokenCompany)
+    {
+        $client = Auth::guard('client')->user();
+
+        $schedules = Schedule::where('clientfk', $client->id)
+            ->whereHas('statusSchedule', function ($query) {
+                $query->where('status', '!=', 'Agendado');
+            })
+            ->with(['services', 'collaborator', 'statusSchedule'])
+            ->orderBy('date', 'desc')
+            ->orderBy('hourStart', 'desc')
+            ->get();
+
+        return response()->json($schedules);
+    }
+
 }

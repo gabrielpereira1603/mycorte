@@ -22,6 +22,11 @@
                     </div>
                 </div>
                 <p class="search-info">Você pode buscar por qualquer informação relacionada aos agendamentos.</p>
+                <div id="loading-spinner" class="d-none">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
             </div>
 
             @if($schedules->isEmpty())
@@ -61,74 +66,100 @@
     </section>
     <script>
         $(document).ready(function() {
-            const fetchSchedules = debounce(function(query, filter) {
+            function debounce(func, wait) {
+                let timeout;
+                return function() {
+                    const context = this, args = arguments;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(context, args), wait);
+                };
+            }
+
+            const fetchSchedules = debounce(function(query) {
+                $('#loading-spinner').removeClass('d-none');  // Mostrar o spinner
+                $('#search-input').prop('disabled', true);    // Desativar o campo de entrada
+
                 $.ajax({
                     url: "{{ route('search.schedules') }}",
                     type: "GET",
-                    data: { query: query, filter: filter },
+                    data: { query: query },
                     success: function(data) {
-                        $('.main-myCuts').html('');
-                        if (data.length === 0) {
-                            $('.main-myCuts').html('<p>Nenhum agendamento encontrado</p>');
-                        } else {
-                            $.each(data, function(key, schedule) {
-                                var card = `
-                                <div class="card-schedule">
-                                    <div class="status-banner
-                                                ${schedule.statusSchedule.status === 'Cancelado' ? 'status-cancelled' : ''}
-                                                ${schedule.statusSchedule.status === 'Finalizado' ? 'status-completed' : ''}
-                                                ${schedule.statusSchedule.status === 'Reagendado' ? 'status-rescheduled' : ''}">
-                                        ${schedule.statusSchedule.status}
-                                    </div>
-                                    <div class="info-schedule">
-                                        <div class="title-card-myCuts">
-                                            <span class="icon-infoChedule-mycuts">
-                                                <img src="{{ asset('images/icons/calendarioIcon.png') }}" alt="Icone de Calendario" width="20px">
-                                            </span>
-                                            <h4>Agendamento em ${schedule.date} às ${schedule.hourStart}</h4>
-                                        </div>
-                                        <p><strong>Hora de Término:</strong> ${schedule.hourFinal}</p>
-                                        <p><strong>Profissional:</strong> ${schedule.collaborator.name}</p>
-                                        <p><strong>Empresa:</strong> ${schedule.company.name}</p>
-                                    </div>
-                                    <div class="services-schedule">
-                                        <h5>Serviços:</h5>
-                                        <ul>
-                                            ${schedule.services.map(service => `
-                                                <li>${service.name} - R$ ${service.value}</li>
-                                            `).join('')}
-                                        </ul>
-                                    </div>
-                                </div>
-                            `;
-                                $('.main-myCuts').append(card);
-                            });
-                        }
+                        renderSchedules(data);
+                    },
+                    error: function() {
+                        handleAjaxError();
                     }
                 });
             }, 300);
 
-            function fetchAllSchedules() {
-                fetchSchedules('', 'all');
+            const fetchAllSchedules = function() {
+                $('#loading-spinner').removeClass('d-none');  // Mostrar o spinner
+                $('#search-input').prop('disabled', true);    // Desativar o campo de entrada
+
+                $.ajax({
+                    url: "{{ route('all.schedules', ['tokenCompany' => $tokenCompany]) }}",
+                    type: "GET",
+                    success: function(data) {
+                        renderSchedules(data);
+                    },
+                    error: function() {
+                        handleAjaxError();
+                    }
+                });
+            };
+
+            function renderSchedules(data) {
+                $('#schedules-container').html('');
+                if (data.length === 0) {
+                    $('#schedules-container').html('<p>Nenhum agendamento encontrado</p>');
+                } else {
+                    $.each(data, function(key, schedule) {
+                        var scheduleCard = `
+                    <div class="schedule-card">
+                        <!-- Estrutura do card de agendamento -->
+                        <h4>${schedule.client_name}</h4>
+                        <p>${schedule.date}</p>
+                        <p>${schedule.service}</p>
+                    </div>
+                `;
+                        $('#schedules-container').append(scheduleCard);
+                    });
+                }
+                $('#loading-spinner').addClass('d-none');  // Esconder o spinner
+                $('#search-input').prop('disabled', false); // Ativar o campo de entrada
             }
 
-            $('#search-input').on('keyup', function(e) {
+            function handleAjaxError() {
+                $('#loading-spinner').addClass('d-none');  // Esconder o spinner em caso de erro
+                $('#search-input').prop('disabled', false); // Ativar o campo de entrada
+                $('#schedules-container').html('<p>Ocorreu um erro ao carregar os agendamentos.</p>');
+            }
+
+            $('#search-input').on('keyup', function() {
                 const query = $(this).val();
                 const filter = $('#filter-select').val();
-                if (e.key === 'Enter' && filter === 'all') {
-                    fetchSchedules(query, filter);
+                if (filter !== 'all') {
+                    fetchSchedules(query);
                 }
             });
 
             $('#filter-select').on('change', function() {
                 const filter = $(this).val();
                 if (filter === 'all') {
+                    $('#search-input').prop('disabled', true);  // Desativar o campo de entrada
                     fetchAllSchedules();
+                } else {
+                    $('#search-input').prop('disabled', false); // Ativar o campo de entrada
+                    const query = $('#search-input').val();
+                    fetchSchedules(query);
                 }
             });
 
-            // Initial load for "Todas" filter
+            // Carregar todos os agendamentos ao carregar a página, sem mostrar o spinner
+            $('#search-input').prop('disabled', true); // Desativar o campo de entrada
             fetchAllSchedules();
         });
+
+
     </script>
 </x-layoutClient>
