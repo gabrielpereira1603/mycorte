@@ -19,8 +19,8 @@
         </header>
 
         <div class="title-home" style="background-color: #3a497684;">
-            <h3 style="color: white;">Seja Bem Vindo ao MyCuts</h3>
-            <p style="color: white;">Essas são as empresas parceiras</p>
+            <h3 style="color: white;">Seja Bem Vindo ao MyCorte</h3>
+            <p style="color: white;">Essas são as empresas parceiras:</p>
         </div>
 
         <div class="alert-container">
@@ -56,7 +56,13 @@
                 <input type="text" id="search-input" class="form-control" placeholder="Pesquisar...">
             </div>
             <p class="search-info">Você pode buscar por qualquer informação relacionada às empresas parceiras.</p>
+            <div id="loading-spinner" class="d-none">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
         </div>
+
 
         <section class="container mt-4">
             <div class="row" id="company-cards">
@@ -149,17 +155,19 @@
         <script src="https://kit.fontawesome.com/f544d27515.js" crossorigin="anonymous"></script>
 
         <script>
-            function debounce(func, wait) {
-                let timeout;
-                return function() {
-                    const context = this, args = arguments;
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => func.apply(context, args), wait);
-                };
-            }
-
             $(document).ready(function() {
+                function debounce(func, wait) {
+                    let timeout;
+                    return function() {
+                        const context = this, args = arguments;
+                        clearTimeout(timeout);
+                        timeout = setTimeout(() => func.apply(context, args), wait);
+                    };
+                }
+
                 const fetchCompanies = debounce(function(query) {
+                    $('#loading-spinner').removeClass('d-none');  // Mostrar o spinner
+
                     $.ajax({
                         url: "{{ route('search.companies') }}",
                         type: "GET",
@@ -167,34 +175,45 @@
                         success: function(data) {
                             $('#company-cards').html('');
                             if (data.length === 0) {
-                                $('#company-cards').html('<p>Nenhuma empresa encontrada</p>');
+                                $('#company-cards').html(`
+                        <p>Nenhuma empresa encontrada</p>
+                        <p><a href="#" id="show-all-companies" style="text-decoration: underline;">Ver todas disponíveis...</a></p>
+                    `);
+                                $('#show-all-companies').click(function(e) {
+                                    e.preventDefault();
+                                    window.location.href = "{{ route('allCompany') }}"; // Recarregar a página na rota allCompany
+                                });
                             } else {
                                 $.each(data, function(key, company) {
                                     var card = `
-                                        <div class="col-md-6 col-lg-4">
-                                            <div class="card card-custom" style="border: solid black 1px;">
-                                                <div class="profile-collaborator">
-                                                    <img src="${company.style.logo}" alt="Profile Picture">
-                                                    <h3 class="mt-2">${company.name}</h3>
-                                                </div>
-                                                <div class="status">
-                                                   <ul class="list-address">
-                                                       <li><strong>Cidade:</strong><a> ${company.city}</a></li>
-                                                       <li><strong>Número:</strong><a> ${company.number}</a></li>
-                                                       <li><strong>Bairro:</strong><a> ${company.neighborhood}</a></li>
-                                                       <li><strong>Estado:</strong><a> ${company.state}</a></li>
-                                                   </ul>
-                                                </div>
-                                                <div class="buttons-home">
-                                                    <a class="btn btn-dark" href="">Endereço</a>
-                                                    <a class="btn btn-dark" href="{{ route('homeclient', ['tokenCompany' => '` + company.token + `']) }}">Agendar</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    `;
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card card-custom" style="border: solid black 1px;">
+                                    <div class="profile-collaborator">
+                                        <img src="${company.style.logo}" alt="Profile Picture">
+                                        <h3 class="mt-2">${company.name}</h3>
+                                    </div>
+                                    <div class="status">
+                                       <ul class="list-address">
+                                           <li><strong>Cidade:</strong><a> ${company.city}</a></li>
+                                           <li><strong>Número:</strong><a> ${company.number}</a></li>
+                                           <li><strong>Bairro:</strong><a> ${company.neighborhood}</a></li>
+                                           <li><strong>Estado:</strong><a> ${company.state}</a></li>
+                                       </ul>
+                                    </div>
+                                    <div class="buttons-home">
+                                        <a class="btn btn-dark" href="">Endereço</a>
+                                        <a class="btn btn-dark" href="{{ route('homeclient', ['tokenCompany' => '` + company.token + `']) }}">Agendar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
                                     $('#company-cards').append(card);
                                 });
                             }
+                            $('#loading-spinner').addClass('d-none');  // Esconder o spinner
+                        },
+                        error: function() {
+                            $('#loading-spinner').addClass('d-none');  // Esconder o spinner em caso de erro
                         }
                     });
                 }, 300);
@@ -208,6 +227,8 @@
                     }
                 });
             });
+
+
         </script>
     </body>
 </html>

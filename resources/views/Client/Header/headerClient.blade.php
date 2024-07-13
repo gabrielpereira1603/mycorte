@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg" style="background-color: {{ $style->primaryColor ?? 'white' }};">
     <div class="container-fluid">
-        <a class="navbar-brand ms-lg-5 ms-md-3 ms-sm-1" href="{{ route('homeclient', ['tokenCompany' => $tokenCompany]) }}">
+        <a class="navbar-brand ms-lg-5 ms-md-3 ms-sm-1" href="{{ route('allCompany') }}">
             <img src="{{ asset('images/logoLetraAzul.png') }}" id="logoHeader" alt="Logo" width="60" class="d-inline-block align-text-top" style="">
         </a>
 

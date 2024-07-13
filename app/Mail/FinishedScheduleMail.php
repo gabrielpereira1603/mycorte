@@ -24,7 +24,7 @@ class FinishedScheduleMail extends Mailable
 
     public function build()
     {
-        return $this->view('emails.finishedSchedule')
+        return $this->view('Emails.finishedSchedule')
             ->with([
                 'clientName' => $this->clientName,
                 'companyName' => $this->companyName,

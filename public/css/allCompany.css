@@ -243,3 +243,12 @@ header{
     border-radius: 2px;
     border: none;
 }
+
+#loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+

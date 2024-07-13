@@ -24,7 +24,7 @@ class PasswordResetMail extends Mailable
 
     public function build()
     {
-        return $this->view('emails.passwordReset')
+        return $this->view('Emails.passwordReset')
             ->with([
                 'clientName' => $this->clientName,
                 'recoveryCode' => $this->recoveryCode,

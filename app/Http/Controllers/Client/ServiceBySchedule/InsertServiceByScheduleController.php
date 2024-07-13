@@ -63,8 +63,6 @@ class InsertServiceByScheduleController extends Controller
             $schedule->companyfk = $company->id; // Token da empresa
             $schedule->save();
 
-            $formattedDate = Carbon::createFromFormat('Y-m-d', $schedule->date)->format('d-m-Y');
-
 
             // Adiciona os serviços relacionados ao agendamento
             foreach ($selectedServices as $serviceId) {
@@ -77,6 +75,7 @@ class InsertServiceByScheduleController extends Controller
                 }
             }
 
+            $formattedDate = Carbon::createFromFormat('Y-m-d', $schedule->date)->format('d-m-Y');
             $client = Client::where('id', $schedule->clientfk)->first();
             $collaborator = Collaborator::where('id', $schedule->collaboratorfk)->first();
             Mail::to($client->email)->send(new CreatedScheduleMail($client, $schedule, $collaborator, $company, $formattedDate));

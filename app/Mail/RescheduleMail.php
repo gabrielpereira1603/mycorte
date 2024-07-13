@@ -13,33 +13,31 @@ class RescheduleMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $clientName;
-    public $companyName;
-    public $newScheduleDate;
-    public $newScheduleStartTime;
-    public $newScheduleEndTime;
-    public $collaboratorName;
+    public $client;
+    public $schedule;
+    public $collaborator;
+    public $company;
+    public $formatedData;
 
-    public function __construct($clientName, $companyName, $newScheduleDate, $newScheduleStartTime, $newScheduleEndTime, $collaboratorName)
+    public function __construct($client, $schedule, $collaborator, $company, $formatedData)
     {
-        $this->clientName = $clientName;
-        $this->companyName = $companyName;
-        $this->newScheduleDate = $newScheduleDate;
-        $this->newScheduleStartTime = $newScheduleStartTime;
-        $this->newScheduleEndTime = $newScheduleEndTime;
-        $this->collaboratorName = $collaboratorName;
+        $this->client = $client;
+        $this->schedule = $schedule;
+        $this->collaborator = $collaborator;
+        $this->company = $company;
+        $this->formatedData = $formatedData;
     }
 
     public function build()
     {
-        return $this->view('emails.reschedule')
+        return $this->view('Emails.reschedule')
             ->with([
-                'clientName' => $this->clientName,
-                'companyName' => $this->companyName,
-                'newScheduleDate' => $this->newScheduleDate,
-                'newScheduleStartTime' => $this->newScheduleStartTime,
-                'newScheduleEndTime' => $this->newScheduleEndTime,
-                'collaboratorName' => $this->collaboratorName,
+                'clientName' => $this->client->name,
+                'companyName' => $this->company->name,
+                'newScheduleDate' => $this->formatedData,
+                'newScheduleStartTime' => $this->schedule->hourStart,
+                'newScheduleEndTime' => $this->schedule->hourFinal,
+                'collaboratorName' => $this->collaborator->name,
             ])
             ->subject('Reagendamento Confirmado - MyCorte');
     }

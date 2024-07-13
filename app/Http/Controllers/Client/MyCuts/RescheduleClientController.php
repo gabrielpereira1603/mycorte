@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Client\MyCuts;
 
 use App\Http\Controllers\Controller;
+use App\Mail\RescheduleMail;
+use App\Models\Client;
+use App\Models\Collaborator;
 use App\Models\Company;
 use App\Models\Schedule;
 use App\Models\ScheduleService;
 use App\Models\Service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RescheduleClientController extends Controller
@@ -70,6 +75,11 @@ class RescheduleClientController extends Controller
                     $scheduleService->save();
                 }
             }
+
+            $formattedDate = Carbon::createFromFormat('Y-m-d', $schedule->date)->format('d-m-Y');
+            $client = Client::where('id', $schedule->clientfk)->first();
+            $collaborator = Collaborator::where('id', $schedule->collaboratorfk)->first();
+            Mail::to($client->email)->send(new RescheduleMail($client, $schedule, $collaborator, $company, $formattedDate));
 
             return redirect()->route('mycutsclient', ['tokenCompany' => $tokenCompany])->with('success', 'Reagendado com sucesso!');
         } catch (\Exception $e) {
