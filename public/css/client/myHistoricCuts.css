@@ -1,0 +1,281 @@
+/* Nome do perfil */
+.profile-name {
+    background-color: #3a497684;
+    text-align: center;
+    padding: 20px 0;
+    color: white;
+}
+
+/* Seção dos agendamentos */
+.section-myCuts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+/* Container principal dos agendamentos */
+.main-myCuts {
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Mensagem de sem agendamentos */
+.no-schedules {
+    text-align: center;
+    font-size: 1.2em;
+    color: #777;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Container de cada agendamento */
+.card-schedule {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-schedule:hover {
+    transform: translateY(-5px);
+}
+
+/* Banner de status */
+.status-banner {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 0.9em;
+    font-weight: bold;
+    z-index: 1;
+}
+
+/* Informações do agendamento */
+.info-schedule {
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.title-card-myCuts {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.icon-infoChedule-mycuts {
+    margin-right: 10px;
+}
+
+.info-schedule h4 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.info-schedule p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #555;
+}
+
+/* Serviços do agendamento */
+.services-schedule {
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.services-schedule h5 {
+    margin: 0 0 10px;
+    font-size: 1.3em;
+    color: #333;
+}
+
+.services-schedule ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.services-schedule ul li {
+    background-color: #eaeaea;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 1em;
+    color: #333;
+    transition: background-color 0.3s ease;
+    word-wrap: break-word; /* Adiciona a quebra de palavra */
+}
+
+.services-schedule ul li:hover {
+    background-color: #d4d4d4;
+}
+
+/* Container do mapa */
+.map-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.map-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #333;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    border: solid 5px #3A4976;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: borderFlash 2s linear infinite;
+}
+
+@keyframes borderFlash {
+    0% {
+        box-shadow: 0 0 5px white, 0 0 5px white, 0 0 10px white;
+    }
+    50% {
+        box-shadow: 0 0 3px rgba(58, 73, 118, 0.76), 0 0 3px rgba(58, 73, 118, 0.76), 0 0 3px rgba(58, 73, 118, 0.76);
+    }
+    100% {
+        box-shadow: 0 0 5px white, 0 0 5px white, 0 0 10px white;
+    }
+}
+
+/* Botões de ação */
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.action-buttons .btn {
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.action-buttons .btn:hover {
+    transform: scale(1.05);
+}
+
+.action-buttons .btn:active {
+    transform: scale(0.95);
+}
+
+/* Efeito visual para botão Cancelar */
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Efeito visual para botão Reagendar */
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.modal-header{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.modal-header button{
+    position: absolute;
+    right: 15px;
+    bottom: 20px;
+    border: transparent;
+    background: transparent;
+    font-size: 20px;
+}
+
+.modal-lg {
+    max-width: 90%; /* Ajusta a largura máxima do modal */
+}
+
+#calendar {
+    width: 100%; /* Garante que o calendário ocupe toda a largura disponível */
+    max-width: 1000px; /* Ajuste o tamanho máximo do calendário conforme necessário */
+    margin: 0 auto; /* Centraliza horizontalmente */
+}
+
+.fc-event-title, .fc-event-time{
+    margin: 6px;
+    color: black;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .profile-name h3 {
+        font-size: 1.5em;
+    }
+
+    .info-schedule h4 {
+        font-size: 1.2em;
+    }
+
+    .info-schedule p {
+        font-size: 0.9em;
+    }
+
+    .services-schedule{
+        margin-bottom: 0px;
+    }
+
+    .services-schedule h5 {
+        font-size: 1.1em;
+    }
+
+    .services-schedule ul li {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .map-container iframe {
+        height: 200px;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .action-buttons button{
+        width: 46%;
+    }
+
+    .status-banner {
+        position: relative; /* Voltando ao fluxo normal */
+        width: auto;
+        max-width: 100%;
+        top: -10px;
+        right: unset;
+        font-size: 0.8em;
+        padding: 3px 7px;
+    }
+
+    .modal-lg {
+        max-width: 100%; /* Ajusta a largura máxima do modal */
+    }
+}

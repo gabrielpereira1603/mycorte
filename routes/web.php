@@ -7,6 +7,7 @@ use App\Http\Controllers\Client\LogoutClientController;
 use App\Http\Controllers\Client\MyAccountClientController;
 use App\Http\Controllers\Client\MyCuts\CancelScheduleController;
 use App\Http\Controllers\Client\MyCuts\MyCutsClientController;
+use App\Http\Controllers\Client\MyCuts\MyHistoricCutsClientController;
 use App\Http\Controllers\Client\MyCuts\RescheduleClientController;
 use App\Http\Controllers\Client\ScheduleClientController;
 use App\Http\Controllers\Client\ServiceBySchedule\InsertServiceByScheduleController;
@@ -86,6 +87,9 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
     Route::get('/mycuts/{tokenCompany}', [MyCutsClientController::class, 'index'])
         ->name('mycutsclient')
         ->middleware(RedirectIfNotAuthenticatedClient::class);
+
+    Route::get('/historico-agendamentos/{tokenCompany}', [MyHistoricCutsClientController::class, 'index'])
+        ->name('myhistoriccuts');
 
     // Rota de reagendamento do client
     Route::post('/reschedule/{tokenCompany}', [RescheduleClientController::class, 'reschedule'])

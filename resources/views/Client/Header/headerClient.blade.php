@@ -17,7 +17,7 @@
                     <a class="nav-link" aria-current="page" href="{{ route('mycutsclient', ['tokenCompany' => $tokenCompany]) }}" style="color: {{ $style->colorText }}">Meus Cortes</a>
                 </li>
                 <li class="nav-item ms-lg-3">
-                    <a class="nav-link" aria-current="page" href="#" style="color: {{ $style->colorText }}">Históricos</a>
+                    <a class="nav-link" aria-current="page" href="{{ route('myhistoriccuts', ['tokenCompany' => $tokenCompany]) }}" style="color: {{ $style->colorText }}">Históricos</a>
                 </li>
 {{--                <li class="nav-item ms-lg-3">--}}
 {{--                    <a class="nav-link" aria-current="page" href="#" style="color: {{ $style->colorText }}">Como Chegar?</a>--}}
