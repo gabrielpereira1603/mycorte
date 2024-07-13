@@ -1,4 +1,47 @@
-/* Nome do perfil */
+/* Estilo para a dropdown de filtros */
+.input-group-append {
+    margin-left: 10px;
+}
+
+.input-group-append .form-select {
+    border: 1px solid #3A4976;
+    border-radius: 0 4px 4px 0;
+    color: #495057;
+}
+
+.input-group-append .form-select:focus {
+    box-shadow: 0 0 0 0.25rem rgba(58, 73, 118, 0.25);
+}
+
+/* Banner de status */
+.status-banner {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 0.9em;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.status-cancelled {
+    background-color: red;
+}
+
+.status-completed {
+    background-color: green;
+}
+
+.status-rescheduled {
+    background-color: rgba(255, 196, 0, 0.82);
+    color: black; /* Muda a cor do texto para melhorar a legibilidade no fundo amarelo */
+}
+
+/* Restante do CSS */
 .profile-name {
     background-color: #3a497684;
     text-align: center;
@@ -6,7 +49,6 @@
     color: white;
 }
 
-/* Seção dos agendamentos */
 .section-myCuts {
     display: flex;
     justify-content: center;
@@ -16,13 +58,11 @@
     background-color: #f1f1f1;
 }
 
-/* Container principal dos agendamentos */
 .main-myCuts {
     width: 100%;
     max-width: 1200px;
 }
 
-/* Mensagem de sem agendamentos */
 .no-schedules {
     text-align: center;
     font-size: 1.2em;
@@ -33,7 +73,6 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Container de cada agendamento */
 .card-schedule {
     position: relative;
     display: flex;
@@ -51,23 +90,6 @@
     transform: translateY(-5px);
 }
 
-/* Banner de status */
-.status-banner {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #28a745;
-    color: white;
-    text-align: center;
-    padding: 5px 10px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-size: 0.9em;
-    font-weight: bold;
-    z-index: 1;
-}
-
-/* Informações do agendamento */
 .info-schedule {
     flex: 1;
     margin-bottom: 20px;
@@ -95,7 +117,6 @@
     color: #555;
 }
 
-/* Serviços do agendamento */
 .services-schedule {
     flex: 1;
     margin-bottom: 20px;
@@ -127,104 +148,6 @@
     background-color: #d4d4d4;
 }
 
-/* Container do mapa */
-.map-container {
-    width: 100%;
-    margin-top: 20px;
-}
-
-.map-title {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-    text-align: center;
-    color: #333;
-}
-
-.map-container iframe {
-    width: 100%;
-    height: 300px;
-    border-radius: 10px;
-    border: solid 5px #3A4976;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: borderFlash 2s linear infinite;
-}
-
-@keyframes borderFlash {
-    0% {
-        box-shadow: 0 0 5px white, 0 0 5px white, 0 0 10px white;
-    }
-    50% {
-        box-shadow: 0 0 3px rgba(58, 73, 118, 0.76), 0 0 3px rgba(58, 73, 118, 0.76), 0 0 3px rgba(58, 73, 118, 0.76);
-    }
-    100% {
-        box-shadow: 0 0 5px white, 0 0 5px white, 0 0 10px white;
-    }
-}
-
-/* Botões de ação */
-.action-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
-
-.action-buttons .btn {
-    transition: transform 0.3s, background-color 0.3s;
-}
-
-.action-buttons .btn:hover {
-    transform: scale(1.05);
-}
-
-.action-buttons .btn:active {
-    transform: scale(0.95);
-}
-
-/* Efeito visual para botão Cancelar */
-.btn-danger:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-}
-
-/* Efeito visual para botão Reagendar */
-.btn-warning:hover {
-    background-color: #e0a800;
-    border-color: #d39e00;
-}
-
-.modal-header{
-    display: flex;
-    justify-content: center;
-    position: relative;
-}
-
-.modal-header button{
-    position: absolute;
-    right: 15px;
-    bottom: 20px;
-    border: transparent;
-    background: transparent;
-    font-size: 20px;
-}
-
-.modal-lg {
-    max-width: 90%; /* Ajusta a largura máxima do modal */
-}
-
-#calendar {
-    width: 100%; /* Garante que o calendário ocupe toda a largura disponível */
-    max-width: 1000px; /* Ajuste o tamanho máximo do calendário conforme necessário */
-    margin: 0 auto; /* Centraliza horizontalmente */
-}
-
-.fc-event-title, .fc-event-time{
-    margin: 6px;
-    color: black;
-}
-
-/* Responsividade */
 @media (max-width: 768px) {
     .profile-name h3 {
         font-size: 1.5em;
@@ -238,7 +161,7 @@
         font-size: 0.9em;
     }
 
-    .services-schedule{
+    .services-schedule {
         margin-bottom: 0px;
     }
 
@@ -251,22 +174,8 @@
         padding: 8px;
     }
 
-    .map-container iframe {
-        height: 200px;
-    }
-
-    .action-buttons {
-        display: flex;
-        justify-content: center;
-        flex-direction: row;
-    }
-
-    .action-buttons button{
-        width: 46%;
-    }
-
     .status-banner {
-        position: relative; /* Voltando ao fluxo normal */
+        position: relative;
         width: auto;
         max-width: 100%;
         top: -10px;
@@ -274,8 +183,32 @@
         font-size: 0.8em;
         padding: 3px 7px;
     }
+}
 
-    .modal-lg {
-        max-width: 100%; /* Ajusta a largura máxima do modal */
-    }
+/* Estilos para o input de pesquisa em MyHistoricCutsClient */
+.input-group .input-group-text {
+    background-color: #3A4976;
+    border: none;
+}
+
+.input-group-text i {
+    color: white;
+}
+
+.input-group .form-control {
+    border: 1px solid #3A4976;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    color: #495057;
+}
+
+.input-group .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(58, 73, 118, 0.25);
+}
+
+.search-info {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    text-align: center;
 }
