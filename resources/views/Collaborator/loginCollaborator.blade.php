@@ -87,8 +87,34 @@
                     }
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Redireciona para a rota de redefinição de senha com o e-mail
-                        window.location.href = `/password/reset?email=${encodeURIComponent(result.value)}`;
+                        // Exibe o alerta de carregamento
+                        Swal.fire({
+                            title: 'Enviando...',
+                            text: 'Aguarde enquanto enviamos o e-mail para redefinir sua senha.',
+                            icon: 'info',
+                            showConfirmButton: false,
+                            didOpen: () => {
+                                Swal.showLoading(); // Exibe o loader spinner
+                            }
+                        });
+
+                        // Simulação de envio de e-mail com um tempo de espera
+                        setTimeout(() => {
+                            // Aqui você faria uma chamada AJAX para enviar o e-mail
+                            // Exemplo:
+                            // axios.post('/password/email', { email: result.value })
+                            //     .then(response => {
+                            //         Swal.fire('Enviado!', 'O e-mail foi enviado com sucesso.', 'success');
+                            //     })
+                            //     .catch(error => {
+                            //         Swal.fire('Erro!', 'Ocorreu um erro ao enviar o e-mail.', 'error');
+                            //     });
+
+                            // Simulação de sucesso
+                            Swal.fire('Enviado!', 'O e-mail foi enviado com sucesso.', 'success');
+                            // Para simular um erro, use:
+                            // Swal.fire('Erro!', 'Ocorreu um erro ao enviar o e-mail.', 'error');
+                        }, 2000); // 2 segundos de espera para simular a resposta
                     }
                 });
             }
