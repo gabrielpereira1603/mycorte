@@ -92,8 +92,18 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
         ->name('mycutsclient')
         ->middleware(RedirectIfNotAuthenticatedClient::class);
 
+    //Rota de Pesquisa no Histórico de Agendamento
+    Route::get('/search/schedules', [MyHistoricCutsClientController::class, 'search'])
+        ->name('search.schedules');
+
+    //Rota de Pesquisa por todas as Schedules do Historico
+    Route::get('/all-schedules/{tokenCompany}', [MyHistoricCutsClientController::class, 'getAllSchedules'])
+        ->name('all.schedules');
+
+    //Rota de Histórico de Agendamentos
     Route::get('/historico-agendamentos/{tokenCompany}', [MyHistoricCutsClientController::class, 'index'])
-        ->name('myhistoriccuts');
+        ->name('myhistoriccuts')
+        ->middleware(RedirectIfNotAuthenticatedClient::class);
 
     // Rota de reagendamento do client
     Route::post('/reschedule/{tokenCompany}', [RescheduleClientController::class, 'reschedule'])
