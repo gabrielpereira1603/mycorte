@@ -72,7 +72,7 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', \App\Models\Client::class),
         ],
-       'collaborators' => [
+       'collaborator' => [
             'driver' => 'eloquent',
             'model' => \App\Models\Collaborator::class,
         ],

@@ -14,11 +14,14 @@ use App\Http\Controllers\Client\ServiceBySchedule\InsertServiceByScheduleControl
 use App\Http\Controllers\Client\ServiceBySchedule\ServiceByScheduleController;
 use App\Http\Controllers\Client\SingupClientController;
 use App\Http\Controllers\Client\UploadPhotoClientController;
+use App\Http\Controllers\Collaborator\ForgotPasswordCollaboratorController;
+use App\Http\Controllers\Collaborator\HomeCollaboratorController;
 use App\Http\Controllers\Collaborator\LoginCollaboratorController;
 use App\Http\Controllers\Session\SessionStoreController;
 use App\Http\Middleware\CheckCompany;
 use App\Http\Middleware\Client\RedirectIfAuthenticatedClient;
 use App\Http\Middleware\Client\RedirectIfNotAuthenticatedClient;
+use App\Http\Middleware\Collaborator\ResetPasswordCollaborator;
 use App\Models\Style;
 use Illuminate\Support\Facades\Route;
 
@@ -123,4 +126,28 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
 
     Route::post('/login/{tokenCompany}', [LoginCollaboratorController::class, 'login'])
         ->name('logincollaborator.post');
+
+    Route::post('/forgotpassword/{tokenCompany}', [ForgotPasswordCollaboratorController::class, 'resetPasswordEmail'])
+        ->name('forgotPasswordCollaborator');
+
+    // Aplicar o middleware de verificação de token para essas rotas
+    Route::middleware([ResetPasswordCollaborator::class])->group(function () {
+        Route::get('/viewforgotpassword/{tokenCompany}', [ForgotPasswordCollaboratorController::class, 'indexTokenForgotPassword'])
+            ->name('viewValidateToken');
+
+        Route::post('/validateToken/{tokenCompany}', [ForgotPasswordCollaboratorController::class, 'validateToken'])
+            ->name('validateTokenForgotPasswordCollaborator');
+
+        Route::get('/resetpassword/{tokenCompany}', [ForgotPasswordCollaboratorController::class, 'resetPasswordIndex'])
+            ->name('resetPasswordCollaboratorView');
+
+        Route::post('/resetpassword/{tokenCompany}', [ForgotPasswordCollaboratorController::class, 'resetPassword'])
+            ->name('resetPasswordCollaborator.post');
+    });
+
+    // Rota de home do collaborator
+    Route::get('/home/{tokenCompany}', [HomeCollaboratorController::class, 'index'])
+        ->name('homecollaborator');
 });
+
+

@@ -66,6 +66,10 @@
                     <div></div>
                 </div>
                 <a class="button btn-secondary" href="{{ route('singupclient', ['tokenCompany' => $tokenCompany]) }}" id="singupBtn" onclick="handleLink('singupBtn')">Cadastre-se Agora</a>
+
+                <a href="{{ route('logincollaborator',['tokenCompany' => $tokenCompany]) }}"
+                style="margin: 12px; color: gray;">Você é um colaborador?
+                </a>
             </div>
         </form>
     </section>

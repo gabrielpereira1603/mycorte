@@ -13,12 +13,13 @@ class PasswordResetMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $clientName;
+    public $name;
     public $recoveryCode;
 
-    public function __construct($clientName, $recoveryCode)
+
+    public function __construct($name, $recoveryCode)
     {
-        $this->clientName = $clientName;
+        $this->name = $name;
         $this->recoveryCode = $recoveryCode;
     }
 
@@ -26,7 +27,7 @@ class PasswordResetMail extends Mailable
     {
         return $this->view('Emails.passwordReset')
             ->with([
-                'clientName' => $this->clientName,
+                'clientName' => $this->name,
                 'recoveryCode' => $this->recoveryCode,
             ])
             ->subject('Recuperação de Senha - MyCorte');

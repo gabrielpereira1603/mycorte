@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('password');
             $table->enum('role', ['ADMIN', 'COLLABORATOR']);
             $table->string('telephone', '60');
+            $table->string('resetPasswordToken', '255')->nullable();
+
             $table->unsignedBigInteger('companyfk');
             $table->foreign('companyfk')->references('id')->on('company')->onDelete('cascade');
             $table->timestamps();

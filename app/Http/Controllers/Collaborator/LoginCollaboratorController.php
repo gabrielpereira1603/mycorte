@@ -12,12 +12,12 @@ class LoginCollaboratorController extends Controller
 {
     public function index($tokenCompany)
     {
-        return view('Collaborator.loginCollaborator',[
+        return view('Collaborator.Login.loginCollaborator',[
             'tokenCompany' => $tokenCompany
         ]);
     }
 
-    public function login(Request $request){
+    public function login(Request $request, $tokenCompany){
         // Validação
         $request->validate([
             'identifier' => 'required|string',
@@ -34,7 +34,7 @@ class LoginCollaboratorController extends Controller
         if ($user && Hash::check($request->password, $user->password)) {
             // Autentica o usuário
             Auth::guard('collaborator')->login($user);
-            return redirect()->route('collaborator.dashboard');
+            return redirect()->route('homecollaborator', ['tokenCompany' => $tokenCompany]);
         }
 
         return redirect()->back()->withErrors(['identifier' => 'As credenciais fornecidas estão incorretas.']);

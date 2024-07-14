@@ -88,7 +88,7 @@
         <div class="recovery-code">
             {{ $recoveryCode }}
         </div>
-        <p>Por favor, utilize este código para redefinir sua senha.</p>
+        <p>Por favor, clique aqui e utilize este código para redefinir sua senha.</p>
         <p>Se você não solicitou a recuperação de senha, ignore este email.</p>
         <p>Atenciosamente,<br>Equipe MyCorte</p>
     </div>

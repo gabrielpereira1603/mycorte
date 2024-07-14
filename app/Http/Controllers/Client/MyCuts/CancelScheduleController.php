@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Client\MyCuts;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Mails\CancelScheduleMailController;
 use App\Mail\CancellationMail;
 use App\Models\Company;
 use App\Models\Schedule;
