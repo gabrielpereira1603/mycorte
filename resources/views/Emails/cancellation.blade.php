@@ -69,7 +69,7 @@
 <body>
 <div class="container">
     <div class="header">
-        <img src="https://i.postimg.cc/RCDV18qy/temp-Imageh1yvji.avif" alt="Cancelamento de Agendamento">
+        <img src="https://i.postimg.cc/K8ZHYg6h/logo-Letra-Azul.png" alt="Cancelamento de Agendamento">
     </div>
     <div class="content">
         <h1>Lamentamos pelo Cancelamento, <span>{{ $clientName }}</span></h1>

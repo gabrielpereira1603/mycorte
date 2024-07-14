@@ -80,7 +80,7 @@
 <body>
 <div class="container">
     <div class="header">
-        <img src="https://i.postimg.cc/RCDV18qy/temp-Imageh1yvji.avif" alt="Agendamento Confirmado">
+        <img src="https://i.postimg.cc/K8ZHYg6h/logo-Letra-Azul.png" alt="Agendamento Confirmado">
     </div>
     <div class="content">
         <h1>Agendamento Confirmado!</h1>

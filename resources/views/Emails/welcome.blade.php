@@ -80,7 +80,7 @@
 <body>
 <div class="container">
     <div class="header">
-        <img src="https://i.postimg.cc/RCDV18qy/temp-Imageh1yvji.avif" alt="Bem-vindo ao MyCorte">
+        <img src="https://i.postimg.cc/K8ZHYg6h/logo-Letra-Azul.png" alt="Bem-vindo ao MyCorte">
     </div>
     <div class="content">
         <h1>Bem-vindo, {{ $clientName }}!</h1>

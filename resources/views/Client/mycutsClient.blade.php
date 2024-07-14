@@ -44,7 +44,7 @@
                                     data-collaborator-id="{{ $schedule->collaborator->id }}"
                                     data-company-id="{{ $schedule->company->id }}"
                                     data-company-token="{{ $tokenCompany }}"
-                                    onclick="openRescheduleModal(this)">Reagendar
+                                    onclick="showRescheduleOptions(this)">Reagendar
                             </button>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
 
     <!-- Modal -->
     <div id="rescheduleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="rescheduleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document"> <!-- Adiciona classe modal-dialog-centered para centralizar -->
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="rescheduleModalLabel">Reagendar Horário</h5>
@@ -64,7 +64,37 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div id="calendar" class="text-center"></div> <!-- Adiciona classe text-center para centralizar o conteúdo -->
+                    <div id="calendar" class="text-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Selecionar Colaborador -->
+    <div id="selectCollaboratorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="selectCollaboratorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="selectCollaboratorModalLabel">Selecionar Colaborador</h5>
+                    <button type="button" id="exitModalCollaborator" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="selectCollaboratorForm">
+                        <div class="collaborator-list">
+                            @foreach($collaborators as $collaborator)
+                                <div class="collaborator-item" data-collaborator-id="{{ $collaborator->id }}">
+                                    <img src="{{ $collaborator->image }}" class="collaborator-img" alt="{{ $collaborator->name }}">
+                                    <span class="collaborator-name">{{ $collaborator->name }}</span>
+                                    <input type="radio" name="collaborator" value="{{ $collaborator->id }}" class="collaborator-radio" style="display:none;">
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="mt-3 d-flex justify-content-end button-box">
+                            <button type="button" class="btn btn-success" onclick="proceedToReschedule()">Confirmar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -88,14 +118,33 @@
             });
         }
 
+        function showRescheduleOptions(button) {
+            Swal.fire({
+                title: 'Reagendar',
+                text: "Você quer reagendar com o mesmo colaborador ou escolher um novo?",
+                icon: 'question',
+                showCancelButton: true,
+                showDenyButton: true,
+                confirmButtonText: 'Mesmo Colaborador',
+                denyButtonText: 'Outro Colaborador',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    openRescheduleModal(button);
+                } else if (result.isDenied) {
+                    openSelectCollaboratorModal(button);
+                }
+            });
+        }
+
         function openRescheduleModal(button) {
             var scheduleId = button.getAttribute('data-schedule-id');
             var collaboratorId = button.getAttribute('data-collaborator-id');
             var companyId = button.getAttribute('data-company-id');
             var companyToken = button.getAttribute('data-company-token');
-            var formAction = '{{ route('dataTransporter') }}'
-            var csrfToken = "{{ csrf_token() }}"
-            var rescheduleController = "{{ route('rescheduleclient', ['tokenCompany' => $tokenCompany]) }}"
+            var formAction = '{{ route('dataTransporter') }}';
+            var csrfToken = "{{ csrf_token() }}";
+            var rescheduleController = "{{ route('rescheduleclient', ['tokenCompany' => $tokenCompany]) }}";
 
             $('#rescheduleModal').modal('show');
 
@@ -107,6 +156,40 @@
             document.head.appendChild(script);
         }
 
+        function openSelectCollaboratorModal(button) {
+            var scheduleId = button.getAttribute('data-schedule-id');
+            var companyId = button.getAttribute('data-company-id');
+            var companyToken = button.getAttribute('data-company-token');
+
+            // Armazenar os dados no modal para uso posterior
+            var selectCollaboratorModal = $('#selectCollaboratorModal');
+            selectCollaboratorModal.data('scheduleId', scheduleId);
+            selectCollaboratorModal.data('companyId', companyId);
+            selectCollaboratorModal.data('companyToken', companyToken);
+
+            $('#selectCollaboratorModal').modal('show');
+        }
+
+        function proceedToReschedule() {
+            var selectedCollaborator = document.querySelector('input[name="collaborator"]:checked');
+            if (selectedCollaborator) {
+                var scheduleId = $('#selectCollaboratorModal').data('scheduleId');
+                var companyId = $('#selectCollaboratorModal').data('companyId');
+                var companyToken = $('#selectCollaboratorModal').data('companyToken');
+                var collaboratorId = selectedCollaborator.value;
+
+                // Fechar modal de seleção de colaborador
+                $('#selectCollaboratorModal').modal('hide');
+
+                // Abrir modal de reagendamento com o novo colaborador
+                var rescheduleButton = document.querySelector(`button[data-schedule-id="${scheduleId}"]`);
+                rescheduleButton.setAttribute('data-collaborator-id', collaboratorId);
+                openRescheduleModal(rescheduleButton);
+            } else {
+                Swal.fire('Selecione um colaborador', '', 'warning');
+            }
+        }
+
         // Adiciona evento para fechar o modal quando o botão é clicado
         document.addEventListener('DOMContentLoaded', function() {
             var closeButton = document.querySelector('#rescheduleModal .modal-header button.close');
@@ -115,6 +198,62 @@
                     $('#rescheduleModal').modal('hide');
                 });
             }
+
+            var closeButtonCollaboratorModal = document.querySelector('#selectCollaboratorModal .modal-header button.close');
+            if (closeButtonCollaboratorModal) {
+                closeButtonCollaboratorModal.addEventListener('click', function() {
+                    $('#selectCollaboratorModal').modal('hide');
+                });
+            }
+
+            // Adiciona evento de clique em cada item de colaborador
+            document.querySelectorAll('.collaborator-item').forEach(function(item) {
+                item.addEventListener('click', function() {
+                    // Desmarcar todos os outros inputs
+                    document.querySelectorAll('.collaborator-radio').forEach(function(input) {
+                        input.checked = false;
+                    });
+
+                    // Seleciona o input de colaborador correspondente
+                    var collaboratorId = this.getAttribute('data-collaborator-id');
+                    var input = document.querySelector('.collaborator-radio[value="' + collaboratorId + '"]');
+                    if (input) {
+                        input.checked = true;
+                    }
+                });
+            });
+
+            // Fechar o modal ao clicar fora dele
+            $('#selectCollaboratorModal').on('click', function(e) {
+                if (e.target === this) {
+                    $('#selectCollaboratorModal').modal('hide');
+                }
+            });
+
+            document.querySelectorAll('.collaborator-item').forEach(function(item) {
+                item.addEventListener('click', function() {
+                    // Desmarcar todos os outros inputs
+                    document.querySelectorAll('.collaborator-radio').forEach(function(input) {
+                        input.checked = false;
+                    });
+
+                    // Remover a classe selected de todos os itens
+                    document.querySelectorAll('.collaborator-item').forEach(function(div) {
+                        div.classList.remove('selected');
+                    });
+
+                    // Adicionar a classe selected ao item clicado
+                    this.classList.add('selected');
+
+                    // Marcar o input correspondente
+                    var collaboratorId = this.getAttribute('data-collaborator-id');
+                    var input = document.querySelector('.collaborator-radio[value="' + collaboratorId + '"]');
+                    if (input) {
+                        input.checked = true;
+                        input.style.display = 'block'; // Garanta que o input esteja visível
+                    }
+                });
+            });
         });
 
         // Adiciona evento para fechar o modal quando clicar fora dele
@@ -125,4 +264,62 @@
         });
 
     </script>
+
+    <style>
+        .collaborator-item {
+            transition: background-color 0.3s;
+            position: relative; /* Adicione este estilo para usar position absolute no input */
+        }
+
+        .collaborator-item.selected {
+            background-color: #e9ecef; /* Cor de fundo para a seleção */
+        }
+
+        .collaborator-radio {
+            position: absolute;
+            right: 10px; /* Ajuste conforme necessário para o layout */
+            display: block; /* Garanta que o input esteja visível */
+        }
+
+
+
+        .collaborator-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .collaborator-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .collaborator-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .collaborator-name {
+            flex-grow: 1;
+        }
+
+        .collaborator-radio {
+            margin-left: auto;
+        }
+
+        @media (max-width: 576px) {
+            #selectCollaboratorForm .button-box{
+                width: 100%;
+            }
+
+            #selectCollaboratorForm .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </x-layoutClient>

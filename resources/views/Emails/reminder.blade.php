@@ -80,7 +80,7 @@
 <body>
 <div class="container">
     <div class="header">
-        <img src="https://i.postimg.cc/RCDV18qy/temp-Imageh1yvji.avif" alt="Lembrete de Agendamento">
+        <img src="https://i.postimg.cc/K8ZHYg6h/logo-Letra-Azul.png" alt="Lembrete de Agendamento">
     </div>
     <div class="content">
         <h1>Lembrete de Agendamento!</h1>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client\MyCuts;
 
 use App\Http\Controllers\Controller;
+use App\Models\Collaborator;
 use App\Models\Company;
 use App\Models\Schedule;
 use App\Models\StatusSchedule;
@@ -27,6 +28,14 @@ class MyCutsClientController extends Controller
             ->orderBy('hourStart')
             ->get();
 
-        return view('Client.mycutsClient', ['tokenCompany' => $tokenCompany, 'schedules' => $schedules, 'company' => $company]);
+        // Busca todos os colaboradores da empresa
+        $collaborators = Collaborator::where('companyfk', $company->id)->get();
+
+        return view('Client.mycutsClient', [
+            'tokenCompany' => $tokenCompany,
+            'schedules' => $schedules,
+            'company' => $company,
+            'collaborators' => $collaborators // Passa os colaboradores para a view
+        ]);
     }
 }
