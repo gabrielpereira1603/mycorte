@@ -1,0 +1,113 @@
+.main-title{
+    background-color: #3a497684;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+}
+
+.main-title p{
+    text-transform: uppercase;
+    font-weight: bold;
+
+}
+
+.toast {
+    position: relative; /* Garantir que o toast não flutue acima do card */
+    margin-bottom: 0.5rem; /* Espaçamento entre toast's se houver mais de um */
+}
+
+.alert-info {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.alert-info i {
+    font-size: 2rem;
+    margin-right: 0.5rem;
+}
+
+.card-header{
+    background-color: #3a4976 !important;
+    color: #ffffff !important;
+}
+
+.truncate {
+    max-width: 150px;
+    white-space: nowrap; /* Não permite que o texto quebre em várias linhas */
+    overflow: hidden; /* Oculta o texto que ultrapassa o container */
+    text-overflow: ellipsis; /* Adiciona reticências quando o texto é truncado */
+}
+
+.card-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-date{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card-date i{
+    margin-right: 6px;
+}
+
+.toast-body hr{
+    margin: 6px 0px !important;
+}
+
+.value-service p{
+    margin-bottom: 0px;
+}
+
+.value-service i{
+    color: rgba(33, 37, 41, 0.75);
+}
+
+.toast-body .box-buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-end;
+    align-items: flex-end;
+}
+
+.toast-body .box-buttons button{
+    width: 100%;
+}
+
+
+.card-body{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+
+
+@media (max-width: 537px) {
+    .truncate {
+        max-width: 150px;
+        white-space: nowrap; /* Não permite que o texto quebre em várias linhas */
+        overflow: hidden; /* Oculta o texto que ultrapassa o container */
+        text-overflow: ellipsis; /* Adiciona reticências quando o texto é truncado */
+    }
+
+    .card-date{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+}

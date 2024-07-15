@@ -17,11 +17,14 @@ use App\Http\Controllers\Client\UploadPhotoClientController;
 use App\Http\Controllers\Collaborator\ForgotPasswordCollaboratorController;
 use App\Http\Controllers\Collaborator\HomeCollaboratorController;
 use App\Http\Controllers\Collaborator\LoginCollaboratorController;
+use App\Http\Controllers\Collaborator\LogoutCollaboratorController;
 use App\Http\Controllers\Session\SessionStoreController;
 use App\Http\Middleware\CheckCompany;
 use App\Http\Middleware\Client\RedirectIfAuthenticatedClient;
 use App\Http\Middleware\Client\RedirectIfNotAuthenticatedClient;
+use App\Http\Middleware\Collaborator\AuthenticateCollaborator;
 use App\Http\Middleware\Collaborator\ResetPasswordCollaborator;
+use App\Http\Middleware\Collaborator\ShareCollaboratorData;
 use App\Models\Style;
 use Illuminate\Support\Facades\Route;
 
@@ -129,6 +132,8 @@ Route::get('/', [AllCompanyController::class, 'index'])->name('allCompany');
 
 Route::get('/search-companies', [AllCompanyController::class, 'search'])->name('search.companies');
 
+
+
 Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(function () {
     // Rota de login do collaborator
     Route::get('/login/{tokenCompany}', [LoginCollaboratorController::class, 'index'])
@@ -136,6 +141,9 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
 
     Route::post('/login/{tokenCompany}', [LoginCollaboratorController::class, 'login'])
         ->name('logincollaborator.post');
+
+    Route::post('/logout/{tokenCompany}', [LogoutCollaboratorController::class, 'logout'])->name('logoutcollaborator');
+
 
     Route::post('/forgotpassword/{tokenCompany}', [ForgotPasswordCollaboratorController::class, 'resetPasswordEmail'])
         ->name('forgotPasswordCollaborator');
@@ -157,7 +165,8 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
 
     // Rota de home do collaborator
     Route::get('/home/{tokenCompany}', [HomeCollaboratorController::class, 'index'])
-        ->name('homecollaborator');
+        ->name('homecollaborator')
+        ->middleware(AuthenticateCollaborator::class);
 });
 
 
