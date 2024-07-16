@@ -21,7 +21,7 @@ class CheckCompany
         $company = Company::where('token', $tokenCompany)->first();
 
         if (!$company){
-            return redirect()->route('allcompany');
+            return redirect()->route('allCompany');
         }
 
         return $next($request, ['company' => $company]);

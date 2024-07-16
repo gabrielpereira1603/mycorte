@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AllCompanyController;
+use App\Http\Controllers\Client\AboutController;
+use App\Http\Controllers\Client\CaptureEmailController;
 use App\Http\Controllers\Client\HomeClientController;
 use App\Http\Controllers\Client\LoginClientController;
 use App\Http\Controllers\Client\LogoutClientController;
@@ -123,6 +125,15 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
     // Rota de cadastro de agendamento do client
     Route::post('/service/{tokenCompany}', [InsertServiceByScheduleController::class, 'createSchedule'])
         ->name('insertServiceBySchedule');
+
+    //Rota de Capturar contato do cliente
+    Route::post('/capture-email/{tokenCompany}', [CaptureEmailController::class, 'send'])
+        ->name('capture.email');
+
+    //Rota de Sobre
+    Route::get('/sobre/{tokenCompany}', [AboutController::class, 'index'])
+        ->name('sobre.page');
+
 });
 
 Route::post('/store-session-data', [SessionStoreController::class, 'store'])->name('dataTransporter');

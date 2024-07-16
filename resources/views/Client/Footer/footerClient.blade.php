@@ -40,7 +40,7 @@
                         <h4 class="widget-title mb-4" style="color: black;">Saiba Mais</h4>
                         <ul class="list-unstyled">
                             <li class="mb-2">
-                                <a href="#!" class="link-secondary text-decoration-none">Sobre</a>
+                                <a href="{{ route('sobre.page', ['tokenCompany' => $tokenCompany]) }}" class="link-secondary text-decoration-none">Sobre</a>
                             </li>
                             <li class="mb-2">
                                 <a href="#!" class="link-secondary text-decoration-none">Contato</a>
@@ -57,26 +57,27 @@
                 <div class="col-12 col-lg-3 col-xl-4">
                     <div class="widget">
                         <h4 class="widget-title mb-4"style="color: black;">Entre em Contato</h4>
-                        <p class="mb-4" style="color: #6c757d;">Deseja fazer parte desse time, entre em contato conosco.</p>
-                        <form action="#!">
+                        <p class="mb-4" style="color: #6c757d;">Deseja conhecer nossos serviços? Nós entramos em contato com você!</p>
+                        <form id="contactForm">
                             <div class="row gy-4">
                                 <div class="col-12">
                                     <div class="input-group">
-                    <span class="input-group-text" id="email-newsletter-addon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
-                      </svg>
-                    </span>
-                                        <input type="email" class="form-control" id="email-newsletter" value="" placeholder="Email Address" aria-label="email-newsletter" aria-describedby="email-newsletter-addon" required>
+                <span class="input-group-text" id="email-newsletter-addon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                    </svg>
+                </span>
+                                        <input type="email" class="form-control" id="email-newsletter" placeholder="Email Address" aria-label="email-newsletter" aria-describedby="email-newsletter-addon" required>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="d-grid">
-                                        <button class="btn btn-primary" type="submit" style="background-color: #3A4976; border-color: #3A4976">Enviar</button>
+                                        <button class="btn btn-primary" type="button" id="submitButton" style="background-color: #3A4976; border-color: #3A4976">Enviar</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -133,5 +134,60 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#submitButton').on('click', function(event) {
+                event.preventDefault();
+
+                var email = $('#email-newsletter').val();
+                if (email) {
+                    Swal.fire({
+                        title: 'Enviando...',
+                        text: 'Por favor, aguarde!',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading()
+                        }
+                    });
+
+                    $.ajax({
+                        url: "{{ route('capture.email', ['tokenCompany' => $tokenCompany]) }}",
+                        type: "POST",
+                        data: {
+                            email: email,
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function(response) {
+                            Swal.close(); // Fecha o loading
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sucesso',
+                                text: 'Solicitação de contato enviada com sucesso. Em breve entraremos em contato!'
+                            });
+                            $('#email-newsletter').val(''); // Limpa o campo do email após o envio
+                        },
+                        error: function(response) {
+                            Swal.close(); // Fecha o loading
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Erro',
+                                text: 'Ocorreu um erro, verifique se o email é válido!'
+                            });
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Atenção',
+                        text: 'Por favor, insira um email válido.'
+                    });
+                }
+            });
+        });
+    </script>
+
+
 
 </footer>
