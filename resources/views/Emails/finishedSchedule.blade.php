@@ -88,7 +88,7 @@
         <p>Esperamos que tenha tido uma ótima experiência e que volte sempre.</p>
         <p>Se precisar de mais algum serviço, não hesite em nos procurar.</p>
         <p>Atenciosamente,<br>Equipe MyCorte.</p>
-        <a href="http://somosdevteam.com" class="button">Visite nosso site</a>
+        <a href="https://mycorte.somosdevteam.com/" class="button">Visite nosso site</a>
     </div>
     <div class="footer">
         &copy; 2024 MyCorte. Todos os direitos reservados.

@@ -94,7 +94,7 @@
         <p><strong>Empresa:</strong> {{ $companyName }}</p>
         <p>Estamos ansiosos para atendê-lo. Se precisar de ajuda, não hesite em entrar em contato conosco.</p>
         <p>Atenciosamente,<br>Equipe MyCorte.</p>
-        <a href="http://somosdevteam.com" class="button">Acesse nosso site</a>
+        <a href="https://mycorte.somosdevteam.com/" class="button">Acesse nosso site</a>
     </div>
     <div class="footer">
         &copy; 2024 MyCorte. Todos os direitos reservados.

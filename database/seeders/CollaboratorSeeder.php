@@ -12,7 +12,7 @@ class CollaboratorSeeder extends Seeder
     {
         DB::table('collaborator')->insert([
             [
-                'email' => 'gabriel@gmail.com',
+                'email' => 'pereiragabrieldev@gmail.com',
                 'enabled' => true,
                 'image' => 'https://mycorte.somosdevteam.com/storage/app/public/profile_photos/collaborator/jason.png',
                 'name' => 'Jason Statham',
@@ -24,11 +24,11 @@ class CollaboratorSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'email' => 'joao@gmail.com',
+                'email' => 'joaocaetanodev@gmail.com',
                 'enabled' => false,
                 'image' => 'https://mycorte.somosdevteam.com/storage/app/public/profile_photos/collaborator/jhon.png',
                 'name' => 'Jhon Whick',
-                'password' => bcrypt('joao'),
+                'password' => bcrypt('caetano'),
                 'role' => 'COLLABORATOR',
                 'telephone' => '987654321',
                 'companyfk' => 1,

@@ -85,7 +85,7 @@
                         <div class="collaborator-list">
                             @foreach($collaborators as $collaborator)
                                 <div class="collaborator-item" data-collaborator-id="{{ $collaborator->id }}">
-                                    <img src="{{ $collaborator->image }}" class="collaborator-img" alt="{{ $collaborator->name }}">
+                                    <img src="{{ $collaborator->image }}" class="collaborator-img" alt="{{ $collaborator->name }}" width="50px" height="50px">
                                     <span class="collaborator-name">{{ $collaborator->name }}</span>
                                     <input type="radio" name="collaborator" value="{{ $collaborator->id }}" class="collaborator-radio" style="display:none;">
                                 </div>

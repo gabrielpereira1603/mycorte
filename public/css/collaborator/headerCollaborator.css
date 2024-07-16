@@ -49,8 +49,8 @@
     transition: opacity 0.1s;
     pointer-events: none;
     width: 10px;
-}
 
+}
 
 #nav-bar {
     position: absolute;
@@ -65,7 +65,7 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     overflow: hidden;
     user-select: none;
-    z-index: 1050; /* Certifique-se de que o header tem um z-index mais alto que o toast */
+    z-index: 1050;
     -webkit-box-shadow: 11px 13px 37px -10px rgba(107,107,107,1);
     -moz-box-shadow: 11px 13px 37px -10px rgba(107,107,107,1);
     box-shadow: 11px 13px 37px -10px rgba(107,107,107,1);
@@ -214,75 +214,55 @@ label[for=nav-toggle] {
 .nav-button .fas {
     transition: min-width 0.2s;
 }
-
-/* Efeito para elementos .nav-button que não têm a classe .active-module */
-.nav-button:not(.active-module):hover ~ #nav-content-highlight {
-    background: var(--navbar-dark-primary); /* Cor de fundo azul */
+.nav-button:nth-of-type(1):hover {
+    color: var(--navbar-dark-primary);
 }
-
-/* Especifique o comportamento para cada botão */
-.nav-button:nth-of-type(1):not(.active-module):hover ~ #nav-content-highlight {
+.nav-button:nth-of-type(1):hover ~ #nav-content-highlight {
     top: 16px;
 }
-.nav-button:nth-of-type(2):not(.active-module):hover ~ #nav-content-highlight {
+.nav-button:nth-of-type(2):hover {
+    color: var(--navbar-dark-primary);
+}
+.nav-button:nth-of-type(2):hover ~ #nav-content-highlight {
     top: 70px;
 }
-.nav-button:nth-of-type(3):not(.active-module):hover ~ #nav-content-highlight {
+.nav-button:nth-of-type(3):hover {
+    color: var(--navbar-dark-primary);
+}
+.nav-button:nth-of-type(3):hover ~ #nav-content-highlight {
     top: 124px;
 }
-.nav-button:nth-of-type(4):not(.active-module):hover ~ #nav-content-highlight {
+.nav-button:nth-of-type(4):hover {
+    color: var(--navbar-dark-primary);
+}
+.nav-button:nth-of-type(4):hover ~ #nav-content-highlight {
     top: 178px;
 }
-.nav-button:nth-of-type(5):not(.active-module):hover ~ #nav-content-highlight {
+.nav-button:nth-of-type(5):hover {
+    color: var(--navbar-dark-primary);
+}
+.nav-button:nth-of-type(5):hover ~ #nav-content-highlight {
     top: 232px;
 }
-.nav-button:nth-of-type(6):not(.active-module):hover ~ #nav-content-highlight {
+.nav-button:nth-of-type(6):hover {
+    color: var(--navbar-dark-primary);
+}
+.nav-button:nth-of-type(6):hover ~ #nav-content-highlight {
     top: 286px;
 }
-.nav-button:nth-of-type(7):not(.active-module):hover ~ #nav-content-highlight {
+.nav-button:nth-of-type(7):hover {
+    color: var(--navbar-dark-primary);
+}
+.nav-button:nth-of-type(7):hover ~ #nav-content-highlight {
     top: 340px;
 }
-.nav-button:nth-of-type(8):not(.active-module):hover ~ #nav-content-highlight {
+.nav-button:nth-of-type(8):hover {
+    color: var(--navbar-dark-primary);
+}
+.nav-button:nth-of-type(8):hover ~ #nav-content-highlight {
     top: 394px;
 }
 
-/* CSS para o .active-module */
-.active-module {
-    position: relative;
-    background: #ffffff;
-    color: #3A4976; /* cor do texto */
-    padding: 16px; /* Ajuste o padding conforme necessário */
-    border-radius: 16px 0 0 16px;
-    transition: background 0.2s, color 0.2s;
-}
-
-.active-module::before, .active-module::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: 100%;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    box-shadow: 16px 16px #ffffff;
-    transition: box-shadow 0.2s;
-}
-
-.active-module::after {
-    top: 100%;
-    box-shadow: 16px -16px #ffffff;
-}
-
-.active-module:hover {
-    background: var(--navbar-dark-primary);
-    color: #ffffff;
-}
-
-.active-module:hover::before, .active-module:hover::after {
-    box-shadow: 16px 16px var(--navbar-dark-primary), 16px -16px var(--navbar-dark-primary);
-}
-
-/* Outros estilos conforme necessário */
 #nav-bar .fas {
     min-width: 3rem;
     text-align: center;
@@ -386,4 +366,30 @@ label[for=nav-footer-toggle] {
 .nav-footer-button span a {
     color: inherit;
     text-decoration: none;
+}
+
+.active-module {
+    position: relative;
+    background: #ffffff;
+    color: #3A4976; /* cor do texto */
+    padding: 16px; /* Ajuste o padding conforme necessário */
+    border-radius: 16px 0 0 16px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.active-module::before, .active-module::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    box-shadow: 16px 16px #ffffff;
+    transition: box-shadow 0.2s;
+}
+
+.active-module::after {
+    top: 100%;
+    box-shadow: 16px -16px #ffffff;
 }

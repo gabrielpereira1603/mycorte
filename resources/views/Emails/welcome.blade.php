@@ -88,7 +88,7 @@
         <p>Para começar, acesse seu painel de controle e explore nossos serviços.</p>
         <p>Se precisar de ajuda, não hesite em entrar em contato conosco.</p>
         <p>Atenciosamente,<br>Equipe MyCorte.</p>
-        <a href="https://mycorte.somosdevteam.com/client/home/fee0bdf87366430b6302536ca9f84772305b5cef15859ac9e531328f2deeb390#" class="button">Acesse nosso site</a>
+        <a href="https://mycorte.somosdevteam.com" class="button">Acesse nosso site</a>
     </div>
     <div class="footer">
         &copy; 2024 MyCorte. Todos os direitos reservados.

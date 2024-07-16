@@ -78,7 +78,7 @@
         <p>Esperamos que você nos dê outra chance em breve. Estamos sempre aqui para oferecer o melhor serviço possível.</p>
         <p>Se precisar de mais algum serviço, não hesite em nos procurar.</p>
         <p>Atenciosamente,<br>Equipe MyCorte.</p>
-        <a href="https://mycorte.somosdevteam.com/client/home/fee0bdf87366430b6302536ca9f84772305b5cef15859ac9e531328f2deeb390#" class="button">Visite nosso site</a>
+        <a href="https://mycorte.somosdevteam.com" class="button">Visite nosso site</a>
     </div>
     <div class="footer">
         &copy; 2024 MyCorte. Todos os direitos reservados.

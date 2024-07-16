@@ -33,7 +33,7 @@ class ReminderEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.reminder')
+        return $this->view('Emails.reminder')
             ->with([
                 'clientName' => $this->schedule->client->name,
                 'scheduleDate' => $this->schedule->date,
