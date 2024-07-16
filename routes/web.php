@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AllCompanyController;
-use App\Http\Controllers\Client\AboutController;
 use App\Http\Controllers\Client\CaptureEmailController;
 use App\Http\Controllers\Client\HomeClientController;
 use App\Http\Controllers\Client\LoginClientController;
@@ -129,20 +129,17 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
     //Rota de Capturar contato do cliente
     Route::post('/capture-email/{tokenCompany}', [CaptureEmailController::class, 'send'])
         ->name('capture.email');
-
-    //Rota de Sobre
-    Route::get('/sobre/{tokenCompany}', [AboutController::class, 'index'])
-        ->name('sobre.page');
-
 });
 
 Route::post('/store-session-data', [SessionStoreController::class, 'store'])->name('dataTransporter');
 
 // Rota padrão para página inicial de todas as empresas
 Route::get('/', [AllCompanyController::class, 'index'])->name('allCompany');
-
 Route::get('/search-companies', [AllCompanyController::class, 'search'])->name('search.companies');
 
+//Rota de Sobre
+Route::get('/sobre', [AboutController::class, 'index'])
+    ->name('aboutFooter');
 
 
 Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(function () {
