@@ -40,7 +40,7 @@
                         <h4 class="widget-title mb-4" style="color: black;">Saiba Mais</h4>
                         <ul class="list-unstyled">
                             <li class="mb-2">
-                                <a href="{{ route('sobre.page', ['tokenCompany' => $tokenCompany]) }}" class="link-secondary text-decoration-none">Sobre</a>
+                                <a href="{{ route('sobre.page', ['tokenCompany' => $tokenCompany ?? 'default_token']) }}" class="link-secondary text-decoration-none">Sobre</a>
                             </li>
                             <li class="mb-2">
                                 <a href="#!" class="link-secondary text-decoration-none">Contato</a>
@@ -153,7 +153,7 @@
                     });
 
                     $.ajax({
-                        url: "{{ route('capture.email', ['tokenCompany' => $tokenCompany]) }}",
+                        url: "{{ route('capture.email', ['tokenCompany' => $tokenCompany ?? 'default_token']) }}",
                         type: "POST",
                         data: {
                             email: email,
