@@ -61,8 +61,8 @@ class InsertServiceByScheduleController extends Controller
             $schedule->companyfk = $company->id; // Token da empresa
             $schedule->save();
 
-
             // Adiciona os serviços relacionados ao agendamento
+            $services = [];
             foreach ($selectedServices as $serviceId) {
                 $service = Service::find($serviceId);
                 if ($service) {
@@ -70,6 +70,12 @@ class InsertServiceByScheduleController extends Controller
                     $scheduleService->schedule_id = $schedule->id;
                     $scheduleService->service_id = $serviceId;
                     $scheduleService->save();
+
+                    // Adiciona o serviço ao array de serviços
+                    $services[] = [
+                        'name' => $service->name,
+                        'value' => $service->value,
+                    ];
                 }
             }
 
@@ -78,13 +84,26 @@ class InsertServiceByScheduleController extends Controller
             $collaborator = Collaborator::where('id', $schedule->collaboratorfk)->first();
             Mail::to($client->email)->send(new CreatedScheduleMail($client, $schedule, $collaborator, $company, $formattedDate));
 
-            (new Pusher())->trigger('my-channel','my-event', $schedule);
+            // Envia os dados para o Pusher
+            (new Pusher())->trigger('my-channel', 'my-event', [
+                'schedule' => $schedule,
+                'services' => $services,
+                'clientName' => $client->name,
+                'clientImage' => $client->image,
+                'scheduleDate' => $formattedDate,
+                'scheduleStartHour' => $schedule->hourStart,
+                'scheduleEndHour' => $schedule->hourFinal,
+                'scheduleId' => $schedule->id,
+                'hoursUntilStart' => Carbon::parse($schedule->date . ' ' . $schedule->hourStart)->diffInHours(now()),
+                'minutesUntilStart' => Carbon::parse($schedule->date . ' ' . $schedule->hourStart)->diffInMinutes(now()) % 60,
+            ]);
 
             return redirect()->route('mycutsclient', ['tokenCompany' => $tokenCompany])->with('success', 'Agendamento criado com sucesso!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Ocorreu um erro ao criar o agendamento. Por favor, tente novamente mais tarde.');
         }
     }
+
 
 
     private function validateScheduleData(Request $request)

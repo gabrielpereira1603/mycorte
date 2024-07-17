@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AllCompanyController;
 use App\Http\Controllers\Client\CaptureEmailController;
 use App\Http\Controllers\Client\HomeClientController;
@@ -28,7 +27,6 @@ use App\Http\Middleware\Client\RedirectIfNotAuthenticatedClient;
 use App\Http\Middleware\Collaborator\AuthenticateCollaborator;
 use App\Http\Middleware\Collaborator\ResetPasswordCollaborator;
 use App\Models\Style;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 // Compose data for all views using layoutClient
