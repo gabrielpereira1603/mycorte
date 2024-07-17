@@ -20,6 +20,7 @@ use App\Http\Controllers\Collaborator\ForgotPasswordCollaboratorController;
 use App\Http\Controllers\Collaborator\HomeCollaboratorController;
 use App\Http\Controllers\Collaborator\LoginCollaboratorController;
 use App\Http\Controllers\Collaborator\LogoutCollaboratorController;
+use App\Http\Controllers\Collaborator\ServicesCollaboratorController;
 use App\Http\Controllers\Session\SessionStoreController;
 use App\Http\Middleware\CheckCompany;
 use App\Http\Middleware\Client\RedirectIfAuthenticatedClient;
@@ -186,6 +187,10 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
     // Rota de home do collaborator
     Route::get('/home/{tokenCompany}', [HomeCollaboratorController::class, 'index'])
         ->name('homecollaborator')
+        ->middleware(AuthenticateCollaborator::class);
+
+    Route::get('/collaborator/services/{tokenCompany}', [ServicesCollaboratorController::class, 'services'])
+        ->name('servicescollaborator')
         ->middleware(AuthenticateCollaborator::class);
 });
 

@@ -1,7 +1,7 @@
 <div id="nav-bar">
     <input type="checkbox" id="nav-toggle" checked>
     <div id="nav-header">
-        <a id="nav-title" href="https://codepen.io" target="_blank">
+        <a id="nav-title"  target="_blank">
             <img src="{{ asset('images/logoHorizontalLetraBranca.png') }}" alt="Logo MyCorte" width="150px">
         </a>
         <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
@@ -21,16 +21,20 @@
 
         <hr/>
         @if($collaboratorRole === 'ADMIN')
-            <div class="nav-button"><i class="fas fa-solid fa-scissors"></i><span>Serviços</span></div>
+            <div class="nav-button {{ Request::routeIs('servicescollaborator') ? 'active-module' : '' }}">
+                <i class="fas fa-solid fa-scissors"></i>
+                <span><a href="{{ route('servicescollaborator', ['tokenCompany' => $tokenCompany]) }}">Serviços</a></span>
+            </div>
             <div class="nav-button"><i class="fas fa-solid fa-print"></i><span>Relatórios</span></div>
             <div class="nav-button"><i class="fas fa-solid fa-users-gear"></i><span>Gerenciar</span></div>
         @elseif($collaboratorRole === 'COLLABORATOR')
             <div class="nav-button"><i class="fas fa-solid fa-print"></i><span>Relatórios</span></div>
-            <div class="nav-button"><i class="fas fa-solid fa-scissors"></i><span>Serviços</span></div>
+            <div class="nav-button {{ Request::routeIs('servicescollaborator') ? 'active-module' : '' }}">
+                <i class="fas fa-solid fa-scissors"></i>
+                <span><a href="{{ route('servicescollaborator', ['tokenCompany' => $tokenCompany]) }}">Serviços</a></span>
+            </div>
         @endif
         <hr/>
-
-        <div class="nav-button"><i class="fas fa-gem"></i><span>Codepen Pro</span></div>
         <div id="nav-content-highlight"></div>
     </div>
     <input id="nav-footer-toggle" type="checkbox"/>
