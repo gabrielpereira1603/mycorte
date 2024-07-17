@@ -126,9 +126,6 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
     Route::post('/service/{tokenCompany}', [InsertServiceByScheduleController::class, 'createSchedule'])
         ->name('insertServiceBySchedule');
 
-    //Rota de Capturar contato do cliente
-    Route::post('/capture-email/{tokenCompany}', [CaptureEmailController::class, 'send'])
-        ->name('capture.email');
 });
 
 Route::post('/store-session-data', [SessionStoreController::class, 'store'])->name('dataTransporter');
@@ -138,8 +135,23 @@ Route::get('/', [AllCompanyController::class, 'index'])->name('allCompany');
 Route::get('/search-companies', [AllCompanyController::class, 'search'])->name('search.companies');
 
 //Rota de Sobre
-Route::get('/sobre', [AboutController::class, 'index'])
-    ->name('aboutFooter');
+Route::get('/sobre', function () {
+    return view('about');
+})->name('aboutFooter');
+
+//Rota de Termos de Uso
+Route::get('/termos-de-uso', function () {
+    return view('termsOfUse');
+})->name('terms-of-use');
+
+//Rota de Politica de Privacidade
+Route::get('/politica-de-privacidade', function () {
+    return view('privacypolicy');
+})->name('privacy-policy');
+
+//Rota de Capturar contato do cliente
+Route::post('/capture-email/{tokenCompany}', [CaptureEmailController::class, 'send'])
+    ->name('capture.email');
 
 
 Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(function () {

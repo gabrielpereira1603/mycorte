@@ -1,0 +1,49 @@
+.terms-of-use {
+    padding: 50px 0;
+    background-color: #f7f7f7;
+}
+
+.terms-of-use .title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.terms-of-use .subtitle {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+.terms-of-use .section-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #3a4976;
+}
+
+.terms-of-use p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+}
+
+.terms-of-use .usage-rules-list,
+.terms-of-use .account-rules-list,
+.terms-of-use .contact-list {
+    list-style: none;
+    padding: 0;
+}
+
+.terms-of-use .usage-rules-list li,
+.terms-of-use .account-rules-list li,
+.terms-of-use .contact-list li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #444;
+}
+
+.terms-of-use .contact-list li strong {
+    color: #3a4976;
+}

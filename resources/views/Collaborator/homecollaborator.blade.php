@@ -1,6 +1,6 @@
 <x-layoutCollaborator title="Início" :tokenCompany="$tokenCompany">
     <div class="main-title">
-        <h4>Bem Vindo {{ $collaborator->name }}</h4>
+        <h4>Bem-Vindo, {{ $collaborator->name }}!</h4>
     </div>
 
     <!-- Verifica se há agendamentos -->
