@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\MyCuts;
 
+use App\Events\Pusher;
 use App\Http\Controllers\Controller;
 use App\Mail\CancellationMail;
 use App\Models\Company;
@@ -31,6 +32,16 @@ class CancelScheduleController extends Controller
         $statusSchedule = StatusSchedule::where('status', 'Cancelado')->firstOrFail();
         $schedule->statusSchedulefk = $statusSchedule->id;
         $schedule->save();
+
+        // Envia os dados para o Pusher
+        (new Pusher())->trigger('schedule', 'cancelled-schedule', [
+            'scheduleId' => $schedule->id,
+            'clientName' => $client->name,
+            'clientImage' => $client->image,
+            'scheduleDate' => $schedule->date,
+            'scheduleStartHour' => $schedule->hourStart,
+            'scheduleEndHour' => $schedule->hourFinal
+        ]);
 
         Mail::to($client->email)->send(new CancellationMail($client->name, $company->name));
 

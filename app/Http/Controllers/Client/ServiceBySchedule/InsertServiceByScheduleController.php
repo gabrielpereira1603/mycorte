@@ -85,7 +85,7 @@ class InsertServiceByScheduleController extends Controller
             Mail::to($client->email)->send(new CreatedScheduleMail($client, $schedule, $collaborator, $company, $formattedDate));
 
             // Envia os dados para o Pusher
-            (new Pusher())->trigger('my-channel', 'my-event', [
+            (new Pusher())->trigger('schedule', 'create-schedule', [
                 'schedule' => $schedule,
                 'services' => $services,
                 'clientName' => $client->name,
