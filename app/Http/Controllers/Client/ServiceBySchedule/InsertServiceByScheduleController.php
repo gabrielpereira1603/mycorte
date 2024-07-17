@@ -1,10 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\Client\ServiceBySchedule;
 
+use App\Events\Pusher;
 use App\Http\Controllers\Controller;
 use App\Mail\CreatedScheduleMail;
-use App\Mail\WelcomeMail;
 use App\Models\Client;
 use App\Models\Collaborator;
 use App\Models\Company;
@@ -13,7 +12,6 @@ use Illuminate\Http\Request;
 use App\Models\Schedule;
 use App\Models\Service;
 use App\Models\ScheduleService;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -80,6 +78,7 @@ class InsertServiceByScheduleController extends Controller
             $collaborator = Collaborator::where('id', $schedule->collaboratorfk)->first();
             Mail::to($client->email)->send(new CreatedScheduleMail($client, $schedule, $collaborator, $company, $formattedDate));
 
+            (new Pusher())->trigger('my-channel','my-event', $client);
 
             return redirect()->route('mycutsclient', ['tokenCompany' => $tokenCompany])->with('success', 'Agendamento criado com sucesso!');
         } catch (\Exception $e) {

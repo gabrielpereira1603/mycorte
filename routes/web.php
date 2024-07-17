@@ -26,8 +26,8 @@ use App\Http\Middleware\Client\RedirectIfAuthenticatedClient;
 use App\Http\Middleware\Client\RedirectIfNotAuthenticatedClient;
 use App\Http\Middleware\Collaborator\AuthenticateCollaborator;
 use App\Http\Middleware\Collaborator\ResetPasswordCollaborator;
-use App\Http\Middleware\Collaborator\ShareCollaboratorData;
 use App\Models\Style;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 // Compose data for all views using layoutClient
@@ -178,3 +178,4 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
 });
 
 
+Route::get('/send', [\App\Http\Controllers\Pusher::class, 'index']);
