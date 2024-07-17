@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="{{ asset('css/client/myaccountClient.css') }}">
         <link rel="stylesheet" href="{{ asset('css/client/myCutsClient.css') }}">
         <link rel="stylesheet" href="{{ asset('css/client/myHistoricCuts.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/aboutClient.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/privacyPolicy.css') }}">
         <link rel="stylesheet" href="{{ asset('css/client/CalendarClient.css') }}">
         <link rel="stylesheet" href="{{ asset('css/client/ServiceFromSchedule.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">

@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="form-group forgot-pass-fau text-center ">
-                        <a href="/terms-conditions/" class="text-secondary">
+                        <a href="{{ route('terms-of-use') }}" class="text-secondary">
                             Ao clicar em "Registre-se" você está aceitando os<br>
                             <span class="text-primary-fau">Termos e Condições</span>
                         </a>
@@ -113,6 +113,9 @@
                     </script>
                     <div class="forgot-pass-fau text-center pt-3">
                         <a href="#" class="text-secondary">Esqueceu a Senha?</a>
+                    </div>
+                    <div class="forgot-pass-fau text-center pt-3">
+                        <a href="#" class="text-secondary"> Você é um colaborador?</a>
                     </div>
                 </form>
             </div>

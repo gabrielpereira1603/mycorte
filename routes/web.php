@@ -20,6 +20,7 @@ use App\Http\Controllers\Collaborator\ForgotPasswordCollaboratorController;
 use App\Http\Controllers\Collaborator\HomeCollaboratorController;
 use App\Http\Controllers\Collaborator\LoginCollaboratorController;
 use App\Http\Controllers\Collaborator\LogoutCollaboratorController;
+use App\Http\Controllers\Collaborator\ServicesCollaboratorController;
 use App\Http\Controllers\Session\SessionStoreController;
 use App\Http\Middleware\CheckCompany;
 use App\Http\Middleware\Client\RedirectIfAuthenticatedClient;
@@ -126,9 +127,6 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
     Route::post('/service/{tokenCompany}', [InsertServiceByScheduleController::class, 'createSchedule'])
         ->name('insertServiceBySchedule');
 
-    //Rota de Capturar contato do cliente
-    Route::post('/capture-email/{tokenCompany}', [CaptureEmailController::class, 'send'])
-        ->name('capture.email');
 });
 
 Route::post('/store-session-data', [SessionStoreController::class, 'store'])->name('dataTransporter');
@@ -138,8 +136,23 @@ Route::get('/', [AllCompanyController::class, 'index'])->name('allCompany');
 Route::get('/search-companies', [AllCompanyController::class, 'search'])->name('search.companies');
 
 //Rota de Sobre
-Route::get('/sobre', [AboutController::class, 'index'])
-    ->name('aboutFooter');
+Route::get('/sobre', function () {
+    return view('about');
+})->name('aboutFooter');
+
+//Rota de Termos de Uso
+Route::get('/termos-de-uso', function () {
+    return view('termsOfUse');
+})->name('terms-of-use');
+
+//Rota de Politica de Privacidade
+Route::get('/politica-de-privacidade', function () {
+    return view('privacypolicy');
+})->name('privacy-policy');
+
+//Rota de Capturar contato do cliente
+Route::post('/capture-email/{tokenCompany}', [CaptureEmailController::class, 'send'])
+    ->name('capture.email');
 
 
 Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(function () {
@@ -174,6 +187,10 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
     // Rota de home do collaborator
     Route::get('/home/{tokenCompany}', [HomeCollaboratorController::class, 'index'])
         ->name('homecollaborator')
+        ->middleware(AuthenticateCollaborator::class);
+
+    Route::get('/collaborator/services/{tokenCompany}', [ServicesCollaboratorController::class, 'services'])
+        ->name('servicescollaborator')
         ->middleware(AuthenticateCollaborator::class);
 });
 

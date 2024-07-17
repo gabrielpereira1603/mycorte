@@ -1,0 +1,94 @@
+.main-title {
+    background-color: #3a497684;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+}
+
+.main-title p {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.toast {
+    margin-bottom: 0.5rem; /* Espaçamento entre toasts se houver mais de um */
+}
+
+.card-header {
+    background-color: #3a4976 !important;
+    color: #ffffff !important;
+}
+
+.truncate {
+    max-width: 150px;
+    white-space: nowrap; /* Não permite que o texto quebre em várias linhas */
+    overflow: hidden; /* Oculta o texto que ultrapassa o container */
+    text-overflow: ellipsis; /* Adiciona reticências quando o texto é truncado */
+}
+
+.card-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.service-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.service-details p {
+    margin: 6px 0;
+}
+
+.service-details i {
+    margin-right: 6px;
+}
+
+.toast-body hr {
+    margin: 10px 0; /* Ajusta o espaçamento da linha */
+}
+
+.box-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px; /* Adiciona espaçamento entre o valor e o botão */
+}
+
+.box-buttons button {
+    width: 100%;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+@media (max-width: 537px) {
+    .truncate {
+        max-width: 150px;
+        white-space: nowrap; /* Não permite que o texto quebre em várias linhas */
+        overflow: hidden; /* Oculta o texto que ultrapassa o container */
+        text-overflow: ellipsis; /* Adiciona reticências quando o texto é truncado */
+    }
+
+    .service-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+}
