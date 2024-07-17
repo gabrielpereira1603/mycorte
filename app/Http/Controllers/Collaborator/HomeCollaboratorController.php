@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Collaborator;
 
-use App\Events\MyEvent;
-use App\Events\ScheduleCreated;
 use App\Http\Controllers\Controller;
 use App\Models\Schedule;
 use Carbon\Carbon;
@@ -13,8 +11,6 @@ class HomeCollaboratorController extends Controller
 {
     public function index($tokenCompany)
     {
-        // Disparar o evento
-        event(new ScheduleCreated($message = 'teste'));
         // Obtém o colaborador logado
         $collaborator = Auth::guard('collaborator')->user();
 

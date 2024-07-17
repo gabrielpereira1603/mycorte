@@ -78,7 +78,7 @@ class InsertServiceByScheduleController extends Controller
             $collaborator = Collaborator::where('id', $schedule->collaboratorfk)->first();
             Mail::to($client->email)->send(new CreatedScheduleMail($client, $schedule, $collaborator, $company, $formattedDate));
 
-            (new Pusher())->trigger('my-channel','my-event', $client);
+            (new Pusher())->trigger('my-channel','my-event', $schedule);
 
             return redirect()->route('mycutsclient', ['tokenCompany' => $tokenCompany])->with('success', 'Agendamento criado com sucesso!');
         } catch (\Exception $e) {

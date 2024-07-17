@@ -195,4 +195,3 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
 });
 
 
-Route::get('/send', [\App\Http\Controllers\Pusher::class, 'index']);
