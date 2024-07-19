@@ -29,7 +29,8 @@
             <i class="fas fa-fire" data-url="#"></i>
             <span>Promoções</span>
         </div>
-        <div class="nav-button" {{ Request::routeIs('configcollaborator') ? 'active-module' : '' }}">
+
+        <div class="nav-button {{ Request::routeIs('configcollaborator') ? 'active-module' : '' }}">
             <i class="fas fa-solid fa-gear" data-url="{{ route('configcollaborator', ['tokenCompany' => $tokenCompany]) }}"></i>
             <span>
                 <a href="{{ route('configcollaborator', ['tokenCompany' => $tokenCompany]) }}">

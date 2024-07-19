@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Client\MyCuts;
 
-use App\Events\Pusher;
-use App\Events\Reeschedule;
+use App\Events\Schedule\Reeschedule;
 use App\Http\Controllers\Controller;
 use App\Mail\RescheduleMail;
 use App\Models\Client;
@@ -16,7 +15,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Collection; // Adicione essa linha
+
+// Adicione essa linha
 
 class RescheduleClientController extends Controller
 {

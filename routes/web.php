@@ -1,6 +1,5 @@
 <?php
 
-use App\Events\StatusUpdated;
 use App\Http\Controllers\AllCompanyController;
 use App\Http\Controllers\Client\CaptureEmailController;
 use App\Http\Controllers\Client\HomeClientController;
@@ -17,10 +16,10 @@ use App\Http\Controllers\Client\ServiceBySchedule\ServiceByScheduleController;
 use App\Http\Controllers\Client\SingupClientController;
 use App\Http\Controllers\Client\UploadPhotoClientController;
 use App\Http\Controllers\Collaborator\ConfigCollaboratorController;
-use App\Http\Controllers\Collaborator\ForgotPasswordCollaboratorController;
 use App\Http\Controllers\Collaborator\HomeCollaboratorController;
-use App\Http\Controllers\Collaborator\LoginCollaboratorController;
-use App\Http\Controllers\Collaborator\LogoutCollaboratorController;
+use App\Http\Controllers\Collaborator\Login\ForgotPasswordCollaboratorController;
+use App\Http\Controllers\Collaborator\Login\LoginCollaboratorController;
+use App\Http\Controllers\Collaborator\Login\LogoutCollaboratorController;
 use App\Http\Controllers\Collaborator\ServicesCollaboratorController;
 use App\Http\Controllers\Session\SessionStoreController;
 use App\Http\Middleware\CheckCompany;

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Client\MyCuts;
 
-use App\Events\Pusher;
-use App\Events\ScheduleCancelled;
+use App\Events\Schedule\ScheduleCancelled;
 use App\Http\Controllers\Controller;
 use App\Mail\CancellationMail;
 use App\Models\Company;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Collaborator;
+namespace App\Http\Controllers\Collaborator\Login;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

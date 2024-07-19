@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Client\ServiceBySchedule;
 
-use App\Events\ScheduleCreate;
+use App\Events\Schedule\ScheduleCreate;
 use App\Http\Controllers\Controller;
 use App\Mail\CreatedScheduleMail;
 use App\Models\Client;
 use App\Models\Collaborator;
 use App\Models\Company;
+use App\Models\Schedule;
+use App\Models\ScheduleService;
+use App\Models\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\Schedule;
-use App\Models\Service;
-use App\Models\ScheduleService;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
