@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client\MyCuts;
 
 use App\Events\Pusher;
+use App\Events\ScheduleCancelled;
 use App\Http\Controllers\Controller;
 use App\Mail\CancellationMail;
 use App\Models\Company;
@@ -34,14 +35,9 @@ class CancelScheduleController extends Controller
         $schedule->save();
 
         // Envia os dados para o Pusher
-        (new Pusher())->trigger('schedule', 'cancelled-schedule', [
-            'scheduleId' => $schedule->id,
-            'clientName' => $client->name,
-            'clientImage' => $client->image,
-            'scheduleDate' => $schedule->date,
-            'scheduleStartHour' => $schedule->hourStart,
-            'scheduleEndHour' => $schedule->hourFinal
-        ]);
+        event(new ScheduleCancelled(
+            $schedule
+        ));
 
         Mail::to($client->email)->send(new CancellationMail($client->name, $company->name));
 

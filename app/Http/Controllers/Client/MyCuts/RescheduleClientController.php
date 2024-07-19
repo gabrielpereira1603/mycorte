@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Client\MyCuts;
 
+use App\Events\Pusher;
+use App\Events\Reeschedule;
 use App\Http\Controllers\Controller;
 use App\Mail\RescheduleMail;
 use App\Models\Client;
@@ -14,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Collection; // Adicione essa linha
 
 class RescheduleClientController extends Controller
 {
@@ -31,8 +34,12 @@ class RescheduleClientController extends Controller
         // Convertendo a string de IDs em um array
         $selectedServices = explode(',', $request->input('selectedServicesModal'));
 
-        // Verificação de conflitos de agendamento
+        // Convertendo o array para uma coleção
+        $selectedServices = collect($selectedServices);
+
+        // Verificação de conflitos de agendamento para o colaborador específico
         $conflictingSchedules = Schedule::where('date', $request->input('date'))
+            ->where('collaboratorfk', $request->input('idCollaborator')) // Verifica o colaborador específico
             ->where('statusSchedulefk', 1) // Verificando apenas agendamentos com status "Agendado"
             ->where(function ($query) use ($request) {
                 $query->where(function ($query) use ($request) {
@@ -43,7 +50,7 @@ class RescheduleClientController extends Controller
             ->exists();
 
         if ($conflictingSchedules) {
-            return redirect()->back()->with('error', 'Já existe um agendamento para a data e horário selecionados. Por favor, escolha outro horário.');
+            return redirect()->back()->with('error', 'Já existe um agendamento para o colaborador selecionado no horário escolhido. Por favor, escolha outro horário.');
         }
 
         try {
@@ -65,7 +72,8 @@ class RescheduleClientController extends Controller
             $schedule->companyfk = $company->id; // Token da empresa
             $schedule->save();
 
-            // Adiciona os serviços relacionados ao novo agendamento
+            // Adiciona os serviços relacionados ao agendamento
+            $services = [];
             foreach ($selectedServices as $serviceId) {
                 $service = Service::find($serviceId);
                 if ($service) {
@@ -73,19 +81,38 @@ class RescheduleClientController extends Controller
                     $scheduleService->schedule_id = $schedule->id;
                     $scheduleService->service_id = $serviceId;
                     $scheduleService->save();
+
+                    // Adiciona o serviço ao array de serviços
+                    $services[] = [
+                        'name' => $service->name,
+                        'value' => $service->value,
+                    ];
                 }
             }
 
+            // Formata a data e envia o email de notificação
             $formattedDate = Carbon::createFromFormat('Y-m-d', $schedule->date)->format('d-m-Y');
             $client = Client::where('id', $schedule->clientfk)->first();
             $collaborator = Collaborator::where('id', $schedule->collaboratorfk)->first();
             Mail::to($client->email)->send(new RescheduleMail($client, $schedule, $collaborator, $company, $formattedDate));
+
+
+            // Envia os dados para o Pusher
+            event(new Reeschedule(
+                $existingSchedule,
+                $schedule,
+                $services,
+                $client,
+                $this->calculateHoursUntilStart($schedule->hourStart),
+                $this->calculateMinutesUntilStart($schedule->hourStart)
+            ));
 
             return redirect()->route('mycutsclient', ['tokenCompany' => $tokenCompany])->with('success', 'Reagendado com sucesso!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Ocorreu um erro ao criar o agendamento. Por favor, tente novamente mais tarde.');
         }
     }
+
 
     private function validateScheduleData(Request $request)
     {
@@ -110,5 +137,19 @@ class RescheduleClientController extends Controller
             'totalPriceModal.numeric' => 'O campo preço total deve ser numérico.',
             'selectedServicesModal.required' => 'O campo serviços selecionados é obrigatório.',
         ]);
+    }
+
+    private function calculateHoursUntilStart($startHour)
+    {
+        $now = now();
+        $start = \Carbon\Carbon::createFromFormat('H:i', $startHour);
+        return $now->diffInHours($start);
+    }
+
+    private function calculateMinutesUntilStart($startHour)
+    {
+        $now = now();
+        $start = \Carbon\Carbon::createFromFormat('H:i', $startHour);
+        return $now->diffInMinutes($start);
     }
 }

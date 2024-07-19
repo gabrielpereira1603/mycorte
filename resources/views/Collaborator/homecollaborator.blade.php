@@ -74,6 +74,8 @@
             var enableSoundButton = document.getElementById('enable-sound');
             var notificationSound = document.getElementById('notification-sound');
             var cancelledSound = document.getElementById('cancelled-sound');
+            var reescheduleSound = document.getElementById('reeschedule-sound');
+
 
             function requestAudioPermission() {
                 Swal.fire({
@@ -145,7 +147,7 @@
                     });
                 }
 
-                var scheduleId = data.scheduleId;
+                var scheduleId = data.schedule.id;
                 var scheduleCard = document.querySelector(`.toast[data-schedule-id="${scheduleId}"]`);
 
                 if (scheduleCard) {
@@ -181,9 +183,9 @@
                 }
 
                 // Verifica se o agendamento já existe
-                var existingToast = document.querySelector(`.toast[data-schedule-id="${data.scheduleId}"]`);
+                var existingToast = document.querySelector(`.toast[data-schedule-id="${data.schedule.id}"]`);
                 if (existingToast) {
-                    console.log('Schedule already exists with ID:', data.scheduleId);
+                    console.log('Schedule already exists with ID:', data.schedule.id);
                     return;
                 }
 
@@ -193,52 +195,52 @@
                 newToast.role = 'alert';
                 newToast.setAttribute('aria-live', 'assertive');
                 newToast.setAttribute('aria-atomic', 'true');
-                newToast.dataset.scheduleId = data.scheduleId;
+                newToast.dataset.scheduleId = data.schedule.id;
                 newToast.innerHTML = `
-                    <div class="toast-header">
-                        <img src="${data.clientImage}" class="rounded me-2" alt="Foto do Cliente" width="50px" height="50px">
-                        <div class="card-info">
-                            <strong class="me-auto truncate">${data.clientName}</strong>
-                            <div class="card-date">
-                                <small>
-                                    <i class="fa-solid fa-calendar-days"></i>
-                                    ${data.scheduleDate}
-                                </small>
-                                <small>
-                                    <i class="fa-regular fa-clock"></i>
-                                    ${data.scheduleStartHour} - ${data.scheduleEndHour}
-                                </small>
-                            </div>
+                <div class="toast-header">
+                    <img src="${data.client.image}" class="rounded me-2" alt="Foto do Cliente" width="50px" height="50px">
+                    <div class="card-info">
+                        <strong class="me-auto truncate">${data.client.name}</strong>
+                        <div class="card-date">
+                            <small>
+                                <i class="fa-solid fa-calendar-days"></i>
+                                ${data.schedule.date}
+                            </small>
+                            <small>
+                                <i class="fa-regular fa-clock"></i>
+                                ${data.schedule.hourStart} - ${data.schedule.hourFinal}
+                            </small>
                         </div>
                     </div>
-                    <div class="toast-body">
-                        ${data.services.map(service => `
-                            <div class="value-service">
-                                <p>
-                                    <i class="fa-solid fa-scissors"></i>
-                                    Serviço: ${service.name}
-                                </p>
-                                <p>
-                                    <i class="fa-solid fa-sack-dollar"></i>
-                                    Valor: R$ ${service.value}
-                                </p>
-                            </div>
-                            <hr>
-                        `).join('')}
-                        <div class="box-buttons">
-                            <button class="btn btn-warning remind-client-btn" data-schedule-id="${data.scheduleId}">
-                                <i class="fa-solid fa-bell"></i> Lembrar Cliente
-                            </button>
-                            <small id="timer-${data.scheduleId}" class="timer"></small>
+                </div>
+                <div class="toast-body">
+                    ${data.services.map(service => `
+                        <div class="value-service">
+                            <p>
+                                <i class="fa-solid fa-scissors"></i>
+                                Serviço: ${service.name}
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-sack-dollar"></i>
+                                Valor: R$ ${service.value}
+                            </p>
                         </div>
+                        <hr>
+                    `).join('')}
+                    <div class="box-buttons">
+                        <button class="btn btn-warning remind-client-btn" data-schedule-id="${data.schedule.id}">
+                            <i class="fa-solid fa-bell"></i> Lembrar Cliente
+                        </button>
+                        <small id="timer-${data.schedule.id}" class="timer"></small>
                     </div>
-                `;
+                </div>
+            `;
                 container.appendChild(newToast);
                 var bsToast = new bootstrap.Toast(newToast, {
                     autohide: false,
                 });
                 bsToast.show();
-                startTimer(data.scheduleId, data.scheduleTimeUntilStart.hours, data.scheduleTimeUntilStart.minutes);
+                startTimer(data.schedule.id, data.hoursUntilStart, data.minutesUntilStart);
             });
 
             function checkForNoSchedules() {
@@ -248,11 +250,11 @@
                     var noSchedulesMessage = document.createElement('div');
                     noSchedulesMessage.className = 'card-body no-schedules-message';
                     noSchedulesMessage.innerHTML = `
-                        <div class="card-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                            <img src="{{ asset('images/icons/emojiSadIcon.png') }}" alt="Emoji Triste" width="200">
-                            <p style="text-align: center; color: #9C9C9C">Nenhum atendimento nas próximas 24 horas</p>
-                        </div>
-                    `;
+                    <div class="card-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <img src="{{ asset('images/icons/emojiSadIcon.png') }}" alt="Emoji Triste" width="200">
+                        <p style="text-align: center; color: #9C9C9C">Nenhum atendimento nas próximas 24 horas</p>
+                    </div>
+                `;
                     container.appendChild(noSchedulesMessage);
                 }
             }
@@ -306,6 +308,7 @@
         });
     </script>
 
+
     <style>
         .toast {
             transition: opacity 0.5s ease-out;
@@ -315,6 +318,7 @@
             opacity: 0;
         }
     </style>
+    <audio id="reeschedule-sound" src="{{ asset('Sounds/reeschedule.mp3') }}" preload="auto"></audio>
     <audio id="cancelled-sound" src="{{ asset('Sounds/canceled.mp3') }}" preload="auto"></audio>
     <audio id="notification-sound" src="{{ asset('Sounds/notification.mp3') }}" preload="auto"></audio>
 </x-layoutCollaborator>

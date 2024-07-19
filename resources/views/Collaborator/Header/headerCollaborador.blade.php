@@ -19,16 +19,27 @@
             <i class="fas fa-solid fa-chart-pie" data-url="#"></i>
             <span><a href="#">Dashboard</a></span>
         </div>
+
         <div class="nav-button">
             <i class="fas fa-solid fa-users-viewfinder" data-url="#"></i>
             <span><a href="#">Painel de Serviços</a></span>
         </div>
+
         <div class="nav-button">
             <i class="fas fa-fire" data-url="#"></i>
             <span>Promoções</span>
         </div>
+        <div class="nav-button" {{ Request::routeIs('configcollaborator') ? 'active-module' : '' }}">
+            <i class="fas fa-solid fa-gear" data-url="{{ route('configcollaborator', ['tokenCompany' => $tokenCompany]) }}"></i>
+            <span>
+                <a href="{{ route('configcollaborator', ['tokenCompany' => $tokenCompany]) }}">
+                    Configurações
+                </a>
+            </span>
+        </div>
 
         <hr/>
+
         @if($collaboratorRole === 'ADMIN')
             <div class="nav-button {{ Request::routeIs('servicescollaborator') ? 'active-module' : '' }}">
                 <i class="fas fa-solid fa-scissors" data-url="{{ route('servicescollaborator', ['tokenCompany' => $tokenCompany]) }}"></i>

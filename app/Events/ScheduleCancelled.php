@@ -1,26 +1,29 @@
 <?php
-
 namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ScheduleCancelled
+class ScheduleCancelled implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $message;
+    public $schedule;
 
-    public function __construct($message)
+    public function __construct($schedule)
     {
-        $this->message = $message;
+        $this->schedule = $schedule;
     }
 
     public function broadcastOn()
     {
-        return ['schedule'];
+        return new Channel('schedule');
     }
 
     public function broadcastAs()

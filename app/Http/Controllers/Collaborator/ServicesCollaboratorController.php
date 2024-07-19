@@ -18,7 +18,7 @@ class ServicesCollaboratorController extends Controller
         $services = Service::where('collaboratorfk', $collaborator->id)->get();
 
         // Retorna a visão com os serviços
-        return view('Collaborator.services', [
+        return view('Collaborator.servicescollaborator', [
             'tokenCompany' => $tokenCompany,
             'services' => $services,
             'collaborator' => $collaborator

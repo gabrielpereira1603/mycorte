@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Http\Controllers\Client\ServiceBySchedule;
 
-use App\Events\Pusher;
+use App\Events\ScheduleCreate;
 use App\Http\Controllers\Controller;
 use App\Mail\CreatedScheduleMail;
 use App\Models\Client;
@@ -84,27 +85,20 @@ class InsertServiceByScheduleController extends Controller
             $collaborator = Collaborator::where('id', $schedule->collaboratorfk)->first();
             Mail::to($client->email)->send(new CreatedScheduleMail($client, $schedule, $collaborator, $company, $formattedDate));
 
-            // Envia os dados para o Pusher
-            (new Pusher())->trigger('schedule', 'create-schedule', [
-                'schedule' => $schedule,
-                'services' => $services,
-                'clientName' => $client->name,
-                'clientImage' => $client->image,
-                'scheduleDate' => $formattedDate,
-                'scheduleStartHour' => $schedule->hourStart,
-                'scheduleEndHour' => $schedule->hourFinal,
-                'scheduleId' => $schedule->id,
-                'hoursUntilStart' => Carbon::parse($schedule->date . ' ' . $schedule->hourStart)->diffInHours(now()),
-                'minutesUntilStart' => Carbon::parse($schedule->date . ' ' . $schedule->hourStart)->diffInMinutes(now()) % 60,
-            ]);
+            // Disparar o evento ScheduleCreate
+            event(new ScheduleCreate(
+                $schedule,
+                $services,
+                $client,
+                $this->calculateHoursUntilStart($schedule->hourStart),
+                $this->calculateMinutesUntilStart($schedule->hourStart)
+            ));
 
             return redirect()->route('mycutsclient', ['tokenCompany' => $tokenCompany])->with('success', 'Agendamento criado com sucesso!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Ocorreu um erro ao criar o agendamento. Por favor, tente novamente mais tarde.');
         }
     }
-
-
 
     private function validateScheduleData(Request $request)
     {
@@ -128,5 +122,19 @@ class InsertServiceByScheduleController extends Controller
             'totalPriceModal.required' => 'O campo preço total é obrigatório.',
             'totalPriceModal.numeric' => 'O campo preço total deve ser numérico.',
         ]);
+    }
+
+    private function calculateHoursUntilStart($startHour)
+    {
+        $now = now();
+        $start = \Carbon\Carbon::createFromFormat('H:i', $startHour);
+        return $now->diffInHours($start);
+    }
+
+    private function calculateMinutesUntilStart($startHour)
+    {
+        $now = now();
+        $start = \Carbon\Carbon::createFromFormat('H:i', $startHour);
+        return $now->diffInMinutes($start);
     }
 }
