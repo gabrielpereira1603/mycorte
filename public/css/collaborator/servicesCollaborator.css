@@ -20,6 +20,31 @@
 .card-header {
     background-color: #3a4976 !important;
     color: #ffffff !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-service-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.add-service-btn i {
+    font-size: 1.2rem;
+}
+
+.add-service-btn:hover {
+    background-color: #218838;
 }
 
 .truncate {
@@ -29,66 +54,297 @@
     text-overflow: ellipsis; /* Adiciona reticências quando o texto é truncado */
 }
 
-.card-info {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.service-details {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.service-details p {
-    margin: 6px 0;
-}
-
-.service-details i {
-    margin-right: 6px;
-}
-
-.toast-body hr {
-    margin: 10px 0; /* Ajusta o espaçamento da linha */
+.toast-body p {
+    margin-bottom: 0.5rem;
 }
 
 .box-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
     width: 100%;
+    height: 100%;
+    overflow: hidden;
+    outline: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1040;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 10px;
+    pointer-events: none;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 0.3rem;
+    outline: 0;
+    pointer-events: auto;
+    margin: auto;
+    width: 90%;
+    max-width: 500px;
+}
+
+.modal-myaccount-editBiografia {
+    padding: 25px 20px;
+    width: 100%;
+}
+
+.header-modal-Biografia {
+    padding: 15px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-editBiografiaModal {
+    margin-bottom: 0px;
+    position: relative;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 6px;
+}
+
+.close-editBiografia {
+    position: absolute;
+    top: -4px;
+    right: -2px;
+    background-color: transparent;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    /* Remove any default padding */
+}
+
+.body-editBiografiaModal {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 10px; /* Adiciona espaçamento entre o valor e o botão */
 }
 
-.box-buttons button {
+.buttons-modalBiografia {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.buttons-modalBiografia button {
+    flex: 1;
+    margin: 0 5px;
+}
+
+.buttons-modalBiografia .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.buttons-modalBiografia .btn-success {
+    background-color: #90ee90; /* Verde mais claro */
+    border-color: #90ee90; /* Verde mais claro */
+}
+
+.form-control {
     width: 100%;
 }
 
-.card-body {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: flex-start;
-    gap: 10px;
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    outline: 0;
+    justify-content: center;
+    align-items: center;
 }
 
-@media (max-width: 537px) {
-    .truncate {
-        max-width: 150px;
-        white-space: nowrap; /* Não permite que o texto quebre em várias linhas */
-        overflow: hidden; /* Oculta o texto que ultrapassa o container */
-        text-overflow: ellipsis; /* Adiciona reticências quando o texto é truncado */
+.modal.show {
+    display: flex;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1040;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 10px;
+    pointer-events: none;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 0.3rem;
+    outline: 0;
+    pointer-events: auto;
+    margin: auto;
+    width: 90%;
+    max-width: 500px;
+}
+
+.modal-myaccount-editBiografia {
+    padding: 25px 20px;
+    width: 100%;
+}
+
+.header-modal-Biografia, .header-addBiografia {
+    padding: 15px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-editBiografiaModal, .title-addBiografiaModal {
+    margin-bottom: 0px;
+    position: relative;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 6px;
+}
+
+.close-editBiografia, .close-addBiografia {
+    position: absolute;
+    top: -4px;
+    right: -2px;
+    background-color: transparent;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    /* Remove any default padding */
+}
+
+.body-editBiografiaModal, .body-addBiografiaModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons-modalBiografia {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.buttons-modalBiografia button {
+    flex: 1;
+    margin: 0 5px;
+}
+
+.buttons-modalBiografia .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.buttons-modalBiografia .btn-success {
+    background-color: #90ee90; /* Verde mais claro */
+    border-color: #90ee90; /* Verde mais claro */
+}
+
+.form-control {
+    width: 100%;
+}
+
+@media (max-width: 576px) {
+    .modal-content {
+        width: 90%;
+        margin: auto;
     }
 
-    .service-details {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
+    .buttons-modalBiografia button {
+        flex: 1;
+        margin: 0 2px;
+        font-size: 0.875rem;
+    }
+}
+
+@media (min-width: 576px) {
+    .modal-content {
+        max-width: 500px;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .modal-content {
+        width: 90%;
+        margin: auto;
+    }
+
+    .buttons-modalBiografia button {
+        flex: 1;
+        margin: 0 2px;
+        font-size: 0.875rem;
+    }
+}
+
+@media (min-width: 576px) {
+    .modal-content {
+        max-width: 500px;
     }
 }

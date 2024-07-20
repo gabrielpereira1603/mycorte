@@ -94,6 +94,8 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
         Route::get('/home/{tokenCompany}', [HomeCollaboratorController::class, 'index'])->name('homecollaborator');
         Route::get('/services/{tokenCompany}', [ServicesCollaboratorController::class, 'services'])->name('servicescollaborator');
         Route::get('/config/{tokenCompany}', [ConfigCollaboratorController::class, 'index'])->name('configcollaborator');
+        Route::post('/collaborator/services/add/{tokenCompany}', [ServicesCollaboratorController::class, 'addService'])->name('collaborator.service.add');
+        Route::post('/collaborator/services/edit/{tokenCompany}', [ServicesCollaboratorController::class, 'editService'])->name('collaborator.service.edit');
     });
 });
 
