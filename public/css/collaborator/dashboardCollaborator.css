@@ -1,0 +1,28 @@
+.main-title {
+    text-align: center;
+    margin: 20px 0;
+    color: #3a4976;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+
+.chart-container {
+    width: 45%;
+    max-width: 500px;
+    margin: 20px 0;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+canvas {
+    width: 100%;
+    height: 400px;
+}

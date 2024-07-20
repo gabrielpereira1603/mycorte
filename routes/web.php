@@ -16,6 +16,7 @@ use App\Http\Controllers\Client\ServiceBySchedule\ServiceByScheduleController;
 use App\Http\Controllers\Client\SingupClientController;
 use App\Http\Controllers\Client\UploadPhotoClientController;
 use App\Http\Controllers\Collaborator\ConfigCollaboratorController;
+use App\Http\Controllers\Collaborator\DashboardController;
 use App\Http\Controllers\Collaborator\HomeCollaboratorController;
 use App\Http\Controllers\Collaborator\Login\ForgotPasswordCollaboratorController;
 use App\Http\Controllers\Collaborator\Login\LoginCollaboratorController;
@@ -96,6 +97,7 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
         Route::get('/config/{tokenCompany}', [ConfigCollaboratorController::class, 'index'])->name('configcollaborator');
         Route::post('/collaborator/services/add/{tokenCompany}', [ServicesCollaboratorController::class, 'addService'])->name('collaborator.service.add');
         Route::post('/collaborator/services/edit/{tokenCompany}', [ServicesCollaboratorController::class, 'editService'])->name('collaborator.service.edit');
+        Route::get('/dashboard/{tokenCompany}', [DashboardController::class, 'index'])->name('dashboard');
     });
 });
 

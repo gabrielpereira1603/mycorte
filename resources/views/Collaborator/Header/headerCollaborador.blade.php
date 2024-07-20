@@ -15,9 +15,10 @@
             </span>
         </div>
 
-        <div class="nav-button">
-            <i class="fas fa-solid fa-chart-pie" data-url="#"></i>
-            <span><a href="#">Dashboard</a></span>
+
+        <div class="nav-button {{ Request::routeIs('dashboard') ? 'active-module' : '' }}">
+            <i class="fas fa-solid fa-chart-pie" data-url="{{ route('dashboard', ['tokenCompany' => $tokenCompany]) }}"></i>
+            <span><a href="{{ route('dashboard', ['tokenCompany' => $tokenCompany]) }}">Dashboard</a></span>
         </div>
 
         <div class="nav-button">
