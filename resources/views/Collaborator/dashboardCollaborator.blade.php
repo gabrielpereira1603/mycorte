@@ -4,23 +4,52 @@
     </div>
     <div class="content">
         <div class="chart-container">
+            <h5 class="chart-title">Gráfico de Barras</h5>
+            <div class="date-picker-container">
+                <input type="text" class="datepicker" placeholder="Início">
+                <input type="text" class="datepicker" placeholder="Fim">
+            </div>
             <canvas id="barChart"></canvas>
         </div>
         <div class="chart-container">
+            <h5 class="chart-title">Gráfico de Linhas</h5>
+            <div class="date-picker-container">
+                <input type="text" class="datepicker" placeholder="Início">
+                <input type="text" class="datepicker" placeholder="Fim">
+            </div>
             <canvas id="lineChart"></canvas>
         </div>
         <div class="chart-container">
+            <h5 class="chart-title">Gráfico de Pizza</h5>
+            <div class="date-picker-container">
+                <input type="text" class="datepicker" placeholder="Início">
+                <input type="text" class="datepicker" placeholder="Fim">
+            </div>
             <canvas id="pieChart"></canvas>
         </div>
         <div class="chart-container">
+            <h5 class="chart-title">Gráfico de Radar</h5>
+            <div class="date-picker-container">
+                <input type="text" class="datepicker" placeholder="Início">
+                <input type="text" class="datepicker" placeholder="Fim">
+            </div>
             <canvas id="radarChart"></canvas>
         </div>
     </div>
+
+    <!-- Incluindo jQuery e jQuery UI para Datepicker -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- Incluindo Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd-mm-yy'
+            });
+
             // Gráfico de barras
             const barCtx = document.getElementById('barChart').getContext('2d');
             new Chart(barCtx, {

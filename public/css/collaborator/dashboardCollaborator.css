@@ -15,11 +15,43 @@
 .chart-container {
     width: 45%;
     max-width: 500px;
-    margin: 20px 0;
+    margin: 20px;
     background: #fff;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.chart-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.chart-title {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #3a4976;
+}
+
+.date-picker-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.datepicker {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    transition: box-shadow 0.3s;
+}
+
+.datepicker:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: #80bdff;
 }
 
 canvas {
