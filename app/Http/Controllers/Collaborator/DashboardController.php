@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Collaborator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -11,4 +12,5 @@ class DashboardController extends Controller
     {
         return view('Collaborator.dashboardCollaborator', ['tokenCompany' => $tokenCompany]);
     }
+
 }
