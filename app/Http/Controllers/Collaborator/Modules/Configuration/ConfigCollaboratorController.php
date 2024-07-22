@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Collaborator;
+namespace App\Http\Controllers\Collaborator\Modules\Configuration;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class ConfigCollaboratorController extends Controller
 {
     public function index($tokenCompany)
     {
-
-        return view('Collaborator.configcollaborator', [
+        return view('Collaborator.Modules.Config.index', [
             'tokenCompany' => $tokenCompany
         ]);
     }

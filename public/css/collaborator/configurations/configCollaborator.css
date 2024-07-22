@@ -1,20 +1,18 @@
-.options-config-schedules{
-    border-radius: 8px;
-    background-color: #3a497684;
+.card{
+    padding: 12px;
 }
 
-.options-header{
-    border-bottom: solid 1px #959595;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+
+.cardAvailability-form,a{
+    width: 100%;
+    margin-top: 12px;
 }
 
-.options-body{
-    padding: 6px;
-    max-width: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: start;
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 480px) {
+
 }

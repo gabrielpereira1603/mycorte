@@ -10,4 +10,14 @@ class AvailabilityCollaborator extends Model
     use HasFactory;
 
     protected $table = 'availability_collaborator';
+
+    protected $fillable = [
+        'hourStart',
+        'hourFinal',
+        'lunchTimeStart',
+        'lunchTimeFinal',
+        'hourServiceInterval',
+        'workDays',
+        'collaboratorfk'
+    ];
 }

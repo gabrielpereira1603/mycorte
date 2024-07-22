@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="{{ asset('css/collaborator/servicesCollaborator.css') }}">
         <link rel="stylesheet" href="{{ asset('css/collaborator/dashboardCollaborator.css') }}">
         <link rel="stylesheet" href="{{ asset('css/collaborator/configurations/configCollaborator.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/collaborator/configurations/configAvailability.css') }}">
+
 
         <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -31,10 +31,10 @@
             <span>Promoções</span>
         </div>
 
-        <div class="nav-button {{ Request::routeIs('configcollaborator') ? 'active-module' : '' }}">
-            <i class="fas fa-solid fa-gear" data-url="{{ route('configcollaborator', ['tokenCompany' => $tokenCompany]) }}"></i>
+        <div class="nav-button {{ Request::routeIs('config.*') ? 'active-module' : '' }}">
+            <i class="fas fa-solid fa-gear" data-url="{{ route('config.index', ['tokenCompany' => $tokenCompany]) }}"></i>
             <span>
-                <a href="{{ route('configcollaborator', ['tokenCompany' => $tokenCompany]) }}">
+                <a href="{{ route('config.index', ['tokenCompany' => $tokenCompany]) }}">
                     Configurações
                 </a>
             </span>
