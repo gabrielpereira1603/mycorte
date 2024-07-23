@@ -6,8 +6,8 @@
         <div class="chart-container" id="chartContainer1">
             <h5 class="chart-title">Análise de Melhores Serviços</h5>
             <div class="date-picker-container">
-                <input type="text" class="datepicker" placeholder="Início">
-                <input type="text" class="datepicker" placeholder="Fim">
+                <input type="text" class="datepicker" id="start-date" placeholder="Início" value="{{ $startDate }}">
+                <input type="text" class="datepicker" id="end-date" placeholder="Fim" value="{{ $endDate }}">
             </div>
             <div class="chart-controls">
                 <select class="chart-type" data-chart-id="chart1">
@@ -19,10 +19,10 @@
             <canvas id="chart1"></canvas>
         </div>
         <div class="chart-container" id="chartContainer2">
-            <h5 class="chart-title">Analise de Agendamentos</h5>
+            <h5 class="chart-title">Análise de Agendamentos</h5>
             <div class="date-picker-container">
-                <input type="text" class="datepicker" placeholder="Início">
-                <input type="text" class="datepicker" placeholder="Fim">
+                <input type="text" class="datepicker" id="start-date2" placeholder="Início" value="{{ $startDate }}">
+                <input type="text" class="datepicker" id="end-date2" placeholder="Fim" value="{{ $endDate }}">
             </div>
             <div class="chart-controls">
                 <select class="chart-type" data-chart-id="chart2">
@@ -34,10 +34,10 @@
             <canvas id="chart2"></canvas>
         </div>
         <div class="chart-container" id="chartContainer3">
-            <h5 class="chart-title">Analise de Faturamento</h5>
+            <h5 class="chart-title">Análise de Faturamento</h5>
             <div class="date-picker-container">
-                <input type="text" class="datepicker" placeholder="Início">
-                <input type="text" class="datepicker" placeholder="Fim">
+                <input type="text" class="datepicker" id="start-date3" placeholder="Início" value="{{ $startDate }}">
+                <input type="text" class="datepicker" id="end-date3" placeholder="Fim" value="{{ $endDate }}">
             </div>
             <div class="chart-controls">
                 <select class="chart-type" data-chart-id="chart3">
@@ -60,17 +60,20 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             $(".datepicker").datepicker({
-                dateFormat: 'dd-mm-yy'
+                dateFormat: 'dd-mm-yy',
+                onSelect: function() {
+                    fetchAndUpdateChart();
+                }
             });
 
             const chartConfigs = {
                 'chart1': {
                     type: 'bar',
                     data: {
-                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                        labels: @json($dates),
                         datasets: [{
-                            label: '# of Votes',
-                            data: [12, 19, 3, 5, 2, 3],
+                            label: 'Agendamentos por Dia',
+                            data: @json($counts),
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
@@ -102,10 +105,10 @@
                 'chart2': {
                     type: 'line',
                     data: {
-                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                        labels: @json($dates),  // Updated to use $dates
                         datasets: [{
-                            label: 'Sales',
-                            data: [65, 59, 80, 81, 56, 55, 40],
+                            label: 'Agendamentos por Dia',
+                            data: @json($counts),  // Updated to use $counts
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1
@@ -123,10 +126,10 @@
                 'chart3': {
                     type: 'pie',
                     data: {
-                        labels: ['Red', 'Blue', 'Yellow'],
+                        labels: @json($dates),  // Updated to use $dates
                         datasets: [{
-                            label: 'Population',
-                            data: [300, 50, 100],
+                            label: 'Agendamentos por Dia',
+                            data: @json($counts),  // Updated to use $counts
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
@@ -160,12 +163,41 @@
                     const chartConfig = chartConfigs[chartId];
                     const chartCanvas = document.getElementById(chartId);
 
-                    chartConfig.type = newType;
-
                     charts[chartId].destroy();
-                    charts[chartId] = new Chart(chartCanvas.getContext('2d'), chartConfig);
+                    chartConfig.type = newType;
+                    charts[chartId] = new Chart(chartCanvas, chartConfig);
                 });
             });
+
+            function fetchAndUpdateChart() {
+                const startDate = $('#start-date').datepicker('getDate');
+                const endDate = $('#end-date').datepicker('getDate');
+
+                const formattedStartDate = $.datepicker.formatDate('yy-mm-dd', startDate);
+                const formattedEndDate = $.datepicker.formatDate('yy-mm-dd', endDate);
+
+                $.ajax({
+                    url: '{{ route('collaborator.dashboard.fetchScheduleData') }}',
+                    method: 'POST',
+                    data: {
+                        start_date: formattedStartDate,
+                        end_date: formattedEndDate,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(data) {
+                        Object.keys(chartConfigs).forEach(chartId => {
+                            const chartConfig = chartConfigs[chartId];
+                            chartConfig.data.labels = data.dates;
+                            chartConfig.data.datasets[0].data = data.counts;
+                            charts[chartId].update();
+                        });
+                    },
+                    error: function(error) {
+                        console.error('Error fetching data:', error);
+                    }
+                });
+            }
         });
     </script>
+
 </x-layoutCollaborator>
