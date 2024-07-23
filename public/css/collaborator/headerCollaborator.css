@@ -66,9 +66,7 @@
     overflow: hidden;
     user-select: none;
     z-index: 1050;
-    -webkit-box-shadow: 11px 13px 37px -10px rgba(107,107,107,1);
-    -moz-box-shadow: 11px 13px 37px -10px rgba(107,107,107,1);
-    box-shadow: 11px 13px 37px -10px rgba(107,107,107,1);
+
 }
 #nav-bar hr {
     margin: 0;

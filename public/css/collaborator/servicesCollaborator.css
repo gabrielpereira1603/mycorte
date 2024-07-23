@@ -1,17 +1,3 @@
-.main-title {
-    background-color: #3a497684;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-}
-
-.main-title p {
-    text-transform: uppercase;
-    font-weight: bold;
-}
 
 .toast {
     margin-bottom: 0.5rem; /* Espaçamento entre toasts se houver mais de um */

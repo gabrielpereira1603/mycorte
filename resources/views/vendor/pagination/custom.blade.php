@@ -45,6 +45,7 @@
         justify-content: center;
         padding: 0;
         list-style: none;
+        flex-wrap: wrap;
     }
 
     .pagination li {
@@ -55,7 +56,7 @@
     .pagination li span {
         display: block;
         padding: 8px 12px;
-        color: #007bff;
+        color: #3A4976;
         text-decoration: none;
         border: 1px solid #ddd;
         border-radius: 5px;
@@ -63,14 +64,14 @@
     }
 
     .pagination li a:hover {
-        background-color: #007bff;
+        background-color: #3A4976;
         color: #fff;
     }
 
     .pagination li.active span {
-        background-color: #007bff;
+        background-color: #3A4976;
         color: #fff;
-        border-color: #007bff;
+        border-color: #3A4976;
     }
 
     .pagination li.disabled span {

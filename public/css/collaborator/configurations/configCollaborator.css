@@ -1,5 +1,31 @@
-.card{
+
+.cardAvailability {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     padding: 12px;
+}
+
+.cardAvailability-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardAvailability-form {
+    margin-top: auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col {
+    display: flex;
+    flex: 1;
+    margin-bottom: 20px;
 }
 
 

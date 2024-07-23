@@ -1,0 +1,163 @@
+.custom-text {
+    text-align: center;
+    font-style: italic;
+}
+
+.calendar-day{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.calendar-day h2{
+    margin-bottom: 0px;
+}
+
+.calendar-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.calendar-cell{
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    margin: 10px;
+}
+
+.calendar-cell p{
+    margin-bottom: 0px;
+
+}
+
+.box-button{
+    margin: 10px 0px 12px 0px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+@media (max-width: 768px) {
+    .calendar-body{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .calendar-cell{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 10px;
+    }
+
+    .interval-p{
+        text-align: center;
+    }
+}
+
+.modal-createAvailability{
+    padding: 25px 20px;
+}
+
+.header-modal-createAvailability{
+    padding: 15px 10px;
+    background-color: #3a4976;
+}
+
+.title-createAvailability{
+    margin-bottom: 0px;
+    position: relative;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 6px;
+}
+
+.close-createAvailability {
+    position: absolute;
+    top: -4px;
+    right: -2px;
+    background-color: transparent;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0; /* Remove any default padding */
+}
+
+.title-createAvailability::after {
+    content: '';
+    position: absolute;
+    bottom: -47px; /* Adjust this value to move the arrow up/down */
+    left: 6%;
+    transform: translateX(-50%);
+    border-width: 16px; /* Size of the arrow */
+    border-style: solid;
+    border-color: #3a4976 transparent transparent transparent;
+}
+
+.body-createAvailability{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 26px 0px 0px 0px;
+}
+
+#createAvailability{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.buttons-modalCreateAvailability{
+    background-color: #edf3f6;
+    gap: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.buttons-modalBiografia button{
+    width: 50%;
+}
+
+#cancelCreate{
+    margin-right: 20px;
+    color: red;
+    font-weight: 300;
+    width: 50%;
+    background-color: transparent;
+    border: none;
+}
+
+#cancelCreate:hover{
+    background-color: red;
+    color: white;
+    border-radius: 2px;
+}
+
+#create{
+    border: none !important;
+    margin-right: 10px;
+    color: #edf3f6;
+    font-weight: 300;
+    width: 50%;
+    padding: 12px;
+    background-color: #5ad678 !important;
+    border-radius: 2px;
+    border: none;
+}

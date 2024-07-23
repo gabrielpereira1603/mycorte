@@ -34,7 +34,7 @@
         </style>
     </head>
 
-    <body style="margin-left: 100px; padding: 16px">
+    <body style="margin-left: 92px; padding: 12px">
         @include('Collaborator.Header.headerCollaborador', ['tokenCompany' => $tokenCompany])
 
         <div class="alert-container">

@@ -1,6 +1,7 @@
 .main-title{
     background-color: #3a497684;
     padding: 20px;
+    margin: 6px 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
