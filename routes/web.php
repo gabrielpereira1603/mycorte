@@ -104,6 +104,8 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
         Route::post('/collaborator/services/add/{tokenCompany}', [ServicesCollaboratorController::class, 'addService'])->name('collaborator.service.add');
         Route::post('/collaborator/services/edit/{tokenCompany}', [ServicesCollaboratorController::class, 'editService'])->name('collaborator.service.edit');
         Route::get('/dashboard/{tokenCompany}', [DashboardController::class, 'index'])->name('dashboard');
+        Route::post('/dashboard/fetch-schedule-data', [DashboardController::class, 'fetchScheduleData'])->name('collaborator.dashboard.fetchScheduleData');
+
     });
 });
 
