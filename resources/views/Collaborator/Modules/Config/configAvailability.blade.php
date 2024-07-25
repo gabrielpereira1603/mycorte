@@ -1,6 +1,6 @@
 <x-layoutCollaborator title="Configurações de Disponibilidade" :tokenCompany="$tokenCompany">
     <div class="main-title">
-        <h4 style="color: white;">Disponibilidades de {{ $collaborator->name }}</h4>
+        <h4 style="">Disponibilidades de {{ $collaborator->name }}</h4>
     </div>
 
     <small class="card-subtitle mb-2 text-muted custom-text">
@@ -56,7 +56,14 @@
                         <i class="fa-solid fa-trash"></i>
                         Excluir
                     </button>
-                    <button class="btn btn-warning edit-availability" data-id="{{ $day->id }}" data-start="{{ $day->hourStart }}" data-end="{{ $day->hourFinal }}" data-start-lunch="{{ $day->lunchTimeStart }}" data-end-lunch="{{ $day->lunchTimeFinal }}" data-interval="{{ $day->hourServiceInterval }}" data-workday="{{ $day->workDays }}">
+                    <button class="btn btn-warning edit-availability"
+                            data-id="{{ $day->id }}"
+                            data-start="{{ $day->hourStart }}"
+                            data-end="{{ $day->hourFinal }}"
+                            data-start-lunch="{{ $day->lunchTimeStart }}"
+                            data-end-lunch="{{ $day->lunchTimeFinal }}"
+                            data-interval="{{ $day->hourServiceInterval }}"
+                            data-workday="{{ $day->workDays }}">
                         <i class="fa-solid fa-pen-to-square"></i>
                         Editar
                     </button>
@@ -86,30 +93,31 @@
                         @csrf
                         <input type="hidden" name="tokenCompany" value="{{ $tokenCompany }}">
                         <input type="hidden" id="availabilityId" name="availabilityId" value="">
+                        <input type="hidden" name="collaboratorfk" value="{{ $collaborator->id }}"> <!-- Campo oculto para o ID do colaborador -->
 
                         <div class="form-group">
                             <label for="newStartWork">Início do expediente:</label>
-                            <input type="time" id="newStartWork" class="form-control" name="startWork" value="" autocomplete="new-password">
+                            <input type="time" id="newStartWork" class="form-control" name="startWork" value="" autocomplete="new-password" required>
                         </div>
 
                         <div class="form-group">
                             <label for="newEndWork">Fim do expediente:</label>
-                            <input type="time" id="newEndWork" class="form-control" name="endWork" value="" autocomplete="new-password">
+                            <input type="time" id="newEndWork" class="form-control" name="endWork" value="" autocomplete="new-password" required>
                         </div>
 
                         <div class="form-group">
                             <label for="newStartLunch">Início do almoço:</label>
-                            <input type="time" id="newStartLunch" class="form-control" name="startLunch" value="" autocomplete="new-password">
+                            <input type="time" id="newStartLunch" class="form-control" name="startLunch" value="" autocomplete="new-password" required>
                         </div>
 
                         <div class="form-group">
                             <label for="newEndLunch">Fim do almoço:</label>
-                            <input type="time" id="newEndLunch" class="form-control" name="endLunch" value="" autocomplete="new-password">
+                            <input type="time" id="newEndLunch" class="form-control" name="endLunch" value="" autocomplete="new-password" required>
                         </div>
 
                         <div class="form-group">
                             <label for="newServiceInterval">Tempo de intervalo entre cada serviço:</label>
-                            <input type="time" id="newServiceInterval" class="form-control" name="serviceInterval" value="" autocomplete="new-password">
+                            <input type="time" id="newServiceInterval" class="form-control" name="serviceInterval" value="" autocomplete="new-password" required>
                         </div>
 
                         <p style="margin-bottom: 0px; font-style: italic; font-size: 11px; color: gray;">
@@ -117,7 +125,7 @@
                         </p>
 
                         <div class="buttons-modalCreateAvailability">
-                            <button type="button" class="btn btn-primary" id="cancelCreate">Cancelar Cadastro</button>
+                            <button type="button" class="btn btn-primary" id="cancelCreate">Cancelar</button>
                             <button type="submit" class="btn btn-primary" id="create">Salvar Cadastro</button>
                         </div>
                     </form>
@@ -127,19 +135,21 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
+        document.addEventListener('DOMContentLoaded', () => {
             const openModalButton = document.getElementById('openCreateAvailabilityModal');
             const createAvailabilityModal = document.getElementById('createAvailabilityModal');
             const closeModalButton = document.querySelector('.close-createAvailability');
             const cancelCreateButton = document.getElementById('cancelCreate');
+            const saveButton = document.getElementById('create');
             const form = document.getElementById('createAvailability');
             const title = document.querySelector('.title-createAvailability');
 
             openModalButton.addEventListener('click', () => {
-                form.action = "";
+                form.action = "{{ route('config.availability.create.post', ['tokenCompany' => $tokenCompany]) }}"; // Defina a URL para criar nova disponibilidade
                 title.textContent = 'CADASTRAR NOVA DISPONIBILIDADE';
                 document.getElementById('availabilityId').value = '';
                 form.reset();
+                saveButton.textContent = 'Salvar Cadastro'; // Texto do botão para criar
                 createAvailabilityModal.style.display = 'block';
             });
 
@@ -153,8 +163,8 @@
                     const interval = button.getAttribute('data-interval');
                     const workDay = button.getAttribute('data-workday');
 
-                    form.action = ``;
-                    title.textContent = 'EDITAR DISPONIBILIDADE: '+ workDay;
+                    form.action = `/path/to/edit/${id}`; // Defina a URL para editar disponibilidade
+                    title.textContent = 'EDITAR DISPONIBILIDADE: ' + workDay;
                     document.getElementById('availabilityId').value = id;
                     document.getElementById('newStartWork').value = start;
                     document.getElementById('newEndWork').value = end;
@@ -162,6 +172,7 @@
                     document.getElementById('newEndLunch').value = endLunch;
                     document.getElementById('newServiceInterval').value = interval;
 
+                    saveButton.textContent = 'Salvar Edição'; // Texto do botão para editar
                     createAvailabilityModal.style.display = 'block';
                 });
             });

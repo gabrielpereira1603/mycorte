@@ -413,28 +413,49 @@
 
 
             function sendReminderEmail(scheduleId) {
-                fetch(`/send-reminder/${scheduleId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({
-                        scheduleId: scheduleId
-                    })
+            Swal.fire({
+                title: 'Enviando lembrete...',
+                text: 'Por favor, aguarde enquanto enviamos o lembrete ao cliente.',
+                icon: 'info',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading()
+                }
+            });
+
+            fetch(`{{ url('/api/send-reminder') }}/${scheduleId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    Swal.close();
+                    if (data.success) {
+                        Swal.fire({
+                            title: 'Sucesso!',
+                            text: 'O lembrete foi enviado com sucesso.',
+                            icon: 'success'
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Erro!',
+                            text: 'Ocorreu um erro ao enviar o lembrete. Tente novamente mais tarde.',
+                            icon: 'error'
+                        });
+                    }
                 })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Lembrete enviado com sucesso!');
-                        } else {
-                            alert('Falha ao enviar lembrete.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro:', error);
+                .catch(error => {
+                    Swal.close();
+                    Swal.fire({
+                        title: 'Erro!',
+                        text: 'Ocorreu um erro ao enviar o lembrete. Tente novamente mais tarde.',
+                        icon: 'error'
                     });
-            }
+                });
+        }
         });
     </script>
 
