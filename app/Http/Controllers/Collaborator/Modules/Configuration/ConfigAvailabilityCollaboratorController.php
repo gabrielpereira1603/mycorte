@@ -41,9 +41,9 @@ class ConfigAvailabilityCollaboratorController extends Controller
 
         $validator = Validator::make($request->all(), [
             'startWork' => 'required',
-            'endWork' => 'required',
-            'startLunch' => 'required',
-            'endLunch' => 'required',
+            'endWork' => 'required|after:startWork',
+            'startLunch' => 'required|after:endWork',
+            'endLunch' => 'required|after:startLunch',
             'serviceInterval' => 'required',
             'workDays' => 'required|in:Segunda,Terca,Quarta,Quinta,Sexta,Sabado,Domingo',
             'collaboratorfk' => 'required|exists:collaborator,id',

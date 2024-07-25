@@ -88,6 +88,7 @@
         </button>
     </div>
 
+    <!-- Modal -->
     <div id="createAvailabilityModal" class="modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content modal-createAvailability" style="max-width: 450px !important;">
@@ -105,13 +106,11 @@
                         <div class="form-group">
                             <label for="newWorkDay">Dias de trabalho:</label>
                             <select id="newWorkDay" class="form-control" name="workDays" required>
-                                <option value="Segunda">Segunda</option>
-                                <option value="Terca">Terça</option>
-                                <option value="Quarta">Quarta</option>
-                                <option value="Quinta">Quinta</option>
-                                <option value="Sexta">Sexta</option>
-                                <option value="Sabado">Sábado</option>
-                                <option value="Domingo">Domingo</option>
+                                @foreach(['Segunda', 'Terca', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'] as $day)
+                                    <option value="{{ $day }}" {{ isset($currentWorkDay) && $currentWorkDay == $day ? 'selected' : '' }}>
+                                        {{ $day }}
+                                    </option>
+                                @endforeach
                             </select>
                             @error('workDays')
                             <div class="text-danger">{{ $message }}</div>
@@ -210,6 +209,9 @@
                     document.getElementById('newEndLunch').value = endLunch;
                     document.getElementById('newServiceInterval').value = interval;
 
+                    // Seleciona o dia da semana no select
+                    document.getElementById('newWorkDay').value = workDay;
+
                     saveButton.textContent = 'Salvar Edição'; // Texto do botão para editar
                     createAvailabilityModal.style.display = 'block';
                 });
@@ -233,6 +235,32 @@
             @if ($errors->any())
                 createAvailabilityModal.style.display = 'block';
             @endif
+
+            // Função para aplicar o efeito de fade-out
+            const fadeOutErrors = () => {
+                document.querySelectorAll('.text-danger').forEach(error => {
+                    setTimeout(() => {
+                        error.classList.add('fade-out');
+                    }, 3000); // Tempo de espera antes de aplicar o efeito de fade-out (em milissegundos)
+                });
+            };
+
+            fadeOutErrors();
         });
     </script>
+    <style>
+        .fade-out {
+            animation: fadeOut 1s forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                display: none;
+            }
+        }
+    </style>
 </x-layoutCollaborator>
