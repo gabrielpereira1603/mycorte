@@ -1,6 +1,6 @@
 <x-layoutCollaborator title="Configurações de Disponibilidade" :tokenCompany="$tokenCompany">
     <div class="main-title">
-        <h4 style="">Disponibilidades de {{ $collaborator->name }}</h4>
+        <h4>Disponibilidades de {{ $collaborator->name }}</h4>
     </div>
 
     <small class="card-subtitle mb-2 text-muted custom-text">
@@ -89,35 +89,66 @@
                     <p class="title-createAvailability" style="color: white;">CADASTRAR NOVA DISPONIBILIDADE</p>
                 </div>
                 <div class="body-createAvailability">
-                    <form id="createAvailability" action="" method="POST">
+                    <form id="createAvailability" action="{{ route('config.availability.create.post', ['tokenCompany' => $tokenCompany]) }}" method="POST">
                         @csrf
                         <input type="hidden" name="tokenCompany" value="{{ $tokenCompany }}">
                         <input type="hidden" id="availabilityId" name="availabilityId" value="">
                         <input type="hidden" name="collaboratorfk" value="{{ $collaborator->id }}"> <!-- Campo oculto para o ID do colaborador -->
 
                         <div class="form-group">
+                            <label for="newWorkDay">Dias de trabalho:</label>
+                            <select id="newWorkDay" class="form-control" name="workDays" required>
+                                <option value="Segunda">Segunda</option>
+                                <option value="Terca">Terça</option>
+                                <option value="Quarta">Quarta</option>
+                                <option value="Quinta">Quinta</option>
+                                <option value="Sexta">Sexta</option>
+                                <option value="Sabado">Sábado</option>
+                                <option value="Domingo">Domingo</option>
+                            </select>
+                            @error('workDays')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label for="newStartWork">Início do expediente:</label>
-                            <input type="time" id="newStartWork" class="form-control" name="startWork" value="" autocomplete="new-password" required>
+                            <input type="time" id="newStartWork" class="form-control" name="startWork" value="{{ old('startWork') }}" autocomplete="new-password" required>
+                            @error('startWork')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="newEndWork">Fim do expediente:</label>
-                            <input type="time" id="newEndWork" class="form-control" name="endWork" value="" autocomplete="new-password" required>
+                            <input type="time" id="newEndWork" class="form-control" name="endWork" value="{{ old('endWork') }}" autocomplete="new-password" required>
+                            @error('endWork')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="newStartLunch">Início do almoço:</label>
-                            <input type="time" id="newStartLunch" class="form-control" name="startLunch" value="" autocomplete="new-password" required>
+                            <input type="time" id="newStartLunch" class="form-control" name="startLunch" value="{{ old('startLunch') }}" autocomplete="new-password" required>
+                            @error('startLunch')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="newEndLunch">Fim do almoço:</label>
-                            <input type="time" id="newEndLunch" class="form-control" name="endLunch" value="" autocomplete="new-password" required>
+                            <input type="time" id="newEndLunch" class="form-control" name="endLunch" value="{{ old('endLunch') }}" autocomplete="new-password" required>
+                            @error('endLunch')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="newServiceInterval">Tempo de intervalo entre cada serviço:</label>
-                            <input type="time" id="newServiceInterval" class="form-control" name="serviceInterval" value="" autocomplete="new-password" required>
+                            <input type="time" id="newServiceInterval" class="form-control" name="serviceInterval" value="{{ old('serviceInterval') }}" autocomplete="new-password" required>
+                            @error('serviceInterval')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <p style="margin-bottom: 0px; font-style: italic; font-size: 11px; color: gray;">
@@ -163,7 +194,7 @@
                     const interval = button.getAttribute('data-interval');
                     const workDay = button.getAttribute('data-workday');
 
-                    form.action = `/path/to/edit/${id}`; // Defina a URL para editar disponibilidade
+                    form.action = "{{ route('config.availability.create.post', ['tokenCompany' => $tokenCompany]) }}"; // Defina a URL para criar nova disponibilidade
                     title.textContent = 'EDITAR DISPONIBILIDADE: ' + workDay;
                     document.getElementById('availabilityId').value = id;
                     document.getElementById('newStartWork').value = start;
@@ -190,7 +221,11 @@
                     createAvailabilityModal.style.display = 'none';
                 }
             });
+
+            // Manter o modal aberto em caso de erro
+            @if ($errors->any())
+                createAvailabilityModal.style.display = 'block';
+            @endif
         });
     </script>
-
 </x-layoutCollaborator>
