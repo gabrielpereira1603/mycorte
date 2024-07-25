@@ -52,10 +52,17 @@
                     </div>
                 </div>
                 <div class="box-button">
-                    <button class="btn btn-danger">
-                        <i class="fa-solid fa-trash"></i>
-                        Excluir
-                    </button>
+                    <!-- Formulário para exclusão -->
+                    <form action="{{ route('config.availability.destroy', ['id' => $day->id, 'tokenCompany' => $tokenCompany]) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fa-solid fa-trash"></i>
+                            Excluir
+                        </button>
+                    </form>
+
+                    <!-- Botão de editar -->
                     <button class="btn btn-warning edit-availability"
                             data-id="{{ $day->id }}"
                             data-start="{{ $day->hourStart }}"

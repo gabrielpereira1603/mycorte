@@ -53,6 +53,16 @@ class ConfigAvailabilityCollaboratorController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        // Verifica se já existe uma disponibilidade para o mesmo dia de trabalho
+        $existingAvailability = AvailabilityCollaborator::where('collaboratorfk', $request->input('collaboratorfk'))
+            ->where('workDays', $request->input('workDays'))
+            ->where('id', '!=', $request->input('availabilityId')) // Ignora o registro atual sendo editado
+            ->exists();
+
+        if ($existingAvailability) {
+            return redirect()->back()->withErrors(['workDays' => 'Já existe uma disponibilidade cadastrada para este dia de trabalho.'])->withInput();
+        }
+
         $availability = AvailabilityCollaborator::updateOrCreate(
             ['id' => $request->input('availabilityId')],
             [
@@ -67,5 +77,17 @@ class ConfigAvailabilityCollaboratorController extends Controller
         );
 
         return redirect()->back()->with('success', 'Disponibilidade salva com sucesso!');
+    }
+
+    public function destroy($id, $tokenCompany)
+    {
+        $availability = AvailabilityCollaborator::find($id);
+
+        if ($availability) {
+            $availability->delete();
+            return redirect()->back()->with('success', 'Disponibilidade excluída com sucesso!');
+        }
+
+        return redirect()->back()->withErrors(['error' => 'Disponibilidade não encontrada.']);
     }
 }

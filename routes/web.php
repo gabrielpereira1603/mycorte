@@ -101,6 +101,7 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
 
             Route::get('/availability/{tokenCompany}', [ConfigAvailabilityCollaboratorController::class, 'index'])->name('availability.edit');
             Route::post('/availability/{tokenCompany}', [ConfigAvailabilityCollaboratorController::class, 'updateOrCreateAvailability'])->name('availability.create.post');
+            Route::delete('/availability/{id}/{tokenCompany}', [ConfigAvailabilityCollaboratorController::class, 'destroy'])->name('availability.destroy');
 
         });
 
