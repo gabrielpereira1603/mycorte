@@ -6,6 +6,7 @@
         <!-- Análise de Melhores Serviços -->
         <div class="chart-container" id="chartContainer1">
             <h5 class="chart-title">Análise de Melhores Serviços</h5>
+            <p class="chart-description">Visualize os serviços que seus clientes mais gostam!</p>
             <div class="date-picker-container">
                 <input type="text" class="datepicker" id="start-date1" placeholder="Início">
                 <input type="text" class="datepicker" id="end-date1" placeholder="Fim">
@@ -22,7 +23,8 @@
 
         <!-- Análise de Agendamentos -->
         <div class="chart-container" id="chartContainer2">
-            <h5 class="chart-title">Análise de Agendamentos</h5>
+            <h5 class="chart-title">Análise de Agendamentos Finalizados</h5>
+            <p class="chart-description">Visualize a quantidade de agendamentos finalizados em diferentes períodos!</p>
             <div class="date-picker-container">
                 <input type="text" class="datepicker" id="start-date2" placeholder="Início">
                 <input type="text" class="datepicker" id="end-date2" placeholder="Fim">
@@ -37,21 +39,58 @@
             <canvas id="chart2"></canvas>
         </div>
 
-        <!-- Análise de Faturamento (sem alimentar) -->
-        <div class="chart-container" id="chartContainer3">
-            <h5 class="chart-title">Análise de Faturamento</h5>
+        <!-- Análise de Faturamento -->
+{{--        <div class="chart-container" id="chartContainer3">--}}
+{{--            <h5 class="chart-title">Análise de Faturamento</h5>--}}
+{{--            <p class="chart-description">Visualize detalhadamente o faturamento em diferentes períodos!</p>--}}
+{{--            <div class="date-picker-container">--}}
+{{--                <input type="text" class="datepicker" id="start-date3" placeholder="Início">--}}
+{{--                <input type="text" class="datepicker" id="end-date3" placeholder="Fim">--}}
+{{--            </div>--}}
+{{--            <div class="chart-controls">--}}
+{{--                <select class="chart-type" data-chart-id="chart3">--}}
+{{--                    <option value="pie">Pizza</option>--}}
+{{--                    <option value="bar">Barra</option>--}}
+{{--                    <option value="line">Linha</option>--}}
+{{--                </select>--}}
+{{--            </div>--}}
+{{--            <canvas id="chart3"></canvas>--}}
+{{--        </div>--}}
+
+        <!-- Análise de Agendamentos Cancelados -->
+        <div class="chart-container" id="chartContainer4">
+            <h5 class="chart-title">Análise de Agendamentos Cancelados</h5>
+            <p class="chart-description">Visualize a quantidade de agendamentos cancelados em diferentes períodos!</p>
             <div class="date-picker-container">
-                <input type="text" class="datepicker" id="start-date3" placeholder="Início">
-                <input type="text" class="datepicker" id="end-date3" placeholder="Fim">
+                <input type="text" class="datepicker" id="start-date4" placeholder="Início">
+                <input type="text" class="datepicker" id="end-date4" placeholder="Fim">
             </div>
             <div class="chart-controls">
-                <select class="chart-type" data-chart-id="chart3">
-                    <option value="pie">Pizza</option>
+                <select class="chart-type" data-chart-id="chart4">
                     <option value="bar">Barra</option>
                     <option value="line">Linha</option>
+                    <option value="pie">Pizza</option>
                 </select>
             </div>
-            <canvas id="chart3"></canvas>
+            <canvas id="chart4"></canvas>
+        </div>
+
+        <!-- Análise de Agendamentos Reagendados -->
+        <div class="chart-container" id="chartContainer5">
+            <h5 class="chart-title">Análise de Agendamentos Reagendados</h5>
+            <p class="chart-description">Visualize a quantidade de agendamentos reagendados em diferentes períodos!</p>
+            <div class="date-picker-container">
+                <input type="text" class="datepicker" id="start-date5" placeholder="Início">
+                <input type="text" class="datepicker" id="end-date5" placeholder="Fim">
+            </div>
+            <div class="chart-controls">
+                <select class="chart-type" data-chart-id="chart5">
+                    <option value="bar">Barra</option>
+                    <option value="line">Linha</option>
+                    <option value="pie">Pizza</option>
+                </select>
+            </div>
+            <canvas id="chart5"></canvas>
         </div>
     </div>
     <script>
@@ -72,16 +111,8 @@
                         datasets: [{
                             label: 'Melhores Serviços',
                             data: [],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)'
-                            ],
+                            backgroundColor: [],
+                            borderColor: [],
                             borderWidth: 1
                         }]
                     },
@@ -95,7 +126,7 @@
                     }
                 },
                 'chart2': {
-                    type: 'line',
+                    type: 'bar',
                     data: {
                         labels: [],
                         datasets: [{
@@ -115,28 +146,62 @@
                         }
                     }
                 },
-                'chart3': {
-                    type: 'pie',
+                // 'chart3': {
+                //     type: 'pie',
+                //     data: {
+                //         labels: [],
+                //         datasets: [{
+                //             label: 'Faturamento',
+                //             data: [],
+                //             backgroundColor: [],
+                //             borderColor: [],
+                //             borderWidth: 1
+                //         }]
+                //     },
+                //     options: {
+                //         responsive: true
+                //     }
+                // },
+                'chart4': {
+                    type: 'bar',
                     data: {
                         labels: [],
                         datasets: [{
-                            label: 'Faturamento',
+                            label: 'Agendamentos Cancelados',
                             data: [],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)'
-                            ],
+                            backgroundColor: [],
+                            borderColor: [],
                             borderWidth: 1
                         }]
                     },
                     options: {
-                        responsive: true
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                },
+                'chart5': {
+                    type: 'bar',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: 'Agendamentos Reagendados',
+                            data: [],
+                            backgroundColor: [],
+                            borderColor: [],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
                     }
                 }
             };
@@ -182,6 +247,12 @@
                     case 'chart3':
                         url = `{{ env('app_url') }}/api/dashboard/getData/revenueAnalysis/${formattedStartDate}/${formattedEndDate}/${collaboratorId}`;
                         break;
+                    case 'chart4':
+                        url = `{{ env('app_url') }}/api/dashboard/getData/canceledAppointments/${formattedStartDate}/${formattedEndDate}/${collaboratorId}`;
+                        break;
+                    case 'chart5':
+                        url = `{{ env('app_url') }}/api/dashboard/getData/rescheduledAppointments/${formattedStartDate}/${formattedEndDate}/${collaboratorId}`;
+                        break;
                 }
 
                 fetch(url)
@@ -191,6 +262,14 @@
                         if (data.labels && data.data) {
                             chart.data.labels = data.labels;
                             chart.data.datasets[0].data = data.data;
+
+                            // Gera cores aleatórias
+                            const backgroundColors = data.labels.map(() => getRandomColor());
+                            const borderColors = data.labels.map(() => getRandomColor());
+
+                            chart.data.datasets[0].backgroundColor = backgroundColors;
+                            chart.data.datasets[0].borderColor = borderColors;
+
                             chart.update();
                         } else {
                             console.error(`Dados inválidos para ${chartId}:`, data);
@@ -205,6 +284,13 @@
                 const month = String(date.getMonth() + 1).padStart(2, '0'); // Janeiro é 0!
                 const year = date.getFullYear();
                 return `${year}-${month}-${day}`;
+            }
+
+            function getRandomColor() {
+                const r = Math.floor(Math.random() * 256);
+                const g = Math.floor(Math.random() * 256);
+                const b = Math.floor(Math.random() * 256);
+                return `rgba(${r}, ${g}, ${b}, 0.6)`;
             }
         });
     </script>
