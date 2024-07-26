@@ -1,36 +1,40 @@
-header{
+/* Estilos para o cabeçalho */
+header {
     width: 100%;
     background-color: #3A4976;
 }
 
-.nav-allcompany{
+/* Estilos para o menu de navegação */
+.nav-allcompany {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.nav-allcompany img{
+.nav-allcompany img {
     width: 150px;
 }
 
-.title-home{
+/* Estilos para o título principal */
+.title-home {
     padding: 20px;
     text-align: center;
 }
 
-.title-home h3{
+.title-home h3 {
     font-size: 22px;
     text-transform: uppercase;
     font-weight: 900;
 }
 
+/* Estilos para o grupo de entrada */
 .input-group .input-group-text {
     background-color: #3A4976;
     border: none;
 }
 
-.input-group-text i{
+.input-group-text i {
     color: white;
 }
 
@@ -38,6 +42,7 @@ header{
     border-left: none;
 }
 
+/* Estilos para a informação de pesquisa */
 .search-info {
     color: #6c757d;
     font-size: 0.9rem;
@@ -45,6 +50,7 @@ header{
     text-align: center;
 }
 
+/* Estilos para o cartão personalizado */
 .card-custom {
     background-color: #3A4976;
     border-radius: 10px;
@@ -52,8 +58,13 @@ header{
     text-align: center;
     width: 300px;
     margin: 20px auto;
+    position: relative;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos para a imagem do colaborador */
 .profile-collaborator img {
     border-radius: 50%;
     width: 80px;
@@ -67,14 +78,38 @@ header{
     text-overflow: ellipsis;
 }
 
+/* Estilos para o rótulo de promoção */
+.promotion-label {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #48aa71;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 1;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+/* Estilos para a barra de status */
 .status {
     display: flex;
     justify-content: space-between;
     margin: 10px 0;
 }
 
-.status .list-address{
-    padding: 0px;
+.status .list-address {
+    padding: 0;
     gap: 10px;
     list-style: none;
     display: flex;
@@ -83,6 +118,7 @@ header{
     justify-content: flex-start;
 }
 
+/* Estilos para os botões na home */
 .buttons-home {
     width: 100%;
     display: flex;
@@ -90,49 +126,35 @@ header{
     gap: 6px;
 }
 
-.buttons-home button{
+.buttons-home button, .buttons-home a {
     width: 50%;
     background-color: #3A4976;
     border: #3A4976 solid 1px;
 }
 
-.buttons-home a{
-    width: 50%;
-    background-color: #3A4976;
-    border: #3A4976 solid 1px;
-}
-
-.buttons-home button:hover{
-    width: 50%;
+.buttons-home button:hover, .buttons-home a:hover {
     background-color: #5a6793;
     border: #5a6793 solid 1px;
 }
 
-.buttons-home a:hover{
-    width: 50%;
-    background-color: #5a6793;
-    border: #5a6793 solid 1px;
-}
-
-
+/* Estilos para o modal */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1050; /* Higher than default Bootstrap z-index */
+    display: none;
+    position: fixed;
+    z-index: 1050;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Adicionando um estilo para a camada de fundo para garantir que seja ocultada */
 .modal-backdrop {
-    display: none !important; /* Certifique-se de que o backdrop seja removido */
+    display: none !important;
 }
 
 .modal-dialog {
@@ -149,7 +171,7 @@ header{
 }
 
 .title-localization {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     position: relative;
     font-weight: 600;
     text-transform: uppercase;
@@ -165,7 +187,7 @@ header{
     height: 28px;
     border-radius: 50%;
     border: none;
-    color: #000000;
+    color: #000;
     font-size: 20px;
     font-weight: bold;
     display: flex;
@@ -173,18 +195,15 @@ header{
     align-items: center;
     cursor: pointer;
     padding: 0;
-    /* Remove any default padding */
 }
 
 .title-localization::after {
     content: '';
     position: absolute;
     bottom: -47px;
-    /* Adjust this value to move the arrow up/down */
     left: 6%;
     transform: translateX(-50%);
     border-width: 16px;
-    /* Size of the arrow */
     border-style: solid;
     border-color: #3a4976 transparent transparent transparent;
 }
@@ -205,11 +224,10 @@ header{
     border: solid 5px #3A4976;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 30px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
-
-.buttons-modalLocalization{
+.buttons-modalLocalization {
     background-color: #edf3f6;
     gap: 12px;
     padding: 12px;
@@ -218,7 +236,7 @@ header{
     width: 100%;
 }
 
-#exitModalLocalization{
+#exitModalLocalization {
     margin-right: 20px;
     color: red;
     font-weight: 300;
@@ -233,7 +251,7 @@ header{
     border-radius: 2px;
 }
 
-#goMaps{
+#goMaps {
     margin-right: 10px;
     color: #edf3f6;
     font-weight: 300;
@@ -251,3 +269,41 @@ header{
     margin-top: 20px;
 }
 
+/* Responsividade */
+@media (max-width: 768px) {
+    .card-custom {
+        margin-bottom: 15px;
+        width: 80%;
+    }
+
+    .buttons-home button, .buttons-home a {
+        width: 48%;
+    }
+}
+
+@media (max-width: 576px) {
+    .promotion-label {
+        font-size: 12px;
+        padding: 3px 6px;
+        top: 5px;
+        right: 5px;
+    }
+
+    .title-home h3 {
+        font-size: 18px;
+    }
+
+    .profile-collaborator img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .card-custom {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .buttons-home button, .buttons-home a {
+        width: 100%;
+    }
+}

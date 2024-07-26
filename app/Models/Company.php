@@ -15,4 +15,10 @@ class Company extends Model
     {
         return $this->hasOne(Style::class, 'companyfk');
     }
+
+    public function promotions()
+    {
+        return $this->hasMany(Promotion::class, 'companyfk');
+    }
+
 }

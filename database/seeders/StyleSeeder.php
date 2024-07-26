@@ -21,7 +21,17 @@ class StyleSeeder extends Seeder
                 'companyfk' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
+            [
+                'colorText' => '#f8fafc',
+                'logo' => 'teste',
+                'name' => 'Padrão MyCorte',
+                'primaryColor' => '#3A4976',
+                'secondaryColor' => '#fca5a5',
+                'companyfk' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }

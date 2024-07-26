@@ -20,6 +20,7 @@ class PromotionSeeder extends Seeder
                 'dataHourFinal' => '2024-07-31 23:59:59',
                 'value' => 50.00,
                 'servicefk' => 1,
+                'companyfk' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -29,6 +30,7 @@ class PromotionSeeder extends Seeder
                 'dataHourFinal' => '2024-12-31 23:59:59',
                 'value' => 60.00,
                 'servicefk' => 2,
+                'companyfk' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -38,6 +40,7 @@ class PromotionSeeder extends Seeder
                 'dataHourFinal' => '2024-04-30 23:59:59',
                 'value' => 40.00,
                 'servicefk' => 1,
+                'companyfk' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -47,9 +50,11 @@ class PromotionSeeder extends Seeder
                 'dataHourFinal' => '2024-10-31 23:59:59',
                 'value' => 55.00,
                 'servicefk' => 2,
+                'companyfk' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+
         ]);
     }
 }

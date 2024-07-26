@@ -9,17 +9,14 @@ class AllCompanyController extends Controller
 {
     public function index()
     {
-        $company = Company::with('style')->get();
-
-        return view('allcompany', ['companies' => $company]);
+        $companies = Company::with(['style', 'promotions'])->get();
+        return view('allcompany', ['companies' => $companies]);
     }
-
 
     public function search(Request $request)
     {
         $query = $request->input('query');
-
-        $companies = Company::with('style')
+        $companies = Company::with(['style', 'promotions'])
             ->where('name', 'LIKE', "%{$query}%")
             ->orWhere('city', 'LIKE', "%{$query}%")
             ->orWhere('neighborhood', 'LIKE', "%{$query}%")
@@ -29,4 +26,5 @@ class AllCompanyController extends Controller
 
         return response()->json($companies);
     }
+
 }

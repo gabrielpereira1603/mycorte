@@ -19,6 +19,8 @@ return new class extends Migration
             $table->decimal('value', 10, 2);
             $table->unsignedBigInteger('servicefk');
             $table->foreign('servicefk')->references('id')->on('service')->onDelete('cascade');
+            $table->unsignedBigInteger('companyfk');
+            $table->foreign('companyfk')->references('id')->on('company')->onDelete('cascade');
             $table->timestamps();
         });
     }

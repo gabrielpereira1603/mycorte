@@ -64,12 +64,14 @@
     </div>
 </div>
 
-
 <section class="container mt-4">
     <div class="row" id="company-cards">
         @foreach ($companies as $company)
             <div class="col-md-6 col-lg-4">
-                <div class="card card-custom" style="border: solid black 1px;">
+                <div class="card card-custom">
+                    @if ($company->promotions->isNotEmpty())
+                        <div class="promotion-label animate__animated animate__pulse">Promoção</div>
+                    @endif
                     <div class="profile-collaborator">
                         <img src="{{ $company->style->logo }}" alt="Profile Picture">
                         <h3 class="mt-2">{{ $company->name }}</h3>
@@ -92,7 +94,6 @@
     </div>
 </section>
 
-
 <div id="localizationModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content modal-myaccount-localization" style="max-width: 450px !important;">
@@ -109,7 +110,6 @@
         </div>
     </div>
 </div>
-
 
 <script>
     $(document).ready(function() {
@@ -178,58 +178,54 @@
                     if (data.length === 0) {
                         $('#company-cards').html(`
                         <p>Nenhuma empresa encontrada</p>
-                        <p><a href="#" id="show-all-companies" style="text-decoration: underline;">Ver todas disponíveis...</a></p>
-                    `);
-                        $('#show-all-companies').click(function(e) {
-                            e.preventDefault();
-                            window.location.href = "{{ route('allCompany') }}"; // Recarregar a página na rota allCompany
-                        });
+                        <p><a href="#" id="show-all-companies" style="text-decoration: underline; color: blue;">Mostrar todas as empresas</a></p>
+                        `);
                     } else {
-                        $.each(data, function(key, company) {
-                            var card = `
-                            <div class="col-md-6 col-lg-4">
-                                <div class="card card-custom" style="border: solid black 1px;">
-                                    <div class="profile-collaborator">
-                                        <img src="${company.style.logo}" alt="Profile Picture">
-                                        <h3 class="mt-2">${company.name}</h3>
-                                    </div>
-                                    <div class="status">
-                                       <ul class="list-address">
-                                           <li><strong>Cidade:</strong><a> ${company.city}</a></li>
-                                           <li><strong>Número:</strong><a> ${company.number}</a></li>
-                                           <li><strong>Bairro:</strong><a> ${company.neighborhood}</a></li>
-                                           <li><strong>Estado:</strong><a> ${company.state}</a></li>
-                                       </ul>
-                                    </div>
-                                    <div class="buttons-home">
-                                        <a class="btn btn-dark" href="">Endereço</a>
-                                        <a class="btn btn-dark" href="{{ route('homeclient', ['tokenCompany' => '` + company.token + `']) }}">Agendar</a>
+                        $.each(data, function(index, company) {
+                            $('#company-cards').append(`
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card card-custom">
+                                        ${company.promotions.length ? '<div class="promotion-label animate__animated animate__pulse">Promoções</div>' : ''}
+                                        <div class="profile-collaborator">
+                                            <img src="${company.style.logo}" alt="Profile Picture">
+                                            <h3 class="mt-2">${company.name}</h3>
+                                        </div>
+                                        <div class="status">
+                                            <ul class="list-address">
+                                                <li><strong>Cidade:</strong><a> ${company.city}</a></li>
+                                                <li><strong>Número:</strong><a> ${company.number}</a></li>
+                                                <li><strong>Bairro:</strong><a> ${company.neighborhood}</a></li>
+                                                <li><strong>Estado:</strong><a> ${company.state}</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="buttons-home">
+                                            <button class="btn btn-dark btn-map" data-bs-toggle="modal" data-bs-target="#localizationModal" data-localization="${company.localization}">Localização</button>
+                                            <a class="btn btn-dark" href="{{ route('homeclient', ['tokenCompany' => '` + company.token + `']) }}">Agendar</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        `;
-                            $('#company-cards').append(card);
+                            `);
                         });
                     }
-                    $('#loading-spinner').addClass('d-none');  // Esconder o spinner
+                    $('#loading-spinner').addClass('d-none');  // Ocultar o spinner
                 },
                 error: function() {
-                    $('#loading-spinner').addClass('d-none');  // Esconder o spinner em caso de erro
+                    $('#company-cards').html('<p>Erro ao buscar empresas. Tente novamente.</p>');
+                    $('#loading-spinner').addClass('d-none');  // Ocultar o spinner
                 }
             });
-        }, 300);
+        }, 500);
 
-        $('#search-input').on('keyup', function() {
-            const query = $(this).val();
-            if (query.length === 0) {
-                window.location.reload(); // Reload page to show all companies
-            } else {
-                fetchCompanies(query);
-            }
+        $('#search-input').on('input', function() {
+            fetchCompanies($(this).val());
+        });
+
+        $('#show-all-companies').click(function(e) {
+            e.preventDefault();
+            $('#search-input').val('');
+            fetchCompanies('');
         });
     });
-
-
 </script>
 </body>
 </html>
