@@ -29,5 +29,10 @@ class Promotion extends Model
         return $this->belongsTo(Company::class, 'companyfk');
     }
 
+    public function collaborator()
+    {
+        return $this->belongsTo(Collaborator::class, 'collaboratorfk');
+    }
+
 
 }

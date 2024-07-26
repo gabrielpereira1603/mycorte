@@ -20,4 +20,9 @@ class Collaborator extends Authenticatable
     {
         return $this->hasMany(Service::class, 'collaboratorfk', 'id');
     }
+
+    public function promotion(): HasMany
+    {
+        return $this->hasMany(Promotion::class, 'collaboratorfk', 'id');
+    }
 }

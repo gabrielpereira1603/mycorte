@@ -20,15 +20,19 @@ class HomeClientController extends Controller
             abort(404, 'Empresa não encontrada');
         }
 
-        // Buscar todos os colaboradores com seus serviços
-        $collaborators = Collaborator::with('service')
-            ->where('companyfk', $company->id) // Filtrar pelos colaboradores da empresa encontrada
-            ->get();
+        // Buscar todos os colaboradores com seus serviços e promoções
+        $collaborators = Collaborator::with('service', 'promotion') // Assumindo que você tem uma relação 'promotion' no modelo Collaborator
+        ->where('companyfk', $company->id) // Filtrar pelos colaboradores da empresa encontrada
+        ->get();
 
         // Formatando os serviços de cada colaborador em uma string separada por vírgulas
         foreach ($collaborators as $collaborator) {
             $services = $collaborator->service->pluck('name')->implode(', ');
             $collaborator->formatted_services = $services;
+
+            // Adicionando as promoções
+            $promotions = $collaborator->promotion->pluck('description')->implode(', '); // ou outra lógica para exibir promoções
+            $collaborator->formatted_promotions = $promotions;
         }
 
         return view('Client.homeClient', [
@@ -36,4 +40,5 @@ class HomeClientController extends Controller
             'collaborators' => $collaborators,
         ]);
     }
+
 }

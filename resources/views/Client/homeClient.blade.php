@@ -13,6 +13,9 @@
                             <h3 class="mt-2">{{ $collaborator->name }}</h3>
                             <p><strong>Serviços:</strong> <span class="services-tooltip" data-tooltip="{{ $collaborator->formatted_services }}">{{ $collaborator->formatted_services }}</span></p>
                         </div>
+                        @if ($collaborator->formatted_promotions)
+                            <div class="promotion-label animate__animated animate__pulse">Promoção</div>
+                        @endif
                         <div class="status">
                             <div class="status-info">
                                 <img class="home-status-icon statusTelefone" width="20px" src="{{ asset('images/icons/iconTelephoneColorMyCorte.png') }}" alt="Telefone">

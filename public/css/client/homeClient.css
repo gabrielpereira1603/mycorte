@@ -1,14 +1,16 @@
-.title-home{
+/* Estilos para o título principal */
+.title-home {
     padding: 20px;
     text-align: center;
 }
 
-.title-home h3{
+.title-home h3 {
     font-size: 22px;
     text-transform: uppercase;
     font-weight: 900;
 }
 
+/* Estilos para o cartão personalizado */
 .card-custom {
     background-color: #3A4976;
     border-radius: 10px;
@@ -16,8 +18,13 @@
     text-align: center;
     width: 300px;
     margin: 20px auto;
+    position: relative;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos para a imagem do colaborador */
 .profile-collaborator img {
     border-radius: 50%;
     width: 80px;
@@ -31,25 +38,26 @@
     text-overflow: ellipsis;
 }
 
+/* Estilos para a barra de status */
 .status {
     display: flex;
     justify-content: space-between;
     margin: 10px 0;
 }
 
-.status-info{
+.status-info {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 4px;
 }
 
-
 .status div {
     display: flex;
     align-items: center;
 }
 
+/* Estilos para os botões na home */
 .buttons-home {
     display: flex;
     justify-content: space-between;
@@ -59,4 +67,71 @@
     width: 45%;
     background-color: #3A4976;
     border: #424242 solid 1px;
+}
+
+.buttons-home a:hover {
+    background-color: #5a6793;
+    border: #5a6793 solid 1px;
+}
+
+/* Estilos para o rótulo de promoção */
+.promotion-label {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #48aa71; /* Verde chamativo */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 1;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .card-custom {
+        margin-bottom: 15px;
+        width: 80%;
+    }
+
+    .buttons-home a {
+        width: 48%;
+    }
+}
+
+@media (max-width: 576px) {
+    .promotion-label {
+        font-size: 12px;
+        padding: 3px 6px;
+        top: 5px;
+        right: 5px;
+    }
+
+    .title-home h3 {
+        font-size: 18px;
+    }
+
+    .profile-collaborator img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .card-custom {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .buttons-home a {
+        width: 100%;
+    }
 }
