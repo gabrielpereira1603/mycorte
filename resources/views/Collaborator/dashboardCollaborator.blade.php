@@ -92,6 +92,25 @@
             </div>
             <canvas id="chart5"></canvas>
         </div>
+
+        <!-- Análise dos Horários com Mais Agendamentos -->
+        <div class="chart-container" id="chartContainer6">
+            <h5 class="chart-title">Análise dos Horários com Mais Agendamentos</h5>
+            <p class="chart-description">Visualize os horários que seus clientes mais gostam!</p>
+            <div class="date-picker-container">
+                <input type="text" class="datepicker" id="start-date6" placeholder="Início">
+                <input type="text" class="datepicker" id="end-date6" placeholder="Fim">
+            </div>
+            <div class="chart-controls">
+                <select class="chart-type" data-chart-id="chart6">
+                    <option value="bar">Barra</option>
+                    <option value="line">Linha</option>
+                    <option value="pie">Pizza</option>
+                </select>
+            </div>
+            <canvas id="chart6"></canvas>
+        </div>
+
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -203,6 +222,27 @@
                             }
                         }
                     }
+                },
+                'chart6': {
+                    type: 'bar',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: 'Horários com Mais Agendamentos',
+                            data: [],
+                            backgroundColor: [],
+                            borderColor: [],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
                 }
             };
 
@@ -252,6 +292,9 @@
                         break;
                     case 'chart5':
                         url = `{{ env('app_url') }}/api/dashboard/getData/rescheduledAppointments/${formattedStartDate}/${formattedEndDate}/${collaboratorId}`;
+                        break;
+                    case 'chart6':
+                        url = `{{ env('app_url') }}/api/dashboard/getData/timeAnalysis/${formattedStartDate}/${formattedEndDate}/${collaboratorId}`;
                         break;
                 }
 

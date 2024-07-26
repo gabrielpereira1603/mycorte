@@ -158,6 +158,29 @@ class DashboardCollaboratorApiController extends Controller
         ]);
     }
 
+    public function fetchTimeAnalysisData($startDate, $endDate, $collaboratorId)
+    {
+        $startDate = Carbon::createFromFormat('Y-m-d', $startDate)->startOfDay();
+        $endDate = Carbon::createFromFormat('Y-m-d', $endDate)->endOfDay();
+
+        $times = DB::table('schedule')
+            ->select(DB::raw('CONCAT(hourStart, "-", hourFinal) as time_range'), DB::raw('COUNT(*) as count'))
+            ->whereBetween('date', [$startDate, $endDate])
+            ->where('collaboratorfk', 2) // Filtra pelo colaborador
+            ->groupBy('time_range')
+            ->orderBy('count', 'desc')
+            ->get();
+
+        $labels = $times->pluck('time_range');
+        $data = $times->pluck('count');
+
+        return response()->json([
+            'labels' => $labels,
+            'data' => $data
+        ]);
+    }
+
+
 
 
 }

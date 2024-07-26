@@ -28,4 +28,5 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/getData/revenueAnalysis/{startDate}/{endDate}/{collaboratorId}', [DashboardCollaboratorApiController::class, 'fetchRevenueAnalysisData']);
     Route::get('/getData/canceledAppointments/{startDate}/{endDate}/{collaboratorId}', [DashboardCollaboratorApiController::class, 'fetchCanceledAppointmentsData']);
     Route::get('/getData/rescheduledAppointments/{startDate}/{endDate}/{collaboratorId}', [DashboardCollaboratorApiController::class, 'fetchRescheduledAppointmentsData']);
+    Route::get('/getData/timeAnalysis/{startDate}/{endDate}/{collaboratorId}', [DashboardCollaboratorApiController::class, 'fetchTimeAnalysisData']);
 });
