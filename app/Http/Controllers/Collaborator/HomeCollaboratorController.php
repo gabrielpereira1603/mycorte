@@ -22,7 +22,7 @@ class HomeCollaboratorController extends Controller
         $schedules = Schedule::where('collaboratorfk', $collaborator->id)
             ->whereDate('date', '>=', $now->toDateString())
             ->whereDate('date', '<=', $oneDayLater->toDateString())
-            ->where('statusSchedulefk', 1) // Filtra pelo status 'Agendado'
+            ->where('statusSchedulefk', 1)
             ->where(function ($query) use ($now, $oneDayLater) {
                 $query->where(function ($subQuery) use ($now, $oneDayLater) {
                     $subQuery->whereBetween('hourStart', [$now->format('H:i:s'), '23:59:59'])
@@ -35,6 +35,7 @@ class HomeCollaboratorController extends Controller
             })
             ->with('client', 'services') // Carrega os clientes e serviços relacionados
             ->get();
+
 
         // Filtra os agendamentos que já passaram
         $schedules = $schedules->filter(function ($schedule) use ($now) {

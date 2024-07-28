@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="{{ asset('css/collaborator/dashboardCollaborator.css') }}">
         <link rel="stylesheet" href="{{ asset('css/collaborator/configurations/configCollaborator.css') }}">
         <link rel="stylesheet" href="{{ asset('css/collaborator/configurations/configAvailability.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/basicModal.css') }}">
 
 
         <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
@@ -22,6 +23,7 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" type="text/javascript"></script>
         <title>{{ $title ?? 'MyCorte' }}</title>
         <style>
             .alert-container {

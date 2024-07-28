@@ -12,12 +12,11 @@ class DashboardCollaboratorApiController extends Controller
 {
     public function fetchBestServicesData($startDate, $endDate, $collaboratorId)
     {
-
-        //Log::info(Auth::guard('collaborator')->user()->id);
         $startDate = Carbon::createFromFormat('Y-m-d', $startDate)->startOfDay();
         $endDate = Carbon::createFromFormat('Y-m-d', $endDate)->endOfDay();
 
         $services = DB::table('schedule_service')
+            ->where('id', $collaboratorId)
             ->join('service', 'schedule_service.service_id', '=', 'service.id')
             ->select('service.name', DB::raw('COUNT(*) as count'))
             ->whereBetween('schedule_service.created_at', [$startDate, $endDate])
@@ -36,7 +35,6 @@ class DashboardCollaboratorApiController extends Controller
 
     public function fetchScheduleAnalysisData($startDate, $endDate, $collaboratorId)
     {
-        Log::info($collaboratorId);
         $startDate = Carbon::createFromFormat('Y-m-d', $startDate)->startOfDay();
         $endDate = Carbon::createFromFormat('Y-m-d', $endDate)->endOfDay();
 
@@ -54,7 +52,7 @@ class DashboardCollaboratorApiController extends Controller
         $daysOfWeek = DB::table('schedule')
             ->select(DB::raw('DAYOFWEEK(date) as day_of_week'), DB::raw('COUNT(*) as count'))
             ->whereBetween('date', [$startDate, $endDate])
-            ->where('collaboratorfk', 2)
+            ->where('collaboratorfk', $collaboratorId)
             ->where('statusSchedulefk', $finalizedStatusId) // Adiciona a condição para status "Finalizado"
             ->groupBy('day_of_week')
             ->orderBy('day_of_week')
@@ -101,7 +99,7 @@ class DashboardCollaboratorApiController extends Controller
         $daysOfWeek = DB::table('schedule')
             ->select(DB::raw('DAYOFWEEK(date) as day_of_week'), DB::raw('COUNT(*) as count'))
             ->whereBetween('date', [$startDate, $endDate])
-            ->where('collaboratorfk', 2)
+            ->where('collaboratorfk', $collaboratorId)
             ->where('statusSchedulefk', $canceledStatusId) // Adiciona a condição para status "Cancelado"
             ->groupBy('day_of_week')
             ->orderBy('day_of_week')
@@ -139,7 +137,7 @@ class DashboardCollaboratorApiController extends Controller
         $daysOfWeek = DB::table('schedule')
             ->select(DB::raw('DAYOFWEEK(date) as day_of_week'), DB::raw('COUNT(*) as count'))
             ->whereBetween('date', [$startDate, $endDate])
-            ->where('collaboratorfk', 2)
+            ->where('collaboratorfk', $collaboratorId)
             ->where('statusSchedulefk', $rescheduledStatusId) // Adiciona a condição para status "Reagendado"
             ->groupBy('day_of_week')
             ->orderBy('day_of_week')
@@ -166,7 +164,7 @@ class DashboardCollaboratorApiController extends Controller
         $times = DB::table('schedule')
             ->select(DB::raw('CONCAT(hourStart, "-", hourFinal) as time_range'), DB::raw('COUNT(*) as count'))
             ->whereBetween('date', [$startDate, $endDate])
-            ->where('collaboratorfk', 2) // Filtra pelo colaborador
+            ->where('collaboratorfk', $collaboratorId) // Filtra pelo colaborador
             ->groupBy('time_range')
             ->orderBy('count', 'desc')
             ->get();

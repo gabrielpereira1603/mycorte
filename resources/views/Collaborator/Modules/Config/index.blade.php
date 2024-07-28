@@ -24,8 +24,9 @@
                         </strong>
                     </small>
                     <form method="get" class="cardAvailability-form">
-                        <a href="{{ route('config.availability.edit', ['tokenCompany' => $tokenCompany]) }}" class="btn btn-warning">
-                            <span style="margin-right: 5px;"></span>
+                        <a href="{{ route('config.availability.edit', ['tokenCompany' => $tokenCompany]) }}" class="btn btn-warning" style="border: rgba(128,128,128,0.78) solid 1px">
+                            <i class="fa-solid fa-pen-to-square"></i>
+
                             Editar Disponibilidade
                         </a>
                     </form>
@@ -40,7 +41,7 @@
                         <span>
                             <img src="{{ asset('images/icons/intervalIcon.png') }}" alt="Icone de Intervalo" width="30px">
                         </span>
-                        Configurações de Intervalos
+                        Configuração de Intervalos
                         <hr style="margin: 8px 0px">
                     </h5>
                 </div>
@@ -51,9 +52,9 @@
                         </strong>
                     </small>
                     <form method="get" class="cardAvailability-form">
-                        <a href="{{ route('config.availability.edit', ['tokenCompany' => $tokenCompany]) }}" class="btn btn-warning">
-                            <span style="margin-right: 5px;"></span>
-                            Editar Disponibilidade
+                        <a href="{{ route('config.availability.edit', ['tokenCompany' => $tokenCompany]) }}" class="btn btn-warning"  style="border: rgba(128,128,128,0.78) solid 1px">
+                            <i class="fa-solid fa-gears"></i>
+                            Configurar Intervalos
                         </a>
                     </form>
                 </div>

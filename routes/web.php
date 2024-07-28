@@ -22,7 +22,7 @@ use App\Http\Controllers\Collaborator\Login\LoginCollaboratorController;
 use App\Http\Controllers\Collaborator\Login\LogoutCollaboratorController;
 use App\Http\Controllers\Collaborator\Modules\Configuration\ConfigAvailabilityCollaboratorController;
 use App\Http\Controllers\Collaborator\Modules\Configuration\ConfigCollaboratorController;
-use App\Http\Controllers\Collaborator\ServicesCollaboratorController;
+use App\Http\Controllers\Collaborator\Modules\Services\ServicesCollaboratorController;
 use App\Http\Controllers\Session\SessionStoreController;
 use App\Http\Middleware\CheckCompany;
 use App\Http\Middleware\Client\RedirectIfAuthenticatedClient;
@@ -95,6 +95,10 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
     Route::middleware([AuthenticateCollaborator::class])->group(function () {
         Route::get('/home/{tokenCompany}', [HomeCollaboratorController::class, 'index'])->name('homecollaborator');
         Route::get('/services/{tokenCompany}', [ServicesCollaboratorController::class, 'services'])->name('servicescollaborator');
+        Route::post('/collaborator/services/add/{tokenCompany}', [ServicesCollaboratorController::class, 'addService'])->name('collaborator.service.add');
+        Route::post('/collaborator/services/delete/{tokenCompany}', [ServicesCollaboratorController::class, 'deleteService'])->name('collaborator.service.delete');
+        Route::post('/collaborator/services/edit/{tokenCompany}', [ServicesCollaboratorController::class, 'editService'])->name('collaborator.service.edit');
+        Route::post('/collaborator/services/active/{tokenCompany}', [ServicesCollaboratorController::class, 'activeService'])->name('collaborator.service.active');
 
         Route::prefix('config')->name('config.')->group(function () {
             Route::get('/{tokenCompany}', [ConfigCollaboratorController::class, 'index'])->name('index');
@@ -105,8 +109,6 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
 
         });
 
-        Route::post('/collaborator/services/add/{tokenCompany}', [ServicesCollaboratorController::class, 'addService'])->name('collaborator.service.add');
-        Route::post('/collaborator/services/edit/{tokenCompany}', [ServicesCollaboratorController::class, 'editService'])->name('collaborator.service.edit');
         Route::get('/dashboard/{tokenCompany}', [DashboardController::class, 'index'])->name('dashboard');
     });
 });

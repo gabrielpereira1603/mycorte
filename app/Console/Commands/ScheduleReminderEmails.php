@@ -10,44 +10,35 @@ use Illuminate\Support\Facades\Log;
 
 class ScheduleReminderEmails extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'emails:send-reminders';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Enviar e-mails de lembrete para schedules';
 
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
-        $now = Carbon::now();
-        $targetTime = $now->addMinutes(30)->toTimeString();
+        // Define o timezone para São Paulo
+        $now = Carbon::now('America/Sao_Paulo');
+        $targetTime = $now->copy()->addHour();  // Configura para uma hora a partir de agora
 
         Log::info("Current DateTime: " . $now->toDateTimeString());
-        Log::info("Target Time: " . $targetTime);
+        Log::info("Target Time: " . $targetTime->toDateTimeString());
 
-        $schedules = Schedule::whereDate('date', $now->toDateString())
-            //->whereTime('hourStart', $targetTime)
-            //->where('reminderEmailSent', false)
+        // Busca agendamentos para a próxima hora
+        $schedules = Schedule::where('scheduled_at', '>=', $now)
+            ->where('scheduled_at', '<=', $targetTime)
+            ->where('reminderEmailSent', false)
             ->get();
 
         Log::info("Found Schedules: " . $schedules->count());
 
         foreach ($schedules as $schedule) {
-            Log::info("Dispatching email for schedule ID: " . $schedule->id);
+            Log::info("Dispatching email for schedule ID: " . $schedule->id . " Scheduled At: " . $schedule->scheduled_at);
             SendReminderEmail::dispatch($schedule);
+            // Atualizar o agendamento para marcar que o e-mail de lembrete foi enviado
+            $schedule->reminderEmailSent = true;
+            $schedule->save();
+            Log::info("Email dispatched for schedule ID: " . $schedule->id);
         }
 
         return 0;
-
     }
 }

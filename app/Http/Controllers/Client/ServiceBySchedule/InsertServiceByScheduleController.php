@@ -36,10 +36,8 @@ class InsertServiceByScheduleController extends Controller
         $conflictingSchedules = Schedule::where('date', $request->input('date'))
             ->where('statusSchedulefk', 1) // Verificando apenas agendamentos com status "Agendado"
             ->where(function($query) use ($request) {
-                $query->where(function($query) use ($request) {
-                    $query->where('hourStart', '<', $request->input('end'))
-                        ->where('hourFinal', '>', $request->input('start'));
-                });
+                $query->where('hourStart', '<', $request->input('end'))
+                    ->where('hourFinal', '>', $request->input('start'));
             })
             ->exists();
 
@@ -56,6 +54,7 @@ class InsertServiceByScheduleController extends Controller
             $schedule->date = $request->input('date');
             $schedule->hourStart = $request->input('start');
             $schedule->hourFinal = $request->input('end');
+            $schedule->scheduled_at = Carbon::createFromFormat('Y-m-d H:i', $request->input('date') . ' ' . $request->input('start'));
             $schedule->clientfk = auth('client')->user()->id; // Ajuste conforme sua lógica de autenticação
             $schedule->collaboratorfk = $request->input('idCollaborator');
             $schedule->statusSchedulefk = 1; // Status padrão

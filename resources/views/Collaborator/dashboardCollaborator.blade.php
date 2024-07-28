@@ -111,6 +111,10 @@
             <canvas id="chart6"></canvas>
         </div>
 
+        @if($collaborator->role === 'COLLABORATOR')
+
+        @endif
+
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -273,8 +277,7 @@
 
                 const formattedStartDate = formatDate(startDate);
                 const formattedEndDate = formatDate(endDate);
-                const collaboratorId = {{ $collaboratorId }}; // Certifique-se de que $collaboratorId está disponível no contexto
-
+                const collaboratorId = {{ $collaborator->id }}; // Certifique-se de que $collaboratorId está disponível no contexto
                 let url = '';
 
                 switch(chartId) {

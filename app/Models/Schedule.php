@@ -14,12 +14,15 @@ class Schedule extends Model
         'date',
         'hourStart',
         'hourFinal',
+        'scheduled_at',
         'reminderEmailSent',
         'clientfk',
         'collaboratorfk',
         'statusSchedulefk',
-        'companyfk',
+        'companyfk'
     ];
+
+    protected $dates = ['scheduled_at'];
 
     public function client()
     {

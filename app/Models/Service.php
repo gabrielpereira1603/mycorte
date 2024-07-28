@@ -11,6 +11,9 @@ class Service extends Model
 
     protected $table = 'service';
 
+    protected $fillable = ['name', 'time', 'value', 'enabled', 'collaboratorfk'];
+
+
     public function schedules()
     {
         return $this->belongsToMany(Schedule::class);

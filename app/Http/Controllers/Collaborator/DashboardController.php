@@ -21,7 +21,6 @@ class DashboardController extends Controller
             'counts' => [],
             'startDate' => Carbon::today()->format('d-m-Y'),
             'endDate' => Carbon::today()->format('d-m-Y'),
-            'collaboratorId' => 1 // Certifique-se de definir o ID do colaborador corretamente
         ]);
     }
 }

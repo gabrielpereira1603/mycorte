@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('name');
             $table->time('time');
             $table->double('value');
+            $table->boolean('enabled')->default(true);
             $table->unsignedBigInteger('collaboratorfk');
             $table->foreign('collaboratorfk')->references('id')->on('collaborator')->onDelete('cascade');
             $table->timestamps();

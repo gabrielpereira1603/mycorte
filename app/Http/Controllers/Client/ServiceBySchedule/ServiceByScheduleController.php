@@ -18,7 +18,7 @@ class ServiceByScheduleController extends Controller
         }
 
         $collaborator = Collaborator::where('id', $collaboratorId)->first();
-        $services = $collaborator->service;
+        $enabledServices = $collaborator->enabledServices;
 
         // Definindo valores padrão
         $redirectMessageButton = "Voltar aos Horários";
@@ -34,7 +34,7 @@ class ServiceByScheduleController extends Controller
         return view('Client.serviceFromSchedule', compact('data'), [
             'tokenCompany' => $tokenCompany,
             'collaborator' => $collaborator,
-            'services' => $services,
+            'services' => $enabledServices,
             'redirectButton' => $redirectButton,
             'redirectMessage' => $redirectMessageButton,
         ]);

@@ -21,6 +21,11 @@ class Collaborator extends Authenticatable
         return $this->hasMany(Service::class, 'collaboratorfk', 'id');
     }
 
+    public function enabledServices(): HasMany
+    {
+        return $this->hasMany(Service::class, 'collaboratorfk', 'id')->where('enabled', true);
+    }
+
     public function promotion(): HasMany
     {
         return $this->hasMany(Promotion::class, 'collaboratorfk', 'id');

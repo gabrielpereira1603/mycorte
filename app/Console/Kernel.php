@@ -4,9 +4,6 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Jobs\SendReminderEmail;
-use Illuminate\Support\Facades\Log;
-use App\Models\Schedule as ScheduleModel;
 
 class Kernel extends ConsoleKernel
 {

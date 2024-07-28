@@ -13,6 +13,7 @@ return new class extends Migration
             $table->date('date');
             $table->time('hourStart');
             $table->time('hourFinal');
+            $table->dateTime('scheduled_at');
             $table->boolean('reminderEmailSent')->default(false);
             $table->unsignedBigInteger('clientfk');
             $table->unsignedBigInteger('collaboratorfk');
