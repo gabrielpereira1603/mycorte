@@ -28,6 +28,6 @@ class Collaborator extends Authenticatable
 
     public function promotion(): HasMany
     {
-        return $this->hasMany(Promotion::class, 'collaboratorfk', 'id');
+        return $this->hasMany(Promotion::class, 'collaboratorfk');
     }
 }

@@ -7,21 +7,19 @@
             </div>
             <div class="service-profileCollaborator">
                 <h5 class="service-info">
-                <span class="iconService">
-                    <img src=" {{ asset('images/icons/horarioIcon.png') }} " alt="Icon Horário">
-                </span>
+                    <span class="iconService">
+                        <img src="{{ asset('images/icons/horarioIcon.png') }}" alt="Icon Horário">
+                    </span>
                     <strong>Horário:</strong>
                     {{ $data['start'] }} | {{ $data['end'] }}
                 </h5>
                 <h5 class="service-info">
-                <span class="iconService">
-                    <img src=" {{ asset('images/icons/calendarioIcon.png') }} " alt="Icon Data">
-                </span>
+                    <span class="iconService">
+                        <img src="{{ asset('images/icons/calendarioIcon.png') }}" alt="Icon Data">
+                    </span>
                     <strong>Data: </strong>{{ $data['date'] }}
-
                 </h5>
             </div>
-
             <div class="service-buttons">
                 <a class="btn btn-danger" href="{{ $redirectButton }}"><i class="fa-solid fa-triangle-exclamation"></i> {{ $redirectMessage }}</a>
             </div>
@@ -29,7 +27,7 @@
     </section>
 
     <h1 style="text-align: center; margin-bottom: 30px;">Selecione os serviços:</h1>
-    <form >
+    <form>
         <input type="hidden" name="start" value="start">
         <input type="hidden" name="end" value="end">
         <input type="hidden" name="date" value="date">
@@ -37,6 +35,10 @@
         <div class="main-services">
             <div class="option">
                 @foreach($services as $service)
+                    @php
+                        // Verifica se há uma promoção para o serviço
+                        $promotion = $promotions->firstWhere('servicefk', $service->id);
+                    @endphp
                     <div class="option-info">
                         <h5 class="option-name text-truncate">
                             <span class="icon-option">
@@ -45,12 +47,18 @@
                             <span class="service-name">{{ $service->name }}</span>
                         </h5>
                         <div class="option-checkBox toggle-checkbox">
-                            <span class="option-price price-value">R$ {{ number_format($service->value, 2, ',', '.') }}</span>
-                            <input type="checkbox" class="service-checkbox" id="{{ $service->name }}" data-price="{{ $service->value }}" value="{{ $service->id }}" name="services[]">
+                            <span class="option-price price-value">
+                                @if($promotion)
+                                    <span class="price-original">R$ {{ number_format($service->value, 2, ',', '.') }}</span>
+                                    <span class="price-promotion">R$ {{ number_format($promotion->value, 2, ',', '.') }}</span>
+                                @else
+                                    R$ {{ number_format($service->value, 2, ',', '.') }}
+                                @endif
+                            </span>
+                            <input type="checkbox" class="service-checkbox" id="{{ $service->name }}" data-price="{{ $promotion ? $promotion->value : $service->value }}" value="{{ $service->id }}" name="services[]">
                             <label for="{{ $service->name }}"></label>
                         </div>
                     </div>
-
                     <div class="divider-service">
                         <div></div>
                     </div>
@@ -58,9 +66,9 @@
 
                 <div class="total-price">
                     <h5 class="total-price-text">
-                    <span class="total-price-span">
-                        <img class="total-price-icon" src="{{ asset('images/icons/barbeiro.png') }}" alt="Logo Service" width="50">
-                    </span>
+                        <span class="total-price-span">
+                            <img class="total-price-icon" src="{{ asset('images/icons/barbeiro.png') }}" alt="Logo Service" width="50">
+                        </span>
                         Total:
                     </h5>
                     <div class="mount-price">
@@ -79,6 +87,7 @@
 
         <input type="hidden" id="totalPrice" name="totalPrice" value="">
     </form>
+
 
     <div class="modal fade seminor-login-modal" data-backdrop="static" id="modalSingup-ServiceFromSchedule">
         <div class="modal-dialog modal-dialog-centered">

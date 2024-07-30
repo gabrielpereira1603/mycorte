@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="buttons-home">
-                            <a class="btn btn-dark" href="{{--{{ route('services', ['collaboratorId' => $collaborator->id]) }}--}}">Serviços</a>
+{{--                            <a class="btn btn-dark" href="--}}{{--{{ route('services', ['collaboratorId' => $collaborator->id]) }}--}}{{--">Serviços</a>--}}
                             <a class="btn btn-dark" href="{{ route('scheduleclient', ['tokenCompany' => $tokenCompany, 'collaboratorId' => $collaborator->id]) }}">Horários</a>
                         </div>
                     </div>

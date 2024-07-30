@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Client\ServiceBySchedule;
 
 use App\Http\Controllers\Controller;
 use App\Models\Collaborator;
+use App\Models\Promotion;
+use Carbon\Carbon;
 
 class ServiceByScheduleController extends Controller
 {
@@ -20,9 +22,16 @@ class ServiceByScheduleController extends Controller
         $collaborator = Collaborator::where('id', $collaboratorId)->first();
         $enabledServices = $collaborator->enabledServices;
 
+        // Obtendo promoções relacionadas aos serviços habilitados e válidas no momento atual
+        $currentDateTime = Carbon::now();
+        $promotions = Promotion::whereIn('servicefk', $enabledServices->pluck('id'))
+            ->where('dataHourStart', '<=', $currentDateTime)
+            ->where('dataHourFinal', '>=', $currentDateTime)
+            ->get();
+
         // Definindo valores padrão
         $redirectMessageButton = "Voltar aos Horários";
-        $redirectButton = route('scheduleclient',['tokenCompany' => $tokenCompany, 'collaboratorId' => $collaboratorId]); // URL padrão caso não haja redirecionamento específico
+        $redirectButton = route('scheduleclient', ['tokenCompany' => $tokenCompany, 'collaboratorId' => $collaboratorId]); // URL padrão caso não haja redirecionamento específico
 
         // Verificando se "redirectController" está presente e tem o valor específico
         if (isset($data['redirectController']) &&
@@ -35,8 +44,10 @@ class ServiceByScheduleController extends Controller
             'tokenCompany' => $tokenCompany,
             'collaborator' => $collaborator,
             'services' => $enabledServices,
+            'promotions' => $promotions, // Passando promoções para a view
             'redirectButton' => $redirectButton,
             'redirectMessage' => $redirectMessageButton,
         ]);
     }
+
 }
