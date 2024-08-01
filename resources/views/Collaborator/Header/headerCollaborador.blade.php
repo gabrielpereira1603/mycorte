@@ -23,12 +23,18 @@
 
         <div class="nav-button">
             <i class="fas fa-solid fa-users-viewfinder" data-url="#"></i>
-            <span><a href="#">Painel de Serviços</a></span>
+            <span>
+                <a href="#">Painel de Serviços</a>
+            </span>
         </div>
 
-        <div class="nav-button">
-            <i class="fas fa-fire" data-url="#"></i>
-            <span>Promoções</span>
+        <div class="nav-button {{ Request::routeIs('promotioncollaborator') ? 'active-module' : '' }}">
+            <i class="fas fa-fire" data-url="{{ route('promotioncollaborator', ['tokenCompany' => $tokenCompany]) }}"></i>
+            <span>
+                <a href="{{ route('promotioncollaborator', ['tokenCompany' => $tokenCompany]) }}">
+                    Promoções
+                </a>
+            </span>
         </div>
 
         <div class="nav-button {{ Request::routeIs('config.*') ? 'active-module' : '' }}">
@@ -57,10 +63,15 @@
             </div>
         @elseif($collaboratorRole === 'COLLABORATOR')
             <div class="nav-button">
-                <i class="fas fa-solid fa-print" data-url="#"></i>
-                <span>Relatórios</span>
+                <i class="fas fa-solid fa-print" data-url="{{ route('report.index', ['tokenCompany' => $tokenCompany]) }}"></i>
+                <span>
+                    <a href="{{ route('report.index', ['tokenCompany' => $tokenCompany]) }}">
+                        Relatórios
+                    </a>
+                </span>
             </div>
-            <div class="nav-button {{ Request::routeIs('servicescollaborator') ? 'active-module' : '' }}">
+
+            <div class="nav-button {{ Request::routeIs('report.*') ? 'active-module' : '' }}">
                 <i class="fas fa-solid fa-scissors" data-url="{{ route('servicescollaborator', ['tokenCompany' => $tokenCompany]) }}"></i>
                 <span><a href="{{ route('servicescollaborator', ['tokenCompany' => $tokenCompany]) }}">Serviços</a></span>
             </div>

@@ -22,6 +22,8 @@ use App\Http\Controllers\Collaborator\Login\LoginCollaboratorController;
 use App\Http\Controllers\Collaborator\Login\LogoutCollaboratorController;
 use App\Http\Controllers\Collaborator\Modules\Configuration\ConfigAvailabilityCollaboratorController;
 use App\Http\Controllers\Collaborator\Modules\Configuration\ConfigCollaboratorController;
+use App\Http\Controllers\Collaborator\Modules\Promotion\PromotionCollaboratorController;
+use App\Http\Controllers\Collaborator\Modules\Report\ReportCollaboratorController;
 use App\Http\Controllers\Collaborator\Modules\Services\ServicesCollaboratorController;
 use App\Http\Controllers\Session\SessionStoreController;
 use App\Http\Middleware\CheckCompany;
@@ -106,9 +108,13 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
             Route::get('/availability/{tokenCompany}', [ConfigAvailabilityCollaboratorController::class, 'index'])->name('availability.edit');
             Route::post('/availability/{tokenCompany}', [ConfigAvailabilityCollaboratorController::class, 'updateOrCreateAvailability'])->name('availability.create.post');
             Route::delete('/availability/{id}/{tokenCompany}', [ConfigAvailabilityCollaboratorController::class, 'destroy'])->name('availability.destroy');
-
         });
 
+        Route::prefix('report')->name('report.')->group(function () {
+            Route::get('/{tokenCompany}', [ReportCollaboratorController::class, 'index'])->name('index');
+        });
+
+        Route::get('/promotion/{tokenCompany}', [PromotionCollaboratorController::class, 'index'])->name('promotioncollaborator');
         Route::get('/dashboard/{tokenCompany}', [DashboardController::class, 'index'])->name('dashboard');
     });
 });
