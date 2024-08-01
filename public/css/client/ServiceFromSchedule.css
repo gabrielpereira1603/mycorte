@@ -398,8 +398,6 @@
     }
 }
 
-
-
 /* Modal styles */
 .service-fromSchedule{
     display: none;
@@ -412,4 +410,39 @@
     overflow: auto;
 }
 
+.option-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha os preços à direita */
+    color: black;
+    margin-right: 10px; /* Ajuste a margem conforme necessário */
+}
 
+.price-promotion {
+    font-weight: bold;
+    color: red; /* Cor do preço promocional */
+    font-size: 1.1em; /* Tamanho do preço promocional */
+}
+
+.price-original {
+    text-decoration: line-through;
+    color: grey; /* Cor do preço original riscado */
+    font-size: 0.8em; /* Tamanho do preço original riscado */
+    margin-bottom: 1px;
+}
+
+/* Ajustes adicionais para responsividade */
+@media (max-width: 767px) {
+    .option-price {
+        align-items: flex-start; /* Alinha os preços à esquerda em telas menores */
+        margin-right: 0;
+    }
+
+    .price-promotion {
+        font-size: 1em; /* Tamanho ajustado para telas menores */
+    }
+
+    .price-original {
+        font-size: 0.7em; /* Tamanho ajustado para telas menores */
+    }
+}

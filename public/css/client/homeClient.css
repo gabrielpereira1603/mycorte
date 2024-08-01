@@ -60,11 +60,11 @@
 /* Estilos para os botões na home */
 .buttons-home {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .buttons-home a {
-    width: 45%;
+    width: 100%;
     background-color: #3A4976;
     border: #424242 solid 1px;
 }
