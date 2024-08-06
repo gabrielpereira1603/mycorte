@@ -62,7 +62,7 @@
                 <span>Gerenciar</span>
             </div>
         @elseif($collaboratorRole === 'COLLABORATOR')
-            <div class="nav-button">
+            <div class="nav-button {{ Request::routeIs('report.*') ? 'active-module' : '' }}">
                 <i class="fas fa-solid fa-print" data-url="{{ route('report.index', ['tokenCompany' => $tokenCompany]) }}"></i>
                 <span>
                     <a href="{{ route('report.index', ['tokenCompany' => $tokenCompany]) }}">
@@ -71,7 +71,7 @@
                 </span>
             </div>
 
-            <div class="nav-button {{ Request::routeIs('report.*') ? 'active-module' : '' }}">
+            <div class="nav-button {{ Request::routeIs('servicescollaborator') ? 'active-module' : '' }}">
                 <i class="fas fa-solid fa-scissors" data-url="{{ route('servicescollaborator', ['tokenCompany' => $tokenCompany]) }}"></i>
                 <span><a href="{{ route('servicescollaborator', ['tokenCompany' => $tokenCompany]) }}">Serviços</a></span>
             </div>

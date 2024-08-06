@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AvailabilityCollaboratorApiController;
 use App\Http\Controllers\Api\Dashboard\DashboardCollaboratorApiController;
 use App\Http\Controllers\Api\IntervalCollaboratorApiController;
 use App\Http\Controllers\Api\ReminderScheduleClientApiController;
+use App\Http\Controllers\Api\Report\TotalScheduleApiController;
 use App\Http\Controllers\Api\ScheduleApiController;
 use App\Http\Controllers\Collaborator\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,5 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/getData/rescheduledAppointments/{startDate}/{endDate}/{collaboratorId}', [DashboardCollaboratorApiController::class, 'fetchRescheduledAppointmentsData']);
     Route::get('/getData/timeAnalysis/{startDate}/{endDate}/{collaboratorId}', [DashboardCollaboratorApiController::class, 'fetchTimeAnalysisData']);
 });
+
+Route::get('/totalschedule/{collaboratorId}/{start}/{end}', [TotalScheduleApiController::class, 'getTotalSchedule'])->name('api-total-schedule');

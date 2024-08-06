@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="{{ asset('css/collaborator/dashboardCollaborator.css') }}">
         <link rel="stylesheet" href="{{ asset('css/collaborator/configurations/configCollaborator.css') }}">
         <link rel="stylesheet" href="{{ asset('css/collaborator/configurations/configAvailability.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/collaborator/report/reportAvailability.css') }}">
+
         <link rel="stylesheet" href="{{ asset('css/basicModal.css') }}">
 
 
@@ -24,6 +26,14 @@
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" type="text/javascript"></script>
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
         <title>{{ $title ?? 'MyCorte' }}</title>
         <style>
             .alert-container {

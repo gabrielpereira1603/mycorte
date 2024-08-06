@@ -24,6 +24,7 @@ use App\Http\Controllers\Collaborator\Modules\Configuration\ConfigAvailabilityCo
 use App\Http\Controllers\Collaborator\Modules\Configuration\ConfigCollaboratorController;
 use App\Http\Controllers\Collaborator\Modules\Promotion\PromotionCollaboratorController;
 use App\Http\Controllers\Collaborator\Modules\Report\ReportCollaboratorController;
+use App\Http\Controllers\Collaborator\Modules\Report\TotalScheduleController;
 use App\Http\Controllers\Collaborator\Modules\Services\ServicesCollaboratorController;
 use App\Http\Controllers\Session\SessionStoreController;
 use App\Http\Middleware\CheckCompany;
@@ -104,7 +105,6 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
 
         Route::prefix('config')->name('config.')->group(function () {
             Route::get('/{tokenCompany}', [ConfigCollaboratorController::class, 'index'])->name('index');
-
             Route::get('/availability/{tokenCompany}', [ConfigAvailabilityCollaboratorController::class, 'index'])->name('availability.edit');
             Route::post('/availability/{tokenCompany}', [ConfigAvailabilityCollaboratorController::class, 'updateOrCreateAvailability'])->name('availability.create.post');
             Route::delete('/availability/{id}/{tokenCompany}', [ConfigAvailabilityCollaboratorController::class, 'destroy'])->name('availability.destroy');
@@ -112,6 +112,8 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
 
         Route::prefix('report')->name('report.')->group(function () {
             Route::get('/{tokenCompany}', [ReportCollaboratorController::class, 'index'])->name('index');
+            Route::get('totalschedule/{tokenCompany}', [TotalScheduleController::class, 'index'])->name('totalschedule');
+
         });
 
         Route::get('/promotion/{tokenCompany}', [PromotionCollaboratorController::class, 'index'])->name('promotioncollaborator');
