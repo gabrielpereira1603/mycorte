@@ -1,0 +1,123 @@
+.toast {
+    margin-bottom: 0.5rem;
+}
+
+.card-header {
+    background-color: #3a4976 !important;
+    color: #ffffff !important;
+}
+
+.box-buttons-promotions {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.box-buttons-promotions button {
+    width: 46%;
+}
+
+.truncate {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.toast-body p {
+    margin-bottom: 0.5rem;
+}
+
+.modal-content {
+    padding: 25px 20px;
+}
+
+.modal-header {
+    border-radius: 0px !important;
+    padding: 15px 10px;
+    background-color: #3a4976;
+}
+
+.modal-title {
+    margin-bottom: 0px;
+    position: relative;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 6px;
+}
+
+.modal-title::after {
+    content: '';
+    position: absolute;
+    bottom: -47px;
+    left: 6%;
+    transform: translateX(-50%);
+    border-width: 16px;
+    border-style: solid;
+    border-color: #3a4976 transparent transparent transparent;
+}
+
+.modal-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0px !important;
+    margin: 0px;
+    padding-bottom: 0px !important;
+}
+
+.promotionForm-inputs {
+    padding: 12px;
+}
+
+.input-promotionModal {
+    padding: 6px;
+    width: 100%;
+    border-radius: 0px;
+    border: solid 1px #3a4976;
+}
+
+#promotionForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modalPromotion-buttons {
+    background-color: #edf3f6;
+    gap: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#cancel {
+    margin-right: 20px;
+    color: red;
+    font-weight: 300;
+    width: 50%;
+    background-color: transparent;
+    border: none;
+}
+
+#cancel:hover {
+    background-color: red;
+    color: white;
+    border-radius: 2px;
+}
+
+#save {
+    border: none !important;
+    margin-right: 10px;
+    color: #edf3f6;
+    font-weight: 300;
+    width: 50%;
+    padding: 12px;
+    background-color: #5ad678 !important;
+    border-radius: 2px;
+}

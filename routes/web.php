@@ -117,6 +117,9 @@ Route::prefix('/collaborator')->middleware([CheckCompany::class])->group(functio
         });
 
         Route::get('/promotion/{tokenCompany}', [PromotionCollaboratorController::class, 'index'])->name('promotioncollaborator');
+        Route::post('/promotion/{tokenCompany}/add', [PromotionCollaboratorController::class, 'addPromotion'])->name('collaborator.promotion.add');
+        Route::post('/promotion/{tokenCompany}/edit', [PromotionCollaboratorController::class, 'editPromotion'])->name('collaborator.promotion.edit');
+        Route::post('/promotion/{tokenCompany}/delete', [PromotionCollaboratorController::class, 'deletePromotion'])->name('collaborator.promotion.delete');
         Route::get('/dashboard/{tokenCompany}', [DashboardController::class, 'index'])->name('dashboard');
     });
 });

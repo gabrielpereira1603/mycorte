@@ -16,12 +16,15 @@ class Promotion extends Model
         'dataHourStart',
         'dataHourFinal',
         'value',
-        'servicefk',
+        'enabled',
+        'type',
+        'companyfk',
+        'collaboratorfk',
     ];
 
-    public function service()
+    public function services()
     {
-        return $this->belongsTo(Service::class, 'servicefk');
+        return $this->belongsToMany(Service::class, 'service_promotion', 'promotion_id', 'service_id');
     }
 
     public function company()
@@ -33,6 +36,4 @@ class Promotion extends Model
     {
         return $this->belongsTo(Collaborator::class, 'collaboratorfk');
     }
-
-
 }
