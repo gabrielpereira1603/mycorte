@@ -39,7 +39,8 @@ class PromotionCollaboratorController extends Controller
             'enabled' => 'boolean',
             'type' => 'required|in:individual,combo',
             'servicefk' => 'required_if:type,individual|exists:service,id',
-            'services' => 'required_if:type,combo|array'
+            'services' => 'required_if:type,combo|array',
+            'services.*' => 'exists:service,id'
         ]);
 
         $collaborator = Auth::guard('collaborator')->user();
@@ -57,7 +58,7 @@ class PromotionCollaboratorController extends Controller
         $promotion->dataHourStart = $request->dataHourStart;
         $promotion->dataHourFinal = $request->dataHourFinal;
         $promotion->value = $request->value;
-        $promotion->enabled = $request->has('enabled');
+        $promotion->enabled = $request->boolean('enabled');
         $promotion->type = $request->type;
         $promotion->companyfk = $collaborator->companyfk;
         $promotion->collaboratorfk = $collaborator->id;
@@ -86,7 +87,8 @@ class PromotionCollaboratorController extends Controller
             'enabled' => 'boolean',
             'type' => 'required|in:individual,combo',
             'servicefk' => 'required_if:type,individual|exists:service,id',
-            'services' => 'required_if:type,combo|array'
+            'services' => 'required_if:type,combo|array',
+            'services.*' => 'exists:service,id'
         ]);
 
         $promotion = Promotion::find($request->promotion_id);
@@ -103,7 +105,7 @@ class PromotionCollaboratorController extends Controller
         $promotion->dataHourStart = $request->dataHourStart;
         $promotion->dataHourFinal = $request->dataHourFinal;
         $promotion->value = $request->value;
-        $promotion->enabled = $request->has('enabled');
+        $promotion->enabled = $request->boolean('enabled');
         $promotion->type = $request->type;
         $promotion->save();
 
@@ -118,9 +120,9 @@ class PromotionCollaboratorController extends Controller
             ->with('success', 'Promoção atualizada com sucesso!');
     }
 
-    public function deletePromotion($tokenCompany, $id)
+    public function deletePromotion(Request $request, $tokenCompany)
     {
-        $promotion = Promotion::find($id);
+        $promotion = Promotion::find($request->id);
         if ($promotion) {
             $promotion->delete();
         }

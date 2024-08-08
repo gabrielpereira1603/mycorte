@@ -109,13 +109,15 @@
 
                             <div class="form-group mb-1 combo-service d-none">
                                 <small style="color: gray">Serviços:</small>
-                                <select class="form-control @error('services') is-invalid @enderror" id="promotionServices" name="services[]" multiple>
+                                <div class="form-check">
                                     @foreach($services as $service)
-                                        <option value="{{ $service->id }}" data-service-value="{{ $service->value }}">
-                                            {{ $service->name }} - R$ {{ number_format($service->value, 2, ',', '.') }}
-                                        </option>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="services[]" value="{{ $service->id }}"> {{ $service->name }} - R$ {{ number_format($service->value, 2, ',', '.') }}
+                                            </label>
+                                        </div>
                                     @endforeach
-                                </select>
+                                </div>
                             </div>
 
                             <div class="input-group mt-3">
@@ -127,7 +129,6 @@
                             </div>
 
                             <div class="form-check mt-3">
-                                <input type="hidden" name="enabled" value="0">
                                 <input type="checkbox" class="form-check-input" id="promotionEnabled" name="enabled" value="1" checked>
                                 <label for="promotionEnabled" class="form-check-label">Habilitado</label>
                             </div>
@@ -187,7 +188,9 @@
                         document.querySelector('.individual-service').classList.add('d-none');
                         document.querySelector('.combo-service').classList.remove('d-none');
                         let services = JSON.parse(this.getAttribute('data-promotion-services'));
-                        $('#promotionServices').val(services).trigger('change');
+                        services.forEach(serviceId => {
+                            document.querySelector(`input[name="services[]"][value="${serviceId}"]`).checked = true;
+                        });
                     }
 
                     document.getElementById('promotionForm').action = "{{ route('collaborator.promotion.edit', ['tokenCompany' => $tokenCompany]) }}";
@@ -216,7 +219,7 @@
                             // Cria um formulário para enviar o ID da promoção
                             const form = document.createElement('form');
                             form.method = 'POST';
-                            form.action = "{{ route('collaborator.promotion.delete', ['tokenCompany' => $tokenCompany, 'id' => '']) }}/" + promotionId;
+                            form.action = "{{ route('collaborator.promotion.delete', ['tokenCompany' => $tokenCompany]) }}";
 
                             // Adiciona o token CSRF
                             const csrfToken = document.createElement('input');
@@ -224,6 +227,13 @@
                             csrfToken.name = '_token';
                             csrfToken.value = "{{ csrf_token() }}";
                             form.appendChild(csrfToken);
+
+                            const idPromotion = document.createElement('input');
+                            idPromotion.type = 'hidden';
+                            idPromotion.name = 'id';
+                            idPromotion.value = promotionId;
+                            form.appendChild(idPromotion);
+
 
                             // Adiciona o método DELETE
                             const methodInput = document.createElement('input');
@@ -259,7 +269,7 @@
                 document.getElementById('promotionEndDate').value = '';
                 document.getElementById('promotionType').value = 'individual';
                 document.getElementById('promotionService').value = '';
-                $('#promotionServices').val([]).trigger('change');
+                document.querySelectorAll('input[name="services[]"]').forEach(checkbox => checkbox.checked = false);
                 document.getElementById('promotionValue').value = '';
                 document.getElementById('promotionEnabled').checked = true;
                 document.querySelector('.individual-service').classList.remove('d-none');
