@@ -35,6 +35,7 @@ use App\Http\Middleware\Collaborator\ResetPasswordCollaborator;
 use App\Models\Style;
 use Illuminate\Support\Facades\Route;
 
+
 // Compose data for all views using layoutClient
 view()->composer('components.layoutClient', function ($view) {
     $tokenCompany = request()->route('tokenCompany');
