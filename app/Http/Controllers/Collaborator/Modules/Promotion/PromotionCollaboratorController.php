@@ -14,8 +14,10 @@ class PromotionCollaboratorController extends Controller
     {
         $collaborator = Auth::guard('collaborator')->user();
 
-        // Filtra as promoções do colaborador logado
-        $promotions = Promotion::where('collaboratorfk', $collaborator->id)->get();
+        // Filtra as promoções do colaborador logado e carrega os serviços associados
+        $promotions = Promotion::where('collaboratorfk', $collaborator->id)
+            ->with('services')
+            ->get();
 
         // Filtra os serviços do colaborador logado
         $services = Service::where('collaboratorfk', $collaborator->id)->get();
@@ -91,7 +93,7 @@ class PromotionCollaboratorController extends Controller
             'services.*' => 'exists:service,id'
         ]);
 
-        $promotion = Promotion::find($request->promotion_id);
+        $promotion = Promotion::with('services')->find($request->promotion_id);
 
         // Validação adicional para garantir que o valor da promoção seja menor que o valor do serviço original
         if ($request->type == 'individual') {

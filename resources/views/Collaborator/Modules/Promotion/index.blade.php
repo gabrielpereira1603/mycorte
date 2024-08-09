@@ -38,6 +38,11 @@
                                     <i class="fa-solid fa-sack-dollar"></i>
                                     Valor: R$ {{ number_format($promotion->value, 2, ',', '.') }}
                                 </p>
+                                <p>
+                                    <i class="fa-solid fa-toggle-on"></i>
+                                    Habilitado:
+                                    <input type="checkbox" class="form-check-input" disabled {{ $promotion->enabled ? 'checked' : '' }}>
+                                </p>
                             </div>
                             <hr>
                             <div class="box-buttons-promotions">
@@ -177,13 +182,13 @@
                     document.getElementById('promotionStartDate').value = startDateTime;
                     document.getElementById('promotionEndDate').value = endDateTime;
                     document.getElementById('promotionType').value = this.getAttribute('data-promotion-type');
-                    document.getElementById('promotionEnabled').checked = this.getAttribute('data-promotion-enabled') === 'true';
+                    document.getElementById('promotionEnabled').checked = this.getAttribute('data-promotion-enabled') === 'true' || this.getAttribute('data-promotion-enabled') === '1';
                     document.getElementById('promotionValue').value = this.getAttribute('data-promotion-value');
 
                     if (this.getAttribute('data-promotion-type') === 'individual') {
                         document.querySelector('.individual-service').classList.remove('d-none');
                         document.querySelector('.combo-service').classList.add('d-none');
-                        document.getElementById('promotionService').value = this.getAttribute('data-promotion-service');
+                        document.getElementById('promotionService').value = this.getAttribute('data-promotion-services').replace(/[\[\]]/g, '');
                     } else {
                         document.querySelector('.individual-service').classList.add('d-none');
                         document.querySelector('.combo-service').classList.remove('d-none');
@@ -198,6 +203,8 @@
                     promotionModal.show();
                 });
             });
+
+
 
             // Evento de clique para deletar uma promoção
             document.querySelectorAll('.delete-promotion-btn').forEach(function(button) {
