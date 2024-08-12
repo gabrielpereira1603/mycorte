@@ -72,7 +72,7 @@
                     <h5 class="modal-title" id="promotionModalLabel" style="color: white;">PROMOÇÃO</h5>
                 </div>
                 <div class="modal-body mt-3">
-                    <form id="promotionForm" action="#" method="POST">
+                    <form id="promotionForm" method="POST">
                         @csrf
                         <div class="promotionForm-inputs">
                             <input type="hidden" name="promotion_id" id="promotionId">
@@ -166,8 +166,6 @@
             // Evento de clique para adicionar uma nova promoção
             document.querySelector('.add-promotion-btn').addEventListener('click', function() {
                 clearPromotionForm();
-                document.getElementById('promotionForm').action = "{{ route('collaborator.promotion.add', ['tokenCompany' => $tokenCompany]) }}";
-                document.querySelector('.modal-title').textContent = 'ADICIONAR PROMOÇÃO';
                 promotionModal.show();
             });
 
@@ -198,13 +196,9 @@
                         });
                     }
 
-                    document.getElementById('promotionForm').action = "{{ route('collaborator.promotion.edit', ['tokenCompany' => $tokenCompany]) }}";
-                    document.querySelector('.modal-title').textContent = 'EDITAR PROMOÇÃO';
                     promotionModal.show();
                 });
             });
-
-
 
             // Evento de clique para deletar uma promoção
             document.querySelectorAll('.delete-promotion-btn').forEach(function(button) {
@@ -241,7 +235,6 @@
                             idPromotion.value = promotionId;
                             form.appendChild(idPromotion);
 
-
                             // Adiciona o método DELETE
                             const methodInput = document.createElement('input');
                             methodInput.type = 'hidden';
@@ -262,9 +255,11 @@
                 if (this.value === 'individual') {
                     document.querySelector('.individual-service').classList.remove('d-none');
                     document.querySelector('.combo-service').classList.add('d-none');
+                    document.getElementById('promotionForm').action = "{{ route('collaborator.promotion.add.individual', ['tokenCompany' => $tokenCompany]) }}";
                 } else if (this.value === 'combo') {
                     document.querySelector('.individual-service').classList.add('d-none');
                     document.querySelector('.combo-service').classList.remove('d-none');
+                    document.getElementById('promotionForm').action = "{{ route('collaborator.promotion.add.combo', ['tokenCompany' => $tokenCompany]) }}";
                 }
             });
 
@@ -281,6 +276,7 @@
                 document.getElementById('promotionEnabled').checked = true;
                 document.querySelector('.individual-service').classList.remove('d-none');
                 document.querySelector('.combo-service').classList.add('d-none');
+                document.getElementById('promotionForm').action = "{{ route('collaborator.promotion.add.individual', ['tokenCompany' => $tokenCompany]) }}";
             }
         });
     </script>
