@@ -28,8 +28,8 @@
         @endisset
 
 
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div class="w-full mt-1 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden">
+        <div class="min-h-screen flex flex-col sm:justify-start items-center pt-6 bg-gray-100 dark:bg-gray-900">
+            <div class="w-full mt-2 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden">
                 {{ $slot }}
             </div>
         </div>

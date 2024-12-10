@@ -2,27 +2,37 @@
 
 namespace App\Livewire\Components\Inputs;
 
+use Carbon\Carbon;
 use Livewire\Component;
+use App\Models\Company;
 
 class SearchCompany extends Component
 {
+    public $search = '';
+
+    public function updatedSearch()
+    {
+        $currentDateTime = Carbon::now();
+
+        $companies = Company::with(['style', 'promotions' => function ($query) use ($currentDateTime) {
+            $query->where('dataHourStart', '<=', $currentDateTime)
+                ->where('dataHourFinal', '>=', $currentDateTime);
+        }])
+            ->when($this->search, function($query) {
+                $query->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('city', 'like', '%' . $this->search . '%')
+                    ->orWhere('state', 'like', '%' . $this->search . '%')
+                    ->orWhere('neighborhood', 'like', '%' . $this->search . '%');
+            })
+            ->get();
+
+        // Dispara o evento com as empresas filtradas
+        $this->dispatch('companiesFiltered', $companies);
+    }
+
     public function render()
     {
-        return <<<'HTML'
-        <div class="w-full">
-            <div class="flex items-center gap-2 p-5" >
-                <span class="input-group-text">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                </span>
-                <input type="text" id="search-input" class="w-full" placeholder="Pesquisar...">
-            </div>
-            <p class="search-info">Você pode buscar por qualquer informação relacionada às empresas parceiras.</p>
-            <div id="loading-spinner" class="d-none">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        </div>
-        HTML;
+
+        return view('livewire.components.inputs.search-company');
     }
 }

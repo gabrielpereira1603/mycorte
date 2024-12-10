@@ -32,6 +32,7 @@ use App\Http\Middleware\Client\RedirectIfAuthenticatedClient;
 use App\Http\Middleware\Client\RedirectIfNotAuthenticatedClient;
 use App\Http\Middleware\Collaborator\AuthenticateCollaborator;
 use App\Http\Middleware\Collaborator\ResetPasswordCollaborator;
+use App\Livewire\Pages\AllCompany;
 use App\Models\Style;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -39,7 +40,7 @@ use App\Http\Controllers\ProfileController;
 
 
 // Compose data for all views using layoutClient
-view()->composer('components.layoutClient', function ($view) {
+view()->composer('layouts.app', function ($view) {
     $tokenCompany = request()->route('tokenCompany');
     $style = Style::whereHas('company', function ($query) use ($tokenCompany) {
         $query->where('token', $tokenCompany);
@@ -77,7 +78,7 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
 });
 
 Route::post('/store-session-data', [SessionStoreController::class, 'store'])->name('dataTransporter');
-Route::get('/', [AllCompanyController::class, 'index'])->name('allCompany');
+Route::get('/', AllCompany::class)->name('allCompany');
 Route::get('/search-companies', [AllCompanyController::class, 'search'])->name('search.companies');
 Route::get('/sobre', fn() => view('about'))->name('aboutFooter');
 Route::get('/termos-de-uso', fn() => view('termsOfUse'))->name('terms-of-use');
