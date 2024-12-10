@@ -159,7 +159,7 @@
             // Inicializar SweetAlert2
             document.querySelectorAll('.delete-service-btn').forEach(function(button) {
                 button.addEventListener('click', function() {
-                    const serviceId = this.getAttribute('data-service-id');
+                    const serviceId = this.getA  ttribute('data-service-id');
                     const serviceName = this.getAttribute('data-service-name');
 
                     Swal.fire({
