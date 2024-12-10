@@ -33,3 +33,4 @@ Route::prefix('dashboard')->group(function () {
 });
 
 Route::get('/totalschedule/{collaboratorId}/{start}/{end}', [TotalScheduleApiController::class, 'getTotalSchedule'])->name('api-total-schedule');
+

@@ -110,7 +110,6 @@
                 bsToast.show();
             });
 
-            // Adiciona evento de clique aos botões "Lembrar Cliente"
             var remindClientButtons = document.querySelectorAll('.remind-client-btn');
             remindClientButtons.forEach(function(button) {
                 button.addEventListener('click', function() {
@@ -119,12 +118,10 @@
                 });
             });
 
-            // Inicializa os timers para os agendamentos
             @foreach($schedules as $schedule)
             startTimer('{{ $schedule->id }}', {{ $schedule->timeUntilStart['hours'] }}, {{ $schedule->timeUntilStart['minutes'] }});
             @endforeach
 
-            // Configuração do Pusher
             Pusher.logToConsole = false;
 
             var pusher = new Pusher('5d7bf54f12d3762e40fb', {
