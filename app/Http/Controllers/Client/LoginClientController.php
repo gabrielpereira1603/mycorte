@@ -30,7 +30,6 @@ class LoginClientController extends Controller
 
         // Tentar autenticar como Cliente
         $client = Client::where('email', $request->email)->first();
-        dd($client);
 
         if ($client && password_verify($request->password, $client->password)) {
             Auth::guard('client')->login($client);

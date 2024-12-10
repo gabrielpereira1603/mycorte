@@ -1,13 +1,12 @@
 <x-guest-layout>
-    <header>
-        <nav class="nav-allcompany">
-            <img src="{{ asset('favicon.png') }}" alt="Logo MyCuts">
-        </nav>
-    </header>
-
-    <div class="title-home" style="background-color: #3a497684;">
-        <h3 style="color: white;">Seja Bem Vindo ao MyCorte</h3>
-        <p style="color: white;">Essas são as empresas parceiras:</p>
+    <x-slot name="header">
+        <h2 class="flex justify-center gap-2 font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight sm:flex sm:items-center sm:justify-start">
+            <x-barber-icon widht="24px" height="24px"/>
+            {{ __('Seja Bem vindo ao MyCorte') }}
+        </h2>
+    </x-slot>
+    <div class="title-home bg-[#3a497684] rounded-[10px]">
+        <livewire:components.inputs.search-company />
     </div>
 
     <div class="alert-container">
@@ -35,20 +34,7 @@
         @endif
     </div>
 
-    <div class="container mt-4">
-        <div class="input-group">
-            <span class="input-group-text">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </span>
-            <input type="text" id="search-input" class="form-control" placeholder="Pesquisar...">
-        </div>
-        <p class="search-info">Você pode buscar por qualquer informação relacionada às empresas parceiras.</p>
-        <div id="loading-spinner" class="d-none">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-    </div>
+
 
     <section class="container mt-4">
         <div class="row" id="company-cards">
@@ -80,22 +66,37 @@
         </div>
     </section>
 
-    <div id="localizationModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content modal-myaccount-localization" style="max-width: 450px !important;">
-                <div class="header-modal-localization" style="background-color: #3a4976;">
-                    <p class="title-localization" style="color: white;">LOCALIZAÇÃO DA EMPRESA</p>
-                </div>
-                <div class="body-localizacao">
-                    <div id="map-container" style="height: 400px;"></div>
-                    <div class="buttons-modalLocalization">
-                        <button type="button" class="btn btn-primary" id="exitModalLocalization">Fechar</button>
-                        <button type="submit" class="btn btn-primary" id="goMaps">Ir Para o Maps</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{{--    <div id="localizationModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
+{{--        <div class="modal-dialog modal-dialog-centered">--}}
+{{--            <div class="modal-content modal-myaccount-localization" style="max-width: 450px !important;">--}}
+{{--                <div class="header-modal-localization" style="background-color: #3a4976;">--}}
+{{--                    <p class="title-localization" style="color: white;">LOCALIZAÇÃO DA EMPRESA</p>--}}
+{{--                </div>--}}
+{{--                <div class="body-localizacao">--}}
+{{--                    <div id="map-container" style="height: 400px;"></div>--}}
+{{--                    <div class="buttons-modalLocalization">--}}
+{{--                        <button type="button" class="btn btn-primary" id="exitModalLocalization">Fechar</button>--}}
+{{--                        <button type="submit" class="btn btn-primary" id="goMaps">Ir Para o Maps</button>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>    <div id="localizationModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
+{{--        <div class="modal-dialog modal-dialog-centered">--}}
+{{--            <div class="modal-content modal-myaccount-localization" style="max-width: 450px !important;">--}}
+{{--                <div class="header-modal-localization" style="background-color: #3a4976;">--}}
+{{--                    <p class="title-localization" style="color: white;">LOCALIZAÇÃO DA EMPRESA</p>--}}
+{{--                </div>--}}
+{{--                <div class="body-localizacao">--}}
+{{--                    <div id="map-container" style="height: 400px;"></div>--}}
+{{--                    <div class="buttons-modalLocalization">--}}
+{{--                        <button type="button" class="btn btn-primary" id="exitModalLocalization">Fechar</button>--}}
+{{--                        <button type="submit" class="btn btn-primary" id="goMaps">Ir Para o Maps</button>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
     <script>
         $(document).ready(function() {
@@ -134,7 +135,6 @@
         });
     </script>
 
-    @include('Client.Footer.footerClient')
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

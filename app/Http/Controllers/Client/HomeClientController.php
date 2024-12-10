@@ -43,7 +43,7 @@ class HomeClientController extends Controller
             $collaborator->formatted_promotions = $promotions;
         }
 
-        return view('Client.homeClient', [
+        return view('Client.home_client', [
             'tokenCompany' => $tokenCompany,
             'collaborators' => $collaborators,
         ]);

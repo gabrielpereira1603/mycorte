@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('css/allCompany.css') }}">
     <link rel="stylesheet" href="{{ asset('css/privacyPolicy.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
@@ -17,7 +17,7 @@
 <body>
 <header>
     <nav class="nav-allcompany">
-        <img src="{{ asset('favicon.png') }}" alt="Logo MyCuts">
+        <img src="{{ asset('favicon.ico') }}" alt="Logo MyCuts">
     </nav>
 </header>
 
