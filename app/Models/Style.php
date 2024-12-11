@@ -12,8 +12,17 @@ class Style extends Model
 
     protected $table = 'style';
 
-    public function company(): BelongsTo
+    protected $fillable = [
+        'colorText',
+        'logo',
+        'name',
+        'primaryColor',
+        'secondaryColor',
+        'companyfk',
+    ];
+
+    public function company()
     {
-        return $this->belongsTo(Company::class, 'companyfk', 'id');
+        return $this->belongsTo(Company::class, 'companyfk');
     }
 }

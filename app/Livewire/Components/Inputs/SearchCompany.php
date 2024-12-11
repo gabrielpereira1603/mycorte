@@ -25,7 +25,6 @@ class SearchCompany extends Component
                     ->orWhere('neighborhood', 'like', '%' . $this->search . '%');
             })
             ->get();
-
         // Dispara o evento com as empresas filtradas
         $this->dispatch('companiesFiltered', $companies);
     }

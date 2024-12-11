@@ -1,9 +1,16 @@
-<footer class="bg-white dark:bg-gray-900">
+<footer class="bg-white dark:bg-gray-800 border-t-2 border-gray-800 dark:border-gray-900">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
                 <a href="http://somosdevteam.com" class="flex items-center">
-                    <img src="{{ asset('images/logoHorizontalSomosDev.png') }}" alt="BootstrapBrain Logo" width="175" height="57">
+                    <!-- Imagem para o modo claro -->
+                    <img src="{{ asset('images/logoHorizontalSomosDev.png') }}"
+                         alt="BootstrapBrain Logo" width="175" height="57"
+                         class="dark:hidden">
+                    <!-- Imagem para o modo escuro -->
+                    <img src="{{ asset('images/logoHorizontalSomosDev.png') }}"
+                         alt="BootstrapBrain Logo" width="175" height="57"
+                         class="hidden dark:block">
                 </a>
                 <div class="widget mt-4">
                     <iframe
@@ -19,10 +26,10 @@
             </div>
             <div class="grid grid-cols-2 gap-5 sm:gap-6 sm:grid-cols-3 m-2">
                 <div class="">
-                    <span class="flex">
-                        <x-contact-icon widht="16px" height="16px"/>
-                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Contato</h2>
-                    </span>
+                    <h2 class="flex items-center mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                        <x-contact-icon widht="16px" height="16px" color="currentColor"/>
+                        Contato
+                    </h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
                             <p class="mb-1">
@@ -37,10 +44,10 @@
                     </ul>
                 </div>
                 <div>
-                     <span class="flex">
-                        <x-map-icon widht="16px" height="16px"/>
-                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Endereço</h2>
-                    </span>
+                    <h2 class="flex items-center mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                        <x-map-icon widht="16px" height="16px" color="currentColor"/>
+                        Endereço
+                    </h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
                             <p class="">Santa Fé do Sul, 1577900</p>
@@ -54,10 +61,10 @@
                     </ul>
                 </div>
                 <div>
-                    <span class="flex">
-                        <x-terms-use-icon widht="16px" height="16px"/>
-                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Termos de Uso</h2>
-                    </span>
+                    <h2 class="flex items-center mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                        <x-terms-use-icon widht="16px" height="16px" fill="currentColor"/>
+                        Termos de Uso
+                    </h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <ul class="list-unstyled">
                             <li class="mb-2">

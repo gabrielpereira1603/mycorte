@@ -21,19 +21,23 @@ class AllCompany extends Component
         } else {
             $this->companies = $companies;
         }
+
     }
     public function render()
     {
         $currentDateTime = Carbon::now();
 
         if (empty($this->companies)) {
-            $this->companies = Company::with(['style', 'promotions' => function($query) use ($currentDateTime) {
+            $this->companies = Company::with(['style', 'promotions' => function ($query) use ($currentDateTime) {
                 $query->where('dataHourStart', '<=', $currentDateTime)
                     ->where('dataHourFinal', '>=', $currentDateTime);
             }])->get();
         }
 
-        return view('livewire.pages.all-company', ['companies' => $this->companies])
-            ->layout('layouts.guest');
+        return view('livewire.pages.all-company', [
+            'companies' => $this->companies,
+            'hasResults' => $this->companies->isNotEmpty(),
+        ])->layout('layouts.guest');
     }
+
 }

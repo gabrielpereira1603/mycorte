@@ -1,6 +1,6 @@
-<div class="w-full p-5">
-    <h2 class="flex justify-center gap-1 mb-5 font-semibold text-primary text-gray-800 dark:text-gray-200 leading-tight sm:flex sm:items-center sm:justify-start">
-        <x-about-icon width="16px" height="16px"/>
+<div class="w-full p-5 transition-all">
+    <h2 class="flex justify-center items-center gap-1.5 mb-5 font-semibold text-primary text-gray-200 dark:text-gray-200 leading-tight sm:flex sm:items-center sm:justify-start">
+        <x-about-icon width="20px" height="20px"/>
         {{ __('Você pode buscar uma barbearia por Cidade, Estado, Bairro, Profissional etc...') }}
     </h2>
 

@@ -16,7 +16,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
+    <body class="font-sans text-gray-900 antialiased dark:bg-gray-800">
         <livewire:layout.navigation />
 
         @isset($header)
@@ -27,9 +27,10 @@
             </header>
         @endisset
 
+        <livewire:errors.alert-message/> <!-- Adicione o componente aqui -->
 
-        <div class="min-h-screen flex flex-col sm:justify-start items-center pt-6 bg-gray-100 dark:bg-gray-900">
-            <div class="w-full mt-2 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden">
+        <div class="flex flex-col sm:justify-start items-center pt-6 bg-gray-100 dark:bg-gray-900 dark:pb-7 pb-7">
+            <div class="w-full mt-2 px-6 py-4 bg-white dark:bg-gray-800 ">
                 {{ $slot }}
             </div>
         </div>

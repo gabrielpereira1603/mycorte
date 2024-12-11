@@ -20,4 +20,9 @@ class AvailabilityCollaborator extends Model
         'workDays',
         'collaboratorfk'
     ];
+
+    public function collaborator()
+    {
+        return $this->belongsTo(Collaborator::class, 'collaboratorfk');
+    }
 }
