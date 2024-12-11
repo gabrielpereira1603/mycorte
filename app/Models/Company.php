@@ -11,6 +11,19 @@ class Company extends Model
 
     protected $table = 'company';
 
+    protected $fillable = [
+        'city',
+        'cnpj',
+        'localization',
+        'name',
+        'neighborhood',
+        'road',
+        'number',
+        'state',
+        'zipCode',
+        'token',
+    ];
+
     public function style()
     {
         return $this->hasOne(Style::class, 'companyfk');

@@ -10,4 +10,17 @@ class IntervalCollaborator extends Model
     use HasFactory;
 
     protected $table = 'interval_collaborator';
+
+    protected $fillable = [
+        'reason',
+        'hourStart',
+        'hourFinal',
+        'date',
+        'collaboratorfk',
+    ];
+
+    public function collaborator()
+    {
+        return $this->belongsTo(Collaborator::class, 'collaboratorfk');
+    }
 }

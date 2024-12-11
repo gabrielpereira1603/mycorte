@@ -22,4 +22,10 @@ class Service extends Model
     {
         return $this->belongsToMany(Promotion::class, 'service_promotion', 'service_id', 'promotion_id');
     }
+
+
+    public function collaborator()
+    {
+        return $this->belongsTo(Collaborator::class, 'collaboratorfk');
+    }
 }

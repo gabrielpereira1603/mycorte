@@ -103,3 +103,6 @@ Atualmente, o projeto está em desenvolvimento.
 
 - **Pergunta 1:** (Aqui você pode adicionar perguntas frequentes e suas respostas)
 - **Pergunta 2:** 
+
+
+

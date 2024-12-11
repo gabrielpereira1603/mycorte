@@ -10,4 +10,13 @@ class StatusSchedule extends Model
     use HasFactory;
 
     protected $table = 'status_schedule';
+
+    protected $fillable = [
+        'status',
+    ];
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class, 'statusSchedulefk');
+    }
 }

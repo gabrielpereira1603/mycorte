@@ -9,12 +9,25 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Collaborator extends Authenticatable
 {
     use HasFactory;
-    protected $fillable = [
-        'email', 'enabled', 'image', 'name', 'password', 'role', 'telephone', 'companyfk'
-    ];
 
     protected $table = 'collaborator';
 
+    protected $fillable = [
+        'email',
+        'enabled',
+        'image',
+        'name',
+        'password',
+        'role',
+        'telephone',
+        'resetPasswordToken',
+        'companyfk',
+    ];
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'companyfk');
+    }
 
     public function service(): HasMany
     {

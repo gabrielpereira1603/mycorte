@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AllCompanyController;
 use App\Http\Controllers\Client\CaptureEmailController;
-use App\Http\Controllers\Client\HomeClientController;
 use App\Http\Controllers\Client\LoginClientController;
 use App\Http\Controllers\Client\LogoutClientController;
 use App\Http\Controllers\Client\MyAccountClientController;
@@ -33,6 +32,7 @@ use App\Http\Middleware\Client\RedirectIfNotAuthenticatedClient;
 use App\Http\Middleware\Collaborator\AuthenticateCollaborator;
 use App\Http\Middleware\Collaborator\ResetPasswordCollaborator;
 use App\Livewire\Pages\AllCompany;
+use App\Livewire\Pages\Client\HomeClient;
 use App\Models\Style;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -59,7 +59,7 @@ Route::prefix('/client')->middleware([CheckCompany::class])->group(function () {
     Route::post('/singup/{tokenCompany}', [SingupClientController::class, 'register'])->name('singupclient.post');
     Route::post('/cancel-schedule/{tokenCompany}/{scheduleId}', [CancelScheduleController::class, 'cancel'])->name('cancel.schedule');
     Route::post('/logout/{tokenCompany}', [LogoutClientController::class, 'logout'])->name('logoutclient');
-    Route::get('/home/{tokenCompany}', [HomeClientController::class, 'index'])->name('homeclient');
+    Route::get('/home/{tokenCompany}', HomeClient::class)->name('homeclient');
 
     Route::middleware([RedirectIfNotAuthenticatedClient::class])->group(function () {
         Route::get('/myaccount/{tokenCompany}', [MyAccountClientController::class, 'index'])->name('myaccountclient');
