@@ -32,7 +32,7 @@
     background-color: #000;
 }
 
-.profile-collaborator h3, .profile-collaborator p {
+#profile-name {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

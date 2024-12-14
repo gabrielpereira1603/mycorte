@@ -31,7 +31,6 @@ class SearchCompany extends Component
 
     public function render()
     {
-
         return view('livewire.components.inputs.search-company');
     }
 }

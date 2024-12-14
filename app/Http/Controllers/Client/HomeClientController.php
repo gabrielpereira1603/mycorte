@@ -15,7 +15,6 @@ class HomeClientController extends Controller
 {
     public function index($tokenCompany): View|Factory|Application
     {
-        // Encontrar o ID da empresa pelo token
         $company = Company::where('token', $tokenCompany)->first();
 
         if (!$company) {
