@@ -16,68 +16,67 @@
             <div class="flex justify-center sm:justify-start flex-wrap gap-4" id="company-cards">
             @foreach ($companies as $company)
                 <div
-                    class="bg-gray-800 rounded-[10px] transition-all duration-1000 ease-in-out transform opacity-0 scale-90"
+                    class="bg-gray-800 rounded-[10px] dark:bg-[#3a497684] transition-all duration-1000 ease-in-out transform opacity-0 scale-90"
                     x-data="{ show: false }"
                     x-init="setTimeout(() => show = true, 100)"
                     x-bind:class="{ 'opacity-100 scale-100': show }"
                 >
-                    <div class="flex flex-col sm:flex sm:flex-col">
-                        <!-- Verificação de Promoções -->
-                        {{--@if ($company->promotions && $company->promotions->isNotEmpty())
-                            <div class="promotion-label animate__animated animate__pulse">Promoção</div>
-                        @endif--}}
-                        <div class="profile-collaborator flex flex-col items-center p-4 gap-2">
-                            <img src="{{ asset('/images/apenasLogo.svg') }}" alt="Profile Picture" class="rounded-[50%]" width="80px" height="80px" style="background: white">
-                            <h2 class="flex justify-center items-center gap-1 font-semibold text-xl text-gray-100 dark:text-gray-200 leading-tight sm:flex sm:items-center sm:justify-start truncate whitespace-nowrap">
-                                <x-barber-icon width="16px" height="16px"/>
-                                {{ __($company->name) }}
-                            </h2>
-                        </div>
-                        <div class="status p-4">
+                <div class="flex flex-col sm:flex sm:flex-col">
+                    <!-- Verificação de Promoções -->
+                    @if ($company->promotions && $company->promotions->isNotEmpty())
+                        <x-promotion-span/>
+                    @endif
+                    <div class="profile-collaborator flex flex-col items-center p-4 gap-2">
+                        <img src="{{ asset('/images/apenasLogo.svg') }}" alt="Profile Picture" class="rounded-[50%]" width="80px" height="80px" style="background: white">
+                        <h2 class="flex justify-center items-center gap-1 font-semibold text-xl text-gray-100 dark:text-gray-200 leading-tight sm:flex sm:items-center sm:justify-start truncate whitespace-nowrap">
+                            <x-barber-icon width="16px" height="16px"/>
+                            {{ __($company->name) }}
+                        </h2>
+                    </div>
+                    <div class="status p-4">
                         <ul class="flex flex-col gap-2 ">
-                            <li>
-                                <h2 class="flex justify-start gap-1 items-center text-gray-100 dark:text-gray-100">
-                                    <x-city-icon width="16px" height="16px"/>
-                                    <strong>
-                                        Cidade:
-                                    </strong>
-                                    {{ __($company->city) }}
-                                </h2>
-                            </li>
-                            <li>
+                        <li>
+                            <h2 class="flex justify-start gap-1 items-center text-gray-100 dark:text-gray-100">
+                                <x-city-icon width="16px" height="16px"/>
+                                <strong>
+                                    Cidade:
+                                </strong>
+                                {{ __($company->city) }}
+                            </h2>
+                        </li>
+                        <li>
 
-                                <h2 class="flex justify-start gap-1 items-center text-gray-100 dark:text-gray-100">
-                                    <x-about-icon width="16px" height="16px"/>
-                                    <strong>
-                                        Número:
-                                    </strong>
-                                    {{ __($company->number) }}
-                                </h2>
-                            </li>
-                            <li>
+                            <h2 class="flex justify-start gap-1 items-center text-gray-100 dark:text-gray-100">
+                                <x-about-icon width="16px" height="16px"/>
+                                <strong>
+                                    Número:
+                                </strong>
+                                {{ __($company->number) }}
+                            </h2>
+                        </li>
+                        <li>
 
-                                <h2 class="flex justify-start gap-1 items-center text-gray-100 dark:text-gray-100">
-                                    <x-street-icon width="16px" height="16px"/>
-                                    <strong>
-                                        Rua:
-                                    </strong>
-                                    {{ __($company->road) }}
-                                </h2>
-                            </li>
-                            <li>
+                            <h2 class="flex justify-start gap-1 items-center text-gray-100 dark:text-gray-100">
+                                <x-street-icon width="16px" height="16px"/>
+                                <strong>
+                                    Rua:
+                                </strong>
+                                {{ __($company->road) }}
+                            </h2>
+                        </li>
+                        <li>
 
-                                <h2 class="flex justify-start gap-1 items-center text-gray-100 dark:text-gray-100">
-                                    <x-state-icon width="16px" height="16px"/>
-                                    <strong>
-                                        Estado:
-                                    </strong>
-                                    {{ __($company->state) }}
-                                </h2>
-                            </li>
-                        </ul>
-                    </div>
-                    </div>
-
+                            <h2 class="flex justify-start gap-1 items-center text-gray-100 dark:text-gray-100">
+                                <x-state-icon width="16px" height="16px"/>
+                                <strong>
+                                    Estado:
+                                </strong>
+                                {{ __($company->state) }}
+                            </h2>
+                        </li>
+                    </ul>
+                </div>
+                </div>
                     <div class="buttons-home p-3">
                         <x-secondary-button class="flex items-center justify-center gap-1">
                             <x-map-icon width="14px" height="14px"/>
@@ -104,4 +103,6 @@
             </div>
         @endif
     </section>
+
 </div>
+
